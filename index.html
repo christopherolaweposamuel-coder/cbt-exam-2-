@@ -4,399 +4,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vision Chapter Quiz - Set 3</title>
-
+<title>Vision Chapter Quiz - Set 4</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  font-family: Arial, sans-serif;
-  background: #f1f4f9;
-  color: #202938;
-  line-height: 1.6;
-  margin: 0;
-  padding: 20px;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px #00000012;
-}
-
-h1 { text-align: center; margin-bottom: 5px; }
-.subtitle { text-align: center; color: #64748b; }
-
-.instructions {
-  background: #edf3ff;
-  padding: 14px;
-  border-left: 4px solid #3157b7;
-  border-radius: 6px;
-  margin: 20px 0;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-#timer { font-size: 1.2rem; font-weight: bold; color: #17603a; }
-#timer.warning { color: #c62828; }
-
-.question {
-  padding: 18px;
-  border: 1px solid #dce3ed;
-  border-radius: 9px;
-  margin-bottom: 16px;
-}
-
-.question h3 { margin-top: 0; }
-
-.option {
-  display: block;
-  padding: 10px;
-  border: 1px solid #dce3ed;
-  border-radius: 7px;
-  margin: 7px 0;
-  cursor: pointer;
-}
-
-.option:hover { background: #f0f4ff; }
-.option input { margin-right: 8px; }
-
-.correct {
-  background: #e5f6e9 !important;
-  border-color: #278447 !important;
-}
-
-.incorrect {
-  background: #fff0f0 !important;
-  border-color: #c62828 !important;
-}
-
-.explanation {
-  display: none;
-  background: #f5f7fa;
-  padding: 12px;
-  border-radius: 6px;
-  margin-top: 12px;
-}
-
-.explanation.show { display: block; }
-
-button {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 7px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button:disabled { opacity: .6; cursor: not-allowed; }
-.primary { background: #244bb5; color: white; }
-.secondary { background: #e5e9f0; color: #202938; }
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 22px 0;
-}
-
-#result {
-  display: none;
-  background: #edf3ff;
-  padding: 20px;
-  border-radius: 9px;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.small { font-size: .9rem; color: #64748b; }
-
-@media(max-width: 600px) {
-  body { padding: 10px; }
-  .container { padding: 15px; }
-}
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f1f4f9;color:#202938;margin:0;padding:18px;line-height:1.6}
+.container{max-width:900px;margin:auto;background:white;padding:24px;border-radius:12px;box-shadow:0 4px 18px #0001}
+h1{text-align:center;margin-bottom:4px}
+.subtitle{text-align:center;color:#64748b}
+.instructions{background:#edf3ff;padding:14px;border-left:4px solid #3157b7;border-radius:6px}
+.topbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f8fafc;padding:13px;border-radius:8px;margin:20px 0}
+#timer{font-size:1.2rem;font-weight:bold;color:#17603a}
+#timer.warning{color:#c62828}
+.question{padding:17px;border:1px solid #dce3ed;border-radius:9px;margin-bottom:16px}
+.question h3{margin-top:0}
+.option{display:block;padding:10px;border:1px solid #dce3ed;border-radius:7px;margin:7px 0;cursor:pointer}
+.option:hover{background:#f0f4ff}
+.option input{margin-right:8px}
+.correct{background:#e4f6e9!important;border-color:#278447!important}
+.incorrect{background:#fff0f0!important;border-color:#c62828!important}
+.explanation{display:none;background:#f5f7fa;padding:12px;border-radius:6px;margin-top:12px}
+.explanation.show{display:block}
+button{padding:12px 18px;border:0;border-radius:7px;font-weight:bold;font-size:1rem;cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
+.primary{background:#244bb5;color:white}
+.secondary{background:#e5e9f0;color:#202938}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+#result{display:none;background:#edf3ff;padding:20px;border-radius:9px;text-align:center;margin:20px 0}
+@media(max-width:600px){body{padding:9px}.container{padding:14px}}
 </style>
 </head>
-
 <body>
 <div class="container">
-
 <h1>Vision: Overview and Nature</h1>
-<p class="subtitle">University-Level Practice Test — Set 3</p>
+<p class="subtitle">University Practice Quiz — Set 4</p>
 
 <div class="instructions">
-  <strong>Instructions</strong>
-  <ul>
-    <li>Answer all 20 multiple-choice questions.</li>
-    <li>Choose only one option: A, B, C, or D.</li>
-    <li>Time allowed: 8 minutes.</li>
-    <li>Each question carries 1 mark.</li>
-    <li>Answers and explanations appear after submission.</li>
-    <li>The quiz submits automatically when time expires.</li>
-  </ul>
+<strong>Instructions</strong>
+<ul>
+<li>20 new questions, each worth 1 mark.</li>
+<li>Choose one answer per question.</li>
+<li>Time allowed: 8 minutes.</li>
+<li>Your score, correct answers and explanations appear after submission.</li>
+<li>The test submits automatically when time expires.</li>
+</ul>
 </div>
 
 <div class="topbar">
-  <span id="progress">Answered: 0 / 20</span>
-  <span id="timer">Time: 08:00</span>
+<span id="progress">Answered: 0 / 20</span>
+<span id="timer">Time: 08:00</span>
 </div>
 
 <div id="result" aria-live="polite"></div>
 
 <form id="quizForm">
-  <div id="questions"></div>
-
-  <div class="actions">
-    <button type="submit" class="primary" id="submitBtn">
-      Submit Quiz
-    </button>
-    <button type="button" class="secondary" id="resetBtn">
-      Restart Quiz
-    </button>
-  </div>
+<div id="questions"></div>
+<div class="actions">
+<button class="primary" id="submitBtn" type="submit">Submit Answers</button>
+<button class="secondary" id="resetBtn" type="button">Restart Quiz</button>
+</div>
 </form>
-
-<p class="small">
-  Use your course notes to verify institution-specific statements and
-  the exact definitions of terms used in your lectures.
-</p>
-
 </div>
 
 <script>
 const questions = [
 {
-q: "A personal vision is most effective when it helps an individual to:",
-o: [
-  "Define a meaningful desired future",
-  "Avoid making long-term decisions",
-  "Concentrate exclusively on past experiences",
-  "Follow every opportunity without evaluation"
-],
-a: 0,
-e: "A personal vision describes the future an individual hopes to work toward."
+q:"A graduate wants to establish a community learning centre in the future. Which detail would make this vision more meaningful?",
+o:["The colour of the graduate's current notebook","The intended contribution the centre would make to learners","The number of messages received today","A list of unrelated past events"],
+a:1,
+e:"A meaningful vision describes a desired future and the contribution it is intended to make."
 },
 {
-q: "Which example best illustrates the difference between having a vision and merely wishing for success?",
-o: [
-  "Expecting success without identifying a direction",
-  "Describing a desired future and using it to guide decisions",
-  "Waiting for circumstances to determine every choice",
-  "Changing ambitions whenever progress becomes difficult"
-],
-a: 1,
-e: "A vision gives direction to choices; a wish alone may not provide a guiding framework."
+q:"Two departments interpret their organisation's vision in completely different ways. What should leadership prioritise?",
+o:["Allowing confusion to continue","Keeping the vision away from employees","Clarifying the vision and its intended meaning","Removing every department's responsibility"],
+a:2,
+e:"A shared understanding helps different departments work toward a common direction."
 },
 {
-q: "An organisation's vision is understood by its employees but is inconsistent with their daily decisions. What is the main problem?",
-o: [
-  "The vision has been communicated too clearly",
-  "The organisation has too many employees",
-  "The vision is not being reflected in organisational behaviour",
-  "The organisation has no need for objectives"
-],
-a: 2,
-e: "A vision is more useful when organisational decisions and activities support the intended future."
+q:"A person has several ambitions but cannot decide which deserve priority. Which approach best supports vision development?",
+o:["Reflect on values, purpose and the future that matters most","Choose every ambition without evaluation","Select goals randomly","Avoid thinking about long-term direction"],
+a:0,
+e:"Reflecting on values and purpose can help an individual identify a coherent future direction."
 },
 {
-q: "Which question is most directly concerned with developing a personal vision?",
-o: [
-  "What future do I want to work toward?",
-  "What did I eat yesterday?",
-  "How can I avoid every responsibility?",
-  "What are other people doing at this exact moment?"
-],
-a: 0,
-e: "Personal vision development involves considering one's desired future and direction."
+q:"A school says it wants to prepare students to solve future community problems. This statement is primarily concerned with:",
+o:["A record of previous examinations","A daily attendance register","A list of staff duties","A desired future contribution"],
+a:3,
+e:"The statement describes what the school hopes to contribute in the future."
 },
 {
-q: "Why should a vision be communicated in language people can understand?",
-o: [
-  "To ensure that no planning is required",
-  "To make it easier for people to understand and pursue the intended direction",
-  "To prevent people from asking questions",
-  "To replace every form of organisational communication"
-],
-a: 1,
-e: "Clear communication helps people understand the future being pursued and their relationship to it."
+q:"Which example suggests that a vision has become disconnected from an organisation's decisions?",
+o:["Projects are reviewed against the organisation's direction","Resources are allocated to activities that contradict its stated priorities","Staff discuss how their work supports the vision","Leaders explain the purpose behind decisions"],
+a:1,
+e:"Decisions that contradict stated priorities indicate a gap between the vision and actual practice."
 },
 {
-q: "Which statement is the best example of an organisational vision rather than a description of present operations?",
-o: [
-  "Our office opens at eight o'clock",
-  "Our organisation currently has four departments",
-  "We aim to become a trusted leader in our field",
-  "The manager signed the report yesterday"
-],
-a: 2,
-e: "The statement describes an intended future position rather than a present fact or past event."
+q:"A personal vision changes after careful reflection on new responsibilities and values. Which conclusion is most reasonable?",
+o:["A vision can never be reconsidered","Any change automatically means failure","A person may review a vision thoughtfully as circumstances and understanding develop","Reflection should be avoided"],
+a:2,
+e:"A vision can be reviewed thoughtfully; changes should be considered in relation to purpose and responsibilities."
 },
 {
-q: "A student repeatedly chooses activities that conflict with a clearly stated personal vision. What should the student examine?",
-o: [
-  "Whether present choices align with the intended future",
-  "Whether the vision should never influence decisions",
-  "Whether goals must always be abandoned",
-  "Whether planning should be avoided entirely"
-],
-a: 0,
-e: "Comparing present choices with the desired future helps identify inconsistencies and necessary adjustments."
+q:"Which question would be most useful when evaluating a proposed vision statement?",
+o:["Does it describe a future direction that can guide choices?","Does it contain the greatest number of words?","Can nobody understand it without an explanation?","Does it list every task for the next week?"],
+a:0,
+e:"A useful vision statement communicates a future direction and helps guide decisions."
 },
 {
-q: "Which statement about vision and planning is most reasonable?",
-o: [
-  "Planning makes a vision unnecessary",
-  "A vision and practical plans can support each other",
-  "A vision automatically completes every task",
-  "Planning should begin only after all goals have been achieved"
-],
-a: 1,
-e: "A vision describes the direction; plans help organise the steps toward that direction."
+q:"An organisation's vision is inspiring, but employees do not know how their roles contribute to it. What would help most?",
+o:["Stop explaining the vision","Remove all team objectives","Tell employees that their roles do not matter","Connect the vision to team priorities and individual responsibilities"],
+a:3,
+e:"Showing how roles connect to the wider direction helps people understand their contribution."
 },
 {
-q: "In a biblical discussion of vision, the reference to an appointed time in Habakkuk 2:3 most directly highlights:",
-o: [
-  "The importance of patience concerning fulfilment",
-  "The need to abandon all responsibility",
-  "The guarantee of immediate results in every situation",
-  "The idea that direction is never necessary"
-],
-a: 0,
-e: "Habakkuk 2:3 is commonly discussed in relation to the appointed time of a vision and waiting for its fulfilment."
+q:"A student writes a vision statement entirely to impress classmates, despite it conflicting with the student's own values. What is the main concern?",
+o:["The statement is too short","The statement lacks personal alignment","The statement refers to the future","The student has written a sentence"],
+a:1,
+e:"A personal vision is more meaningful when it reflects the individual's considered values and purpose."
 },
 {
-q: "Which approach best reflects careful discernment when considering a claimed spiritual vision?",
-o: [
-  "Accept every claim without consideration",
-  "Reject reflection as unnecessary",
-  "Consider the claim carefully in light of faith, values, and responsibilities",
-  "Assume that personal ambition alone proves the claim"
-],
-a: 2,
-e: "Discernment involves thoughtful consideration rather than automatic acceptance or unsupported assumptions."
+q:"In a discussion of Habakkuk 2:3, a person becomes discouraged because a goal has not been fulfilled immediately. Which lesson is most relevant?",
+o:["Every goal must be abandoned after a delay","Effort and responsibility are always unnecessary","The passage is commonly associated with waiting for the appointed time","A delay proves that planning has no value"],
+a:2,
+e:"Habakkuk 2:3 is commonly discussed in connection with an appointed time and the need to wait."
 },
 {
-q: "Proverbs 29:18 is commonly connected in Christian teaching with the importance of:",
-o: [
-  "Vision, guidance, and direction",
-  "Ignoring instruction",
-  "Rejecting all forms of responsibility",
-  "Avoiding moral considerations"
-],
-a: 0,
-e: "The verse is often discussed in teachings about vision and the need for guidance."
+q:"Which interpretation should be avoided when studying biblical teachings about vision?",
+o:["Vision can be discussed in relation to direction","A vision may call for patience","People can reflect on their responsibilities","Every personal desire is automatically a divine instruction"],
+a:3,
+e:"A personal desire should not automatically be treated as a divine instruction; discernment matters."
 },
 {
-q: "A vision remains unchanged even after the situation around an organisation changes significantly. What is a sensible response?",
-o: [
-  "Never evaluate the vision under any circumstances",
-  "Review the situation and assess whether the direction remains appropriate",
-  "Stop communicating with employees",
-  "Assume that all strategies are permanently correct"
-],
-a: 1,
-e: "Reviewing circumstances can help an organisation assess whether its direction and plans remain appropriate."
+q:"A manager communicates the organisation's vision only during recruitment and never refers to it again. What is a likely weakness?",
+o:["The vision may not remain visible in ongoing decisions and activities","The vision must have been achieved already","Employees no longer need direction","The organisation cannot set any priorities"],
+a:0,
+e:"Revisiting the vision in relevant decisions and activities can help keep it connected to organisational practice."
 },
 {
-q: "Why is shared understanding important for an organisational vision?",
-o: [
-  "It helps people coordinate their contributions toward a common future",
-  "It removes the need for individual responsibilities",
-  "It guarantees that disagreements will never occur",
-  "It means all employees must perform identical tasks"
-],
-a: 0,
-e: "Shared understanding helps different people and teams coordinate their efforts without requiring identical roles."
+q:"A vision statement describes an inspiring future but is so broad that people cannot identify its central idea. What is the best revision strategy?",
+o:["Add several unrelated paragraphs","Make its central direction more focused and clear","Remove all reference to the future","Replace it with a timetable"],
+a:1,
+e:"A focused statement makes the central future direction easier to understand."
 },
 {
-q: "Which practice is most likely to make a vision statement difficult to use?",
-o: [
-  "Expressing a clear future direction",
-  "Connecting it to the organisation's purpose",
-  "Using confusing language and unrelated ideas",
-  "Communicating it to the people concerned"
-],
-a: 2,
-e: "Confusing wording and unrelated ideas make a vision harder to understand and apply."
+q:"Why is it useful to distinguish an institution's vision from its mission when studying its official statements?",
+o:["The two terms must always have identical wording","Neither statement has any practical purpose","They may express different but related aspects of the institution's direction and purpose","One of them must always be ignored"],
+a:2,
+e:"Vision and mission are related concepts, but their exact meanings and wording should be learned from the institution's materials."
 },
 {
-q: "In studying RCCG's stated vision, which response is most academically appropriate when asked for its exact wording?",
-o: [
-  "Invent a phrase that sounds religious",
-  "Use the wording presented in the course notes",
-  "Substitute the vision of another church",
-  "Ignore the assigned material"
-],
-a: 1,
-e: "The exact statement should be taken from the assigned source rather than reconstructed from memory or guessed."
+q:"A student is preparing for an examination question on RCCG's stated vision. Which preparation is most reliable?",
+o:["Memorise a statement invented from general assumptions","Study the exact wording and key elements given in the assigned material","Use the mission statement of an unrelated organisation","Prepare only by guessing possible answers"],
+a:1,
+e:"Institution-specific questions should be answered using the actual statement and emphasis in the assigned course material."
 },
 {
-q: "Which statement best reflects the spiritual emphasis associated with RCCG's stated aims in the course topic?",
-o: [
-  "Making heaven and living a holy life",
-  "Pursuing fame as the only goal",
-  "Avoiding spiritual development",
-  "Rejecting all forms of service"
-],
-a: 0,
-e: "The course topic associates RCCG's stated aims with making heaven and living a holy life."
+q:"A student is asked to discuss the relationship between vision and holiness in the RCCG course topic. Which preparation would be strongest?",
+o:["Ignore the assigned church material","Assume the topic is unrelated to spiritual aims","Replace the topic with business management alone","Review how the course material connects holiness with RCCG's stated spiritual aims"],
+a:3,
+e:"The answer should reflect the relationship actually presented in the course material, including its discussion of holiness."
 },
 {
-q: "When comparing the vision and mission of Redeemer's University, what should a student pay closest attention to?",
-o: [
-  "The precise wording and purpose of each statement in the course material",
-  "The assumption that vision and mission always have identical wording",
-  "The name of the institution alone",
-  "Statements copied from an unrelated organisation"
-],
-a: 0,
-e: "Institutional statements should be studied using their actual wording and context as presented in the assigned material."
+q:"A question asks for a specific feature of Redeemer's University's vision. Which source should take priority in the answer?",
+o:["The exact university statement reproduced in the course notes","A guess based only on the institution's name","A random statement from another university","An unrelated personal opinion"],
+a:0,
+e:"Use the exact institutional wording supplied in the assigned material rather than guessing."
 },
 {
-q: "A question asks for the exact meanings of the letters in LIFE PIE. Which answer method is safest?",
-o: [
-  "Guess the expansion from the letters",
-  "Use the exact expansion given in the course material",
-  "Assume the acronym has a universal meaning",
-  "Replace the acronym with a different one"
-],
-a: 1,
-e: "The exact expansion of LIFE PIE must be confirmed from the course notes; it should not be invented."
+q:"A lecturer asks students to apply LIFE PIE values to a practical situation. What should students do before explaining the application?",
+o:["Assume the acronym has no defined meaning","Invent a new expansion","Identify the exact values as defined in their course material","Ignore the values and discuss an unrelated acronym"],
+a:2,
+e:"The values must first be identified accurately from the course material before applying them."
 },
 {
-q: "Which sequence best connects vision with purposeful action?",
-o: [
-  "Ignore the future, act randomly, then choose a goal",
-  "Identify a desired future, establish priorities, and take relevant action",
-  "Choose activities first and avoid considering their purpose",
-  "Set a direction but refuse to evaluate progress"
-],
-a: 1,
-e: "Purposeful action connects a desired future with priorities and relevant activities."
+q:"A team completes many activities but cannot explain how those activities contribute to its intended future. What would improve its effectiveness?",
+o:["Increase the number of unrelated activities","Review the vision and connect activities to clear priorities","Avoid discussing objectives","Stop evaluating decisions"],
+a:1,
+e:"Activities become more purposeful when they are connected to the intended direction and priorities."
 },
 {
-q: "Which conclusion about vision is the most defensible?",
-o: [
-  "Vision guarantees success without effort",
-  "Vision is useful only to large organisations",
-  "Vision can provide direction, but progress also requires action",
-  "Vision removes the need for values and judgement"
-],
-a: 2,
-e: "Vision can guide decisions, but achieving a desired future generally requires practical effort and responsible choices."
+q:"Which scenario best illustrates the practical value of vision in decision-making?",
+o:["A person accepts every opportunity regardless of purpose","A team makes choices without discussing its objectives","An organisation changes direction daily without reflection","A student chooses activities based on how they support a considered long-term goal"],
+a:3,
+e:"A vision can serve as a reference point for evaluating choices and deciding which activities support a desired future."
 }
 ];
 
@@ -405,191 +194,168 @@ const questionsBox = document.getElementById("questions");
 const timerBox = document.getElementById("timer");
 const progressBox = document.getElementById("progress");
 const resultBox = document.getElementById("result");
-const submitButton = document.getElementById("submitBtn");
+const submitBtn = document.getElementById("submitBtn");
 
-let secondsLeft = 480;
+let timeLeft = 480;
 let interval = null;
 let started = false;
 let submitted = false;
 
-function renderQuestions() {
+function renderQuestions(){
   questionsBox.innerHTML = "";
 
-  questions.forEach((item, i) => {
+  questions.forEach((item,i)=>{
     const card = document.createElement("section");
     card.className = "question";
-    card.id = "question-" + i;
+    card.id = "question-"+i;
 
     const heading = document.createElement("h3");
-    heading.textContent = (i + 1) + ". " + item.q;
+    heading.textContent = (i+1)+". "+item.q;
     card.appendChild(heading);
 
-    item.o.forEach((option, j) => {
+    item.o.forEach((option,j)=>{
       const label = document.createElement("label");
       label.className = "option";
 
       const radio = document.createElement("input");
       radio.type = "radio";
-      radio.name = "q" + i;
+      radio.name = "q"+i;
       radio.value = j;
-      radio.addEventListener("change", () => {
+      radio.addEventListener("change",()=>{
         updateProgress();
         startTimer();
       });
 
       label.appendChild(radio);
-      label.appendChild(
-        document.createTextNode(
-          String.fromCharCode(65 + j) + ". " + option
-        )
-      );
-
+      label.appendChild(document.createTextNode(
+        String.fromCharCode(65+j)+". "+option
+      ));
       card.appendChild(label);
     });
 
     const explanation = document.createElement("div");
     explanation.className = "explanation";
-    explanation.id = "explanation-" + i;
+    explanation.id = "explanation-"+i;
     card.appendChild(explanation);
 
     questionsBox.appendChild(card);
   });
 }
 
-function updateProgress() {
-  let count = 0;
-
-  questions.forEach((_, i) => {
-    if (form.querySelector('input[name="q' + i + '"]:checked')) {
-      count++;
-    }
+function updateProgress(){
+  let answered = 0;
+  questions.forEach((_,i)=>{
+    if(form.querySelector('input[name="q'+i+'"]:checked')) answered++;
   });
-
-  progressBox.textContent = "Answered: " + count + " / " + questions.length;
+  progressBox.textContent = "Answered: "+answered+" / "+questions.length;
 }
 
-function startTimer() {
-  if (started || submitted) return;
+function startTimer(){
+  if(started || submitted) return;
   started = true;
 
-  interval = setInterval(() => {
-    secondsLeft--;
+  interval = setInterval(()=>{
+    timeLeft--;
     updateTimer();
 
-    if (secondsLeft <= 0) {
+    if(timeLeft<=0){
       clearInterval(interval);
       finishQuiz(true);
     }
-  }, 1000);
+  },1000);
 }
 
-function updateTimer() {
-  const minutes = Math.floor(secondsLeft / 60);
-  const seconds = secondsLeft % 60;
-
-  timerBox.textContent =
-    "Time: " +
-    String(minutes).padStart(2, "0") + ":" +
-    String(seconds).padStart(2, "0");
-
-  timerBox.classList.toggle("warning", secondsLeft <= 60);
+function updateTimer(){
+  const mins = Math.floor(timeLeft/60);
+  const secs = timeLeft%60;
+  timerBox.textContent = "Time: "+
+    String(mins).padStart(2,"0")+":"+
+    String(secs).padStart(2,"0");
+  timerBox.classList.toggle("warning",timeLeft<=60);
 }
 
-function escapeHTML(text) {
-  return String(text).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[character]);
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
 }
 
-function finishQuiz(timeExpired = false) {
-  if (submitted) return;
-
+function finishQuiz(timeExpired=false){
+  if(submitted) return;
   submitted = true;
   clearInterval(interval);
 
   let score = 0;
   let answered = 0;
 
-  questions.forEach((item, i) => {
-    const card = document.getElementById("question-" + i);
-    const selected = form.querySelector(
-      'input[name="q' + i + '"]:checked'
-    );
+  questions.forEach((item,i)=>{
+    const card = document.getElementById("question-"+i);
+    const selected = form.querySelector('input[name="q'+i+'"]:checked');
     const labels = card.querySelectorAll(".option");
-    const correctIndex = item.a;
-    const chosenIndex = selected ? Number(selected.value) : -1;
+    const chosen = selected ? Number(selected.value) : -1;
 
-    if (selected) answered++;
-    if (chosenIndex === correctIndex) score++;
+    if(selected) answered++;
+    if(chosen===item.a) score++;
 
-    labels.forEach((label, j) => {
+    labels.forEach((label,j)=>{
       label.querySelector("input").disabled = true;
-
-      if (j === correctIndex) label.classList.add("correct");
-      if (j === chosenIndex && chosenIndex !== correctIndex) {
-        label.classList.add("incorrect");
-      }
+      if(j===item.a) label.classList.add("correct");
+      if(j===chosen && chosen!==item.a) label.classList.add("incorrect");
     });
 
-    const explanation = document.getElementById("explanation-" + i);
+    const explanation = document.getElementById("explanation-"+i);
     explanation.classList.add("show");
-
     explanation.innerHTML =
-      "<p><strong>Correct answer: " +
-      String.fromCharCode(65 + correctIndex) + ". " +
-      escapeHTML(item.o[correctIndex]) +
-      "</strong></p><p>" + escapeHTML(item.e) + "</p>";
+      "<p><strong>Correct answer: "+
+      String.fromCharCode(65+item.a)+". "+
+      escapeHTML(item.o[item.a])+
+      "</strong></p><p>"+escapeHTML(item.e)+"</p>";
   });
 
-  const percent = Math.round(score / questions.length * 100);
+  const percent = Math.round(score/questions.length*100);
   let feedback;
 
-  if (percent >= 80) {
-    feedback = "Excellent performance. Review the explanations to consolidate your understanding.";
-  } else if (percent >= 60) {
-    feedback = "Good effort. Revisit the questions you missed and study the relevant notes.";
-  } else {
-    feedback = "Keep practising. Review the chapter and try again.";
+  if(percent>=80){
+    feedback="Excellent work! Review the explanations to consolidate your understanding.";
+  }else if(percent>=60){
+    feedback="Good effort. Revisit the questions you missed and review your notes.";
+  }else{
+    feedback="Keep practising. Study the chapter again and try the quiz once more.";
   }
 
   resultBox.style.display = "block";
   resultBox.innerHTML =
-    "<h2>" + (timeExpired ? "Time is up!" : "Quiz submitted") + "</h2>" +
-    "<p><strong>Score: " + score + " / " + questions.length + "</strong></p>" +
-    "<p><strong>Percentage: " + percent + "%</strong></p>" +
-    "<p>Answered: " + answered + " / " + questions.length + "</p>" +
-    "<p>" + feedback + "</p>";
+    "<h2>"+(timeExpired?"Time is up!":"Quiz submitted")+"</h2>"+
+    "<p><strong>Score: "+score+" / "+questions.length+"</strong></p>"+
+    "<p><strong>Percentage: "+percent+"%</strong></p>"+
+    "<p>Answered: "+answered+" / "+questions.length+"</p>"+
+    "<p>"+feedback+"</p>";
 
-  submitButton.disabled = true;
-  progressBox.textContent = "Completed: " + answered + " / " + questions.length;
-  resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
+  submitBtn.disabled = true;
+  progressBox.textContent = "Completed: "+answered+" / "+questions.length;
+  resultBox.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-form.addEventListener("submit", event => {
+form.addEventListener("submit",event=>{
   event.preventDefault();
   startTimer();
   finishQuiz(false);
 });
 
-document.getElementById("resetBtn").addEventListener("click", () => {
+document.getElementById("resetBtn").addEventListener("click",()=>{
   clearInterval(interval);
-  secondsLeft = 480;
+  timeLeft = 480;
   started = false;
   submitted = false;
 
   resultBox.style.display = "none";
   resultBox.innerHTML = "";
-  submitButton.disabled = false;
+  submitBtn.disabled = false;
 
   renderQuestions();
   updateTimer();
   updateProgress();
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({top:0,behavior:"smooth"});
 });
 
 renderQuestions();
