@@ -1,366 +1,283 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vision Chapter Quiz - Set 4</title>
+<title>COS 101 Interactive CBT | Modules 1–5</title>
 <style>
 *{box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#f1f4f9;color:#202938;margin:0;padding:18px;line-height:1.6}
-.container{max-width:900px;margin:auto;background:white;padding:24px;border-radius:12px;box-shadow:0 4px 18px #0001}
-h1{text-align:center;margin-bottom:4px}
-.subtitle{text-align:center;color:#64748b}
-.instructions{background:#edf3ff;padding:14px;border-left:4px solid #3157b7;border-radius:6px}
-.topbar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f8fafc;padding:13px;border-radius:8px;margin:20px 0}
-#timer{font-size:1.2rem;font-weight:bold;color:#17603a}
-#timer.warning{color:#c62828}
-.question{padding:17px;border:1px solid #dce3ed;border-radius:9px;margin-bottom:16px}
-.question h3{margin-top:0}
-.option{display:block;padding:10px;border:1px solid #dce3ed;border-radius:7px;margin:7px 0;cursor:pointer}
-.option:hover{background:#f0f4ff}
-.option input{margin-right:8px}
-.correct{background:#e4f6e9!important;border-color:#278447!important}
-.incorrect{background:#fff0f0!important;border-color:#c62828!important}
-.explanation{display:none;background:#f5f7fa;padding:12px;border-radius:6px;margin-top:12px}
-.explanation.show{display:block}
-button{padding:12px 18px;border:0;border-radius:7px;font-weight:bold;font-size:1rem;cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
-.primary{background:#244bb5;color:white}
-.secondary{background:#e5e9f0;color:#202938}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
-#result{display:none;background:#edf3ff;padding:20px;border-radius:9px;text-align:center;margin:20px 0}
-@media(max-width:600px){body{padding:9px}.container{padding:14px}}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
+header{background:#102b50;color:white;padding:24px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:25px}
+header p{margin:5px 0;color:#dbeafe}
+.container{max-width:850px;margin:22px auto;padding:0 14px}
+.panel{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 12px #0000000c}
+.stats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:bold}
+.progress{height:9px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:14px}
+#progressBar{height:100%;width:0;background:#2563eb;transition:width .2s}
+#timer{color:#dc2626}
+.question-number{color:#2563eb;font-weight:bold;font-size:14px}
+.question{font-size:19px;line-height:1.5;font-weight:bold;margin:12px 0 18px}
+.option{display:block;width:100%;text-align:left;border:2px solid #dbe3ee;background:white;border-radius:10px;padding:13px 14px;margin:10px 0;font-size:15px;cursor:pointer;line-height:1.4;color:#172033}
+.option:hover{border-color:#2563eb;background:#eff6ff}
+.option.selected{border-color:#2563eb;background:#dbeafe}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{border-color:#16a34a;background:#dcfce7}
+.option.wrong{border-color:#dc2626;background:#fee2e2}
+button.action{border:0;border-radius:9px;padding:12px 18px;background:#1d4ed8;color:white;font-size:15px;font-weight:bold;cursor:pointer}
+button.action:hover{background:#1e40af}
+button.action:disabled{background:#94a3b8;cursor:not-allowed}
+.secondary{background:#475569!important}
+.navigation{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.feedback{margin-top:14px;padding:12px;border-radius:9px;line-height:1.5}
+.good{background:#dcfce7;color:#166534}
+.bad{background:#fee2e2;color:#991b1b}
+.hidden{display:none!important}
+.result{text-align:center}
+.score{font-size:42px;font-weight:bold;color:#1d4ed8;margin:14px 0}
+.review-item{border-top:1px solid #e2e8f0;padding:15px 0;line-height:1.5}
+.review-item h3{font-size:16px}
+.small{font-size:13px;color:#64748b}
+select{padding:10px;border:1px solid #cbd5e1;border-radius:8px}
+@media(max-width:520px){header h1{font-size:21px}.panel{padding:15px}.question{font-size:17px}.stats{font-size:14px}}
 </style>
 </head>
 <body>
+<header>
+  <h1>COS 101 Interactive CBT</h1>
+  <p>Introduction to Computing Sciences | Modules 1–5</p>
+  <p>Undergraduate Practice Test · 30 Questions</p>
+</header>
+
 <div class="container">
-<h1>Vision: Overview and Nature</h1>
-<p class="subtitle">University Practice Quiz — Set 4</p>
+  <section id="startPanel" class="panel">
+    <h2>Instructions</h2>
+    <ul>
+      <li>Answer all 30 objective questions.</li>
+      <li>Select one option for each question.</li>
+      <li>You have 15 minutes to complete the test.</li>
+      <li>Your score, correct answers and explanations appear after submission.</li>
+      <li>You can move between questions before submitting.</li>
+    </ul>
+    <p><strong>Coverage:</strong> Computer history and generations, computing fields, computer systems, advantages and disadvantages, classification, and supercomputers.</p>
+    <button class="action" onclick="startTest()">Start CBT</button>
+  </section>
 
-<div class="instructions">
-<strong>Instructions</strong>
-<ul>
-<li>20 new questions, each worth 1 mark.</li>
-<li>Choose one answer per question.</li>
-<li>Time allowed: 8 minutes.</li>
-<li>Your score, correct answers and explanations appear after submission.</li>
-<li>The test submits automatically when time expires.</li>
-</ul>
-</div>
+  <section id="quizPanel" class="panel hidden">
+    <div class="stats">
+      <span id="questionCount">Question 1 of 30</span>
+      <span>Answered: <span id="answeredCount">0</span>/30</span>
+      <span id="timer">15:00</span>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <p class="question-number" id="questionCategory"></p>
+    <div class="question" id="questionText"></div>
+    <div id="options"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <div class="navigation">
+      <button id="prevBtn" class="action secondary" onclick="moveQuestion(-1)">Previous</button>
+      <button id="nextBtn" class="action" onclick="moveQuestion(1)">Next</button>
+      <button id="submitBtn" class="action" onclick="submitTest()">Submit Test</button>
+    </div>
+    <p class="small">Your answers are saved as you move between questions.</p>
+  </section>
 
-<div class="topbar">
-<span id="progress">Answered: 0 / 20</span>
-<span id="timer">Time: 08:00</span>
-</div>
-
-<div id="result" aria-live="polite"></div>
-
-<form id="quizForm">
-<div id="questions"></div>
-<div class="actions">
-<button class="primary" id="submitBtn" type="submit">Submit Answers</button>
-<button class="secondary" id="resetBtn" type="button">Restart Quiz</button>
-</div>
-</form>
+  <section id="resultPanel" class="panel hidden">
+    <div class="result">
+      <h2 id="resultHeading">Test Results</h2>
+      <div class="score" id="scoreText">0/30</div>
+      <p id="percentageText"></p>
+      <p id="resultMessage"></p>
+      <button class="action" onclick="toggleReview()">View Answers and Explanations</button>
+      <button class="action secondary" onclick="restartTest()">Try Again</button>
+    </div>
+    <div id="reviewPanel" class="hidden">
+      <h2>Answer Review</h2>
+      <div id="reviewList"></div>
+    </div>
+  </section>
 </div>
 
 <script>
 const questions = [
-{
-q:"A graduate wants to establish a community learning centre in the future. Which detail would make this vision more meaningful?",
-o:["The colour of the graduate's current notebook","The intended contribution the centre would make to learners","The number of messages received today","A list of unrelated past events"],
-a:1,
-e:"A meaningful vision describes a desired future and the contribution it is intended to make."
-},
-{
-q:"Two departments interpret their organisation's vision in completely different ways. What should leadership prioritise?",
-o:["Allowing confusion to continue","Keeping the vision away from employees","Clarifying the vision and its intended meaning","Removing every department's responsibility"],
-a:2,
-e:"A shared understanding helps different departments work toward a common direction."
-},
-{
-q:"A person has several ambitions but cannot decide which deserve priority. Which approach best supports vision development?",
-o:["Reflect on values, purpose and the future that matters most","Choose every ambition without evaluation","Select goals randomly","Avoid thinking about long-term direction"],
-a:0,
-e:"Reflecting on values and purpose can help an individual identify a coherent future direction."
-},
-{
-q:"A school says it wants to prepare students to solve future community problems. This statement is primarily concerned with:",
-o:["A record of previous examinations","A daily attendance register","A list of staff duties","A desired future contribution"],
-a:3,
-e:"The statement describes what the school hopes to contribute in the future."
-},
-{
-q:"Which example suggests that a vision has become disconnected from an organisation's decisions?",
-o:["Projects are reviewed against the organisation's direction","Resources are allocated to activities that contradict its stated priorities","Staff discuss how their work supports the vision","Leaders explain the purpose behind decisions"],
-a:1,
-e:"Decisions that contradict stated priorities indicate a gap between the vision and actual practice."
-},
-{
-q:"A personal vision changes after careful reflection on new responsibilities and values. Which conclusion is most reasonable?",
-o:["A vision can never be reconsidered","Any change automatically means failure","A person may review a vision thoughtfully as circumstances and understanding develop","Reflection should be avoided"],
-a:2,
-e:"A vision can be reviewed thoughtfully; changes should be considered in relation to purpose and responsibilities."
-},
-{
-q:"Which question would be most useful when evaluating a proposed vision statement?",
-o:["Does it describe a future direction that can guide choices?","Does it contain the greatest number of words?","Can nobody understand it without an explanation?","Does it list every task for the next week?"],
-a:0,
-e:"A useful vision statement communicates a future direction and helps guide decisions."
-},
-{
-q:"An organisation's vision is inspiring, but employees do not know how their roles contribute to it. What would help most?",
-o:["Stop explaining the vision","Remove all team objectives","Tell employees that their roles do not matter","Connect the vision to team priorities and individual responsibilities"],
-a:3,
-e:"Showing how roles connect to the wider direction helps people understand their contribution."
-},
-{
-q:"A student writes a vision statement entirely to impress classmates, despite it conflicting with the student's own values. What is the main concern?",
-o:["The statement is too short","The statement lacks personal alignment","The statement refers to the future","The student has written a sentence"],
-a:1,
-e:"A personal vision is more meaningful when it reflects the individual's considered values and purpose."
-},
-{
-q:"In a discussion of Habakkuk 2:3, a person becomes discouraged because a goal has not been fulfilled immediately. Which lesson is most relevant?",
-o:["Every goal must be abandoned after a delay","Effort and responsibility are always unnecessary","The passage is commonly associated with waiting for the appointed time","A delay proves that planning has no value"],
-a:2,
-e:"Habakkuk 2:3 is commonly discussed in connection with an appointed time and the need to wait."
-},
-{
-q:"Which interpretation should be avoided when studying biblical teachings about vision?",
-o:["Vision can be discussed in relation to direction","A vision may call for patience","People can reflect on their responsibilities","Every personal desire is automatically a divine instruction"],
-a:3,
-e:"A personal desire should not automatically be treated as a divine instruction; discernment matters."
-},
-{
-q:"A manager communicates the organisation's vision only during recruitment and never refers to it again. What is a likely weakness?",
-o:["The vision may not remain visible in ongoing decisions and activities","The vision must have been achieved already","Employees no longer need direction","The organisation cannot set any priorities"],
-a:0,
-e:"Revisiting the vision in relevant decisions and activities can help keep it connected to organisational practice."
-},
-{
-q:"A vision statement describes an inspiring future but is so broad that people cannot identify its central idea. What is the best revision strategy?",
-o:["Add several unrelated paragraphs","Make its central direction more focused and clear","Remove all reference to the future","Replace it with a timetable"],
-a:1,
-e:"A focused statement makes the central future direction easier to understand."
-},
-{
-q:"Why is it useful to distinguish an institution's vision from its mission when studying its official statements?",
-o:["The two terms must always have identical wording","Neither statement has any practical purpose","They may express different but related aspects of the institution's direction and purpose","One of them must always be ignored"],
-a:2,
-e:"Vision and mission are related concepts, but their exact meanings and wording should be learned from the institution's materials."
-},
-{
-q:"A student is preparing for an examination question on RCCG's stated vision. Which preparation is most reliable?",
-o:["Memorise a statement invented from general assumptions","Study the exact wording and key elements given in the assigned material","Use the mission statement of an unrelated organisation","Prepare only by guessing possible answers"],
-a:1,
-e:"Institution-specific questions should be answered using the actual statement and emphasis in the assigned course material."
-},
-{
-q:"A student is asked to discuss the relationship between vision and holiness in the RCCG course topic. Which preparation would be strongest?",
-o:["Ignore the assigned church material","Assume the topic is unrelated to spiritual aims","Replace the topic with business management alone","Review how the course material connects holiness with RCCG's stated spiritual aims"],
-a:3,
-e:"The answer should reflect the relationship actually presented in the course material, including its discussion of holiness."
-},
-{
-q:"A question asks for a specific feature of Redeemer's University's vision. Which source should take priority in the answer?",
-o:["The exact university statement reproduced in the course notes","A guess based only on the institution's name","A random statement from another university","An unrelated personal opinion"],
-a:0,
-e:"Use the exact institutional wording supplied in the assigned material rather than guessing."
-},
-{
-q:"A lecturer asks students to apply LIFE PIE values to a practical situation. What should students do before explaining the application?",
-o:["Assume the acronym has no defined meaning","Invent a new expansion","Identify the exact values as defined in their course material","Ignore the values and discuss an unrelated acronym"],
-a:2,
-e:"The values must first be identified accurately from the course material before applying them."
-},
-{
-q:"A team completes many activities but cannot explain how those activities contribute to its intended future. What would improve its effectiveness?",
-o:["Increase the number of unrelated activities","Review the vision and connect activities to clear priorities","Avoid discussing objectives","Stop evaluating decisions"],
-a:1,
-e:"Activities become more purposeful when they are connected to the intended direction and priorities."
-},
-{
-q:"Which scenario best illustrates the practical value of vision in decision-making?",
-o:["A person accepts every opportunity regardless of purpose","A team makes choices without discussing its objectives","An organisation changes direction daily without reflection","A student chooses activities based on how they support a considered long-term goal"],
-a:3,
-e:"A vision can serve as a reference point for evaluating choices and deciding which activities support a desired future."
-}
+{q:"Which statement best describes the historical use of cowrie shells in parts of West Africa?",o:["They were used only as currency and never for calculations.","They served as counting tools that could represent numbers and support arithmetic.","They were the first electronic memory devices.","They were invented by Charles Babbage."],a:1,e:"The Module 1 notes explain that cowrie shells represented numbers and were moved to perform calculations such as addition and subtraction.",c:"Computer history"},
+{q:"Which person is associated with the Pascaline calculating machine?",o:["John Napier","Alan Turing","Blaise Pascal","Herman Hollerith"],a:2,e:"Blaise Pascal developed the Pascaline, which was particularly useful for addition and subtraction.",c:"Computer history"},
+{q:"Ada Lovelace is recognised in the notes primarily for her contribution as:",o:["The inventor of the first supercomputer","The first computer programmer","The inventor of the vacuum tube","The founder of IBM"],a:1,e:"Ada Lovelace worked closely with Charles Babbage and recognised that the Analytical Engine could have uses beyond calculation.",c:"Computer history"},
+{q:"Herman Hollerith's tabulating machine was notably associated with which activity?",o:["Processing the United States census","Predicting earthquakes with GPUs","Creating the first smartphone","Designing the abacus"],a:0,e:"Hollerith developed an electromechanical tabulating machine used for the 1890 United States census.",c:"Computer history"},
+{q:"What was a defining technology of first-generation computers?",o:["Microprocessors","Integrated circuits","Vacuum tubes","Cloud computing"],a:2,e:"First-generation computers, mainly from the 1940s to the 1950s, used vacuum tubes.",c:"Computer generations"},
+{q:"A computer generation is mainly classified according to:",o:["The country where it was sold","The technology used in its construction","The colour of its monitor","The number of people who own it"],a:1,e:"The notes explain that computer generations are distinguished by the technology on which the computers were built.",c:"Computer generations"},
+{q:"Which development is most strongly associated with third-generation computers?",o:["Vacuum tubes","Integrated circuits","Cowrie-shell arithmetic","The disappearance of operating systems"],a:1,e:"Integrated circuits helped reduce computer size and improve reliability and performance in the third generation.",c:"Computer generations"},
+{q:"Which feature helped fourth-generation computers become smaller and more powerful?",o:["The return to mechanical gears","The use of microprocessors","The removal of memory","The use of only machine language"],a:1,e:"Microprocessors were a major development of the fourth generation and enabled smaller, more powerful computers.",c:"Computer generations"},
+{q:"Alan Turing's universal-machine concept contributed to the foundations of:",o:["Modern computer science","Computer recycling only","The Pascaline's mechanical gears","The first cowrie-shell system"],a:0,e:"The Module 1 notes link Turing's universal-machine concept to the foundations of modern computer science.",c:"Computer history"},
+{q:"Which field focuses especially on protecting systems, networks, and data from digital attacks?",o:["Cybersecurity","Data entry","Word processing","Computer graphics only"],a:0,e:"Cybersecurity concerns the protection of computer systems and digital information.",c:"Computing fields"},
+{q:"Which option best distinguishes data science from simply storing files?",o:["It studies and extracts useful insights from data.","It only manufactures keyboards.","It replaces every operating system.","It is limited to printing documents."],a:0,e:"Data science focuses on working with data to discover patterns, draw conclusions, and support decisions.",c:"Computing fields"},
+{q:"Which of these is NOT listed as a basic component of a computer system in Module 2?",o:["Hardware","Software","Peopleware","Weather"],a:3,e:"The listed components include hardware, software, data, peopleware/people, and procedures.",c:"Computer system"},
+{q:"A keyboard sends a user's typed information into a computer. It is acting as a(n):",o:["Input device","Output device","Arithmetic unit","Long-term storage device"],a:0,e:"Input devices allow data and instructions to enter a computer system.",c:"Computer system"},
+{q:"Which CPU component performs arithmetic operations and logical comparisons?",o:["Control Unit","Arithmetic Logic Unit","Monitor","Solid-state drive"],a:1,e:"The ALU performs arithmetic and logical operations.",c:"Computer system"},
+{q:"The Control Unit is mainly responsible for:",o:["Directing and coordinating computer operations","Displaying images on the screen directly","Storing every file permanently","Printing all processed data"],a:0,e:"The Control Unit coordinates and directs the activities of the computer's functional units.",c:"Computer system"},
+{q:"Which statement about RAM and ROM is most accurate?",o:["Both are output devices.","RAM is volatile memory, while ROM is generally non-volatile.","ROM loses its contents whenever power is removed, but RAM never does.","Both are types of printers."],a:1,e:"RAM normally loses its contents when power is removed; ROM retains its contents.",c:"Computer system"},
+{q:"A computer receives data, processes it according to instructions, and produces results. The results are called:",o:["Input","Output","Procedures","Hardware"],a:1,e:"Output is the information or result produced after processing.",c:"Computer system"},
+{q:"Which sequence best represents the basic information-processing cycle?",o:["Output → input → processing → input","Processing → output → input → storage only","Input → processing → output","Storage → output → keyboard → input"],a:2,e:"The basic cycle is input, processing, and output; storage may also be involved.",c:"Computer system"},
+{q:"A computer produces the same incorrect result repeatedly because the instructions are wrong. Which principle best explains this?",o:["Computers can make sound decisions without instructions.","Consistency does not guarantee correctness when the input or instructions are faulty.","Storage always corrects programming errors.","Speed automatically removes errors."],a:1,e:"The notes state that computers produce consistent results when the input is correct and the instructions work.",c:"Computer characteristics"},
+{q:"Which example best illustrates a computer's communication advantage?",o:["A computer exchanging information with another computer over a network","A computer overheating due to poor cooling","A user forgetting a password","A monitor displaying no picture"],a:0,e:"Communication allows computers and users to exchange information, often over networks.",c:"Advantages and disadvantages"},
+{q:"Which is an example of a potential disadvantage of computer use discussed in Module 3?",o:["Unlimited protection of every user's privacy","Health risks from prolonged or improper use","Guaranteed employment for every worker","Zero environmental impact"],a:1,e:"The notes identify health risks, privacy violations, labour-force impacts, public safety concerns, and environmental impacts.",c:"Advantages and disadvantages"},
+{q:"Which practice supports green computing?",o:["Discarding every computer as soon as it becomes old","Leaving unused computers running indefinitely","Recycling and properly disposing of replaced computers","Increasing electronic waste without control"],a:2,e:"Green computing includes reducing electricity use and waste, recycling, and extending computer life.",c:"Advantages and disadvantages"},
+{q:"A computer measures continuously changing temperature or pressure rather than representing values as discrete binary data. It is best classified as:",o:["Digital","Analog","General-purpose only","Mainframe only"],a:1,e:"Analog computers work with continuously variable physical quantities.",c:"Classification of computers"},
+{q:"A computer system combines analog measurement with digital control and display. This is a:",o:["Hybrid computer","Purely mechanical calculator","Computer without memory by definition","Special-purpose software package"],a:0,e:"Hybrid computers combine characteristics of analog and digital computers.",c:"Classification of computers"},
+{q:"A laptop runs a browser, spreadsheet, media player, and programming tools. This best illustrates a:",o:["Special-purpose computer","General-purpose computer","Computer that cannot store data","Purely analog computer"],a:1,e:"General-purpose computers can perform many different tasks by running different software.",c:"Classification of computers"},
+{q:"A device built specifically to control a traffic-light system is best described as:",o:["General-purpose in every context","Special-purpose","A supercomputer by definition","A mainframe in every case"],a:1,e:"A special-purpose computer is designed for one dedicated task or a narrow range of tasks.",c:"Classification of computers"},
+{q:"Which statement about supercomputer performance matches Module 5A?",o:["It is measured only by screen resolution.","It is measured using FLOPS, or floating-point operations per second.","It is measured by keyboard size.","It is measured only by the number of files stored."],a:1,e:"FLOPS measures floating-point calculation performance; the notes discuss PetaFLOPS and ExaFLOPS.",c:"Supercomputers"},
+{q:"Why do supercomputers use massive parallelism?",o:["To make all calculations happen one after another on a single core","To let many processing cores work on computations simultaneously","To eliminate the need for communication between nodes","To prevent scientific simulations"],a:1,e:"Massive parallelism enables many cores to work at the same time on computationally demanding problems.",c:"Supercomputers"},
+{q:"Why are high-speed interconnects important in supercomputers?",o:["They help interconnected nodes communicate rapidly with low delay.","They replace all cooling systems.","They convert every digital computer into an analog computer.","They are used only to improve screen brightness."],a:0,e:"Supercomputer nodes must exchange information quickly; interconnect performance can limit the overall system.",c:"Supercomputers"},
+{q:"Which task is a suitable supercomputer application from the lecture notes?",o:["Only typing a short letter","Climate modelling and complex scientific simulation","Only changing a desktop wallpaper","Only playing audio files"],a:1,e:"The notes identify climate and weather modelling, physics simulations, drug discovery, engineering, and AI/big-data tasks as applications.",c:"Supercomputers"}
 ];
 
-const form = document.getElementById("quizForm");
-const questionsBox = document.getElementById("questions");
-const timerBox = document.getElementById("timer");
-const progressBox = document.getElementById("progress");
-const resultBox = document.getElementById("result");
-const submitBtn = document.getElementById("submitBtn");
-
-let timeLeft = 480;
-let interval = null;
-let started = false;
+let current = 0;
+let answers = {};
+let secondsLeft = 15 * 60;
+let timerInterval = null;
 let submitted = false;
 
-function renderQuestions(){
-  questionsBox.innerHTML = "";
-
-  questions.forEach((item,i)=>{
-    const card = document.createElement("section");
-    card.className = "question";
-    card.id = "question-"+i;
-
-    const heading = document.createElement("h3");
-    heading.textContent = (i+1)+". "+item.q;
-    card.appendChild(heading);
-
-    item.o.forEach((option,j)=>{
-      const label = document.createElement("label");
-      label.className = "option";
-
-      const radio = document.createElement("input");
-      radio.type = "radio";
-      radio.name = "q"+i;
-      radio.value = j;
-      radio.addEventListener("change",()=>{
-        updateProgress();
-        startTimer();
-      });
-
-      label.appendChild(radio);
-      label.appendChild(document.createTextNode(
-        String.fromCharCode(65+j)+". "+option
-      ));
-      card.appendChild(label);
-    });
-
-    const explanation = document.createElement("div");
-    explanation.className = "explanation";
-    explanation.id = "explanation-"+i;
-    card.appendChild(explanation);
-
-    questionsBox.appendChild(card);
-  });
-}
-
-function updateProgress(){
-  let answered = 0;
-  questions.forEach((_,i)=>{
-    if(form.querySelector('input[name="q'+i+'"]:checked')) answered++;
-  });
-  progressBox.textContent = "Answered: "+answered+" / "+questions.length;
-}
-
-function startTimer(){
-  if(started || submitted) return;
-  started = true;
-
-  interval = setInterval(()=>{
-    timeLeft--;
+function startTest(){
+  document.getElementById("startPanel").classList.add("hidden");
+  document.getElementById("quizPanel").classList.remove("hidden");
+  current=0;
+  answers={};
+  secondsLeft=15*60;
+  submitted=false;
+  renderQuestion();
+  updateTimer();
+  clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    secondsLeft--;
     updateTimer();
-
-    if(timeLeft<=0){
-      clearInterval(interval);
-      finishQuiz(true);
+    if(secondsLeft<=0){
+      clearInterval(timerInterval);
+      submitTest(true);
     }
   },1000);
 }
 
 function updateTimer(){
-  const mins = Math.floor(timeLeft/60);
-  const secs = timeLeft%60;
-  timerBox.textContent = "Time: "+
-    String(mins).padStart(2,"0")+":"+
-    String(secs).padStart(2,"0");
-  timerBox.classList.toggle("warning",timeLeft<=60);
+  const m=Math.floor(secondsLeft/60);
+  const s=secondsLeft%60;
+  const el=document.getElementById("timer");
+  el.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  el.style.color=secondsLeft<=60?"#dc2626":"#dc2626";
 }
 
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g,ch=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[ch]);
-}
-
-function finishQuiz(timeExpired=false){
-  if(submitted) return;
-  submitted = true;
-  clearInterval(interval);
-
-  let score = 0;
-  let answered = 0;
-
-  questions.forEach((item,i)=>{
-    const card = document.getElementById("question-"+i);
-    const selected = form.querySelector('input[name="q'+i+'"]:checked');
-    const labels = card.querySelectorAll(".option");
-    const chosen = selected ? Number(selected.value) : -1;
-
-    if(selected) answered++;
-    if(chosen===item.a) score++;
-
-    labels.forEach((label,j)=>{
-      label.querySelector("input").disabled = true;
-      if(j===item.a) label.classList.add("correct");
-      if(j===chosen && chosen!==item.a) label.classList.add("incorrect");
-    });
-
-    const explanation = document.getElementById("explanation-"+i);
-    explanation.classList.add("show");
-    explanation.innerHTML =
-      "<p><strong>Correct answer: "+
-      String.fromCharCode(65+item.a)+". "+
-      escapeHTML(item.o[item.a])+
-      "</strong></p><p>"+escapeHTML(item.e)+"</p>";
+function renderQuestion(){
+  const item=questions[current];
+  document.getElementById("questionCount").textContent=`Question ${current+1} of ${questions.length}`;
+  document.getElementById("questionCategory").textContent=item.c;
+  document.getElementById("questionText").textContent=item.q;
+  document.getElementById("answeredCount").textContent=Object.keys(answers).length;
+  document.getElementById("progressBar").style.width=(Object.keys(answers).length/questions.length*100)+"%";
+  document.getElementById("prevBtn").disabled=current===0;
+  document.getElementById("nextBtn").disabled=current===questions.length-1;
+  document.getElementById("feedback").classList.add("hidden");
+  const options=document.getElementById("options");
+  options.innerHTML="";
+  item.o.forEach((option,index)=>{
+    const btn=document.createElement("button");
+    btn.className="option"+(answers[current]===index?" selected":"");
+    btn.type="button";
+    btn.textContent=String.fromCharCode(65+index)+". "+option;
+    btn.onclick=()=>selectAnswer(index);
+    options.appendChild(btn);
   });
-
-  const percent = Math.round(score/questions.length*100);
-  let feedback;
-
-  if(percent>=80){
-    feedback="Excellent work! Review the explanations to consolidate your understanding.";
-  }else if(percent>=60){
-    feedback="Good effort. Revisit the questions you missed and review your notes.";
-  }else{
-    feedback="Keep practising. Study the chapter again and try the quiz once more.";
-  }
-
-  resultBox.style.display = "block";
-  resultBox.innerHTML =
-    "<h2>"+(timeExpired?"Time is up!":"Quiz submitted")+"</h2>"+
-    "<p><strong>Score: "+score+" / "+questions.length+"</strong></p>"+
-    "<p><strong>Percentage: "+percent+"%</strong></p>"+
-    "<p>Answered: "+answered+" / "+questions.length+"</p>"+
-    "<p>"+feedback+"</p>";
-
-  submitBtn.disabled = true;
-  progressBox.textContent = "Completed: "+answered+" / "+questions.length;
-  resultBox.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-form.addEventListener("submit",event=>{
-  event.preventDefault();
-  startTimer();
-  finishQuiz(false);
-});
+function selectAnswer(index){
+  if(submitted)return;
+  answers[current]=index;
+  renderQuestion();
+}
 
-document.getElementById("resetBtn").addEventListener("click",()=>{
-  clearInterval(interval);
-  timeLeft = 480;
-  started = false;
-  submitted = false;
+function moveQuestion(direction){
+  const next=current+direction;
+  if(next>=0&&next<questions.length){
+    current=next;
+    renderQuestion();
+  }
+}
 
-  resultBox.style.display = "none";
-  resultBox.innerHTML = "";
-  submitBtn.disabled = false;
-
-  renderQuestions();
-  updateTimer();
-  updateProgress();
+function submitTest(timeUp=false){
+  if(submitted)return;
+  if(!timeUp){
+    const unanswered=questions.length-Object.keys(answers).length;
+    if(unanswered>0){
+      const ok=confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`);
+      if(!ok)return;
+    }else{
+      if(!confirm("Are you sure you want to submit your answers?"))return;
+    }
+  }
+  submitted=true;
+  clearInterval(timerInterval);
+  let score=0;
+  questions.forEach((q,i)=>{if(answers[i]===q.a)score++;});
+  const pct=Math.round(score/questions.length*100);
+  document.getElementById("quizPanel").classList.add("hidden");
+  document.getElementById("resultPanel").classList.remove("hidden");
+  document.getElementById("scoreText").textContent=`${score}/${questions.length}`;
+  document.getElementById("percentageText").textContent=`Percentage: ${pct}%`;
+  document.getElementById("resultHeading").textContent=timeUp?"Time is up!":"Test Submitted";
+  document.getElementById("resultMessage").textContent=
+    pct>=80?"Excellent work! Keep revising the details and tricky concepts.":
+    pct>=60?"Good effort. Review the explanations to strengthen your understanding.":
+    pct>=40?"Keep practising. Study the explanations and try the CBT again.":
+    "Use this result as a guide. Review the lecture PDFs and attempt the CBT again.";
+  buildReview();
+  document.getElementById("reviewPanel").classList.add("hidden");
   window.scrollTo({top:0,behavior:"smooth"});
-});
+}
 
-renderQuestions();
-updateTimer();
-updateProgress();
+function buildReview(){
+  const list=document.getElementById("reviewList");
+  list.innerHTML="";
+  questions.forEach((q,i)=>{
+    const correct=answers[i]===q.a;
+    const div=document.createElement("div");
+    div.className="review-item";
+    const h=document.createElement("h3");
+    h.textContent=`${i+1}. ${q.q}`;
+    const status=document.createElement("p");
+    status.className=correct?"good":"bad";
+    status.style.padding="9px";
+    status.style.borderRadius="8px";
+    status.textContent=answers[i]===undefined
+      ?"Not answered."
+      :(correct?"Correct!":"Incorrect.");
+    const chosen=document.createElement("p");
+    chosen.textContent="Your answer: "+(answers[i]===undefined?"No answer":String.fromCharCode(65+answers[i])+". "+q.o[answers[i]]);
+    const answer=document.createElement("p");
+    answer.innerHTML="<strong>Correct answer: </strong>";
+    answer.append(document.createTextNode(String.fromCharCode(65+q.a)+". "+q.o[q.a]));
+    const explanation=document.createElement("p");
+    explanation.innerHTML="<strong>Explanation: </strong>";
+    explanation.append(document.createTextNode(q.e));
+    div.append(h,status,chosen,answer,explanation);
+    list.appendChild(div);
+  });
+}
+
+function toggleReview(){
+  document.getElementById("reviewPanel").classList.toggle("hidden");
+  document.getElementById("reviewPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function restartTest(){
+  clearInterval(timerInterval);
+  current=0;
+  answers={};
+  secondsLeft=15*60;
+  submitted=false;
+  document.getElementById("resultPanel").classList.add("hidden");
+  document.getElementById("startPanel").classList.remove("hidden");
+  document.getElementById("reviewPanel").classList.add("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 </script>
 </body>
 </html>
