@@ -1,264 +1,372 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COS 101 Interactive CBT | Modules 1–5</title>
+<title>COS 101 CBT - Modules 2 & 3</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
-header{background:#102b50;color:white;padding:24px 16px;text-align:center}
+header{background:#102b50;color:white;padding:24px 14px;text-align:center}
 header h1{margin:0 0 8px;font-size:25px}
 header p{margin:5px 0;color:#dbeafe}
 .container{max-width:850px;margin:22px auto;padding:0 14px}
 .panel{background:white;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 12px #0000000c}
 .stats{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:bold}
+#timer{color:#dc2626}
 .progress{height:9px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-top:14px}
 #progressBar{height:100%;width:0;background:#2563eb;transition:width .2s}
-#timer{color:#dc2626}
 .question-number{color:#2563eb;font-weight:bold;font-size:14px}
 .question{font-size:19px;line-height:1.5;font-weight:bold;margin:12px 0 18px}
 .option{display:block;width:100%;text-align:left;border:2px solid #dbe3ee;background:white;border-radius:10px;padding:13px 14px;margin:10px 0;font-size:15px;cursor:pointer;line-height:1.4;color:#172033}
 .option:hover{border-color:#2563eb;background:#eff6ff}
 .option.selected{border-color:#2563eb;background:#dbeafe}
-.option:disabled{cursor:default;opacity:1}
-.option.correct{border-color:#16a34a;background:#dcfce7}
-.option.wrong{border-color:#dc2626;background:#fee2e2}
 button.action{border:0;border-radius:9px;padding:12px 18px;background:#1d4ed8;color:white;font-size:15px;font-weight:bold;cursor:pointer}
 button.action:hover{background:#1e40af}
 button.action:disabled{background:#94a3b8;cursor:not-allowed}
 .secondary{background:#475569!important}
 .navigation{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
-.feedback{margin-top:14px;padding:12px;border-radius:9px;line-height:1.5}
-.good{background:#dcfce7;color:#166534}
-.bad{background:#fee2e2;color:#991b1b}
 .hidden{display:none!important}
 .result{text-align:center}
 .score{font-size:42px;font-weight:bold;color:#1d4ed8;margin:14px 0}
 .review-item{border-top:1px solid #e2e8f0;padding:15px 0;line-height:1.5}
 .review-item h3{font-size:16px}
 .small{font-size:13px;color:#64748b}
-select{padding:10px;border:1px solid #cbd5e1;border-radius:8px}
-@media(max-width:520px){header h1{font-size:21px}.panel{padding:15px}.question{font-size:17px}.stats{font-size:14px}}
 </style>
 </head>
 <body>
 <header>
-  <h1>COS 101 Interactive CBT</h1>
-  <p>Introduction to Computing Sciences | Modules 1–5</p>
-  <p>Undergraduate Practice Test · 30 Questions</p>
+<h1>COS 101 Interactive CBT</h1>
+<p>Introduction to Computing Sciences</p>
+<p>Modules 2 & 3 | 30 Questions | 15 Minutes</p>
 </header>
 
 <div class="container">
-  <section id="startPanel" class="panel">
-    <h2>Instructions</h2>
-    <ul>
-      <li>Answer all 30 objective questions.</li>
-      <li>Select one option for each question.</li>
-      <li>You have 15 minutes to complete the test.</li>
-      <li>Your score, correct answers and explanations appear after submission.</li>
-      <li>You can move between questions before submitting.</li>
-    </ul>
-    <p><strong>Coverage:</strong> Computer history and generations, computing fields, computer systems, advantages and disadvantages, classification, and supercomputers.</p>
-    <button class="action" onclick="startTest()">Start CBT</button>
-  </section>
+<section id="startPanel" class="panel">
+<h2>Instructions</h2>
+<ul>
+<li>Questions are from Module 2: The Computer System.</li>
+<li>Questions are also from Module 3: Advantages and Disadvantages of Computers.</li>
+<li>Select one answer per question.</li>
+<li>Your score and explanations appear after submission.</li>
+<li>You can move between questions before submitting.</li>
+</ul>
+<p><strong>Time allowed:</strong> 15 minutes</p>
+<button class="action" onclick="startTest()">Start CBT</button>
+</section>
 
-  <section id="quizPanel" class="panel hidden">
-    <div class="stats">
-      <span id="questionCount">Question 1 of 30</span>
-      <span>Answered: <span id="answeredCount">0</span>/30</span>
-      <span id="timer">15:00</span>
-    </div>
-    <div class="progress"><div id="progressBar"></div></div>
-    <p class="question-number" id="questionCategory"></p>
-    <div class="question" id="questionText"></div>
-    <div id="options"></div>
-    <div id="feedback" class="feedback hidden"></div>
-    <div class="navigation">
-      <button id="prevBtn" class="action secondary" onclick="moveQuestion(-1)">Previous</button>
-      <button id="nextBtn" class="action" onclick="moveQuestion(1)">Next</button>
-      <button id="submitBtn" class="action" onclick="submitTest()">Submit Test</button>
-    </div>
-    <p class="small">Your answers are saved as you move between questions.</p>
-  </section>
+<section id="quizPanel" class="panel hidden">
+<div class="stats">
+<span id="questionCount">Question 1 of 30</span>
+<span>Answered: <span id="answeredCount">0</span>/30</span>
+<span id="timer">15:00</span>
+</div>
+<div class="progress"><div id="progressBar"></div></div>
+<p class="question-number" id="category"></p>
+<div class="question" id="questionText"></div>
+<div id="options"></div>
+<div class="navigation">
+<button id="prevBtn" class="action secondary" onclick="moveQuestion(-1)">Previous</button>
+<button id="nextBtn" class="action" onclick="moveQuestion(1)">Next</button>
+<button class="action" onclick="submitTest()">Submit Test</button>
+</div>
+<p class="small">Your selected answers are saved automatically as you move between questions.</p>
+</section>
 
-  <section id="resultPanel" class="panel hidden">
-    <div class="result">
-      <h2 id="resultHeading">Test Results</h2>
-      <div class="score" id="scoreText">0/30</div>
-      <p id="percentageText"></p>
-      <p id="resultMessage"></p>
-      <button class="action" onclick="toggleReview()">View Answers and Explanations</button>
-      <button class="action secondary" onclick="restartTest()">Try Again</button>
-    </div>
-    <div id="reviewPanel" class="hidden">
-      <h2>Answer Review</h2>
-      <div id="reviewList"></div>
-    </div>
-  </section>
+<section id="resultPanel" class="panel hidden">
+<div class="result">
+<h2 id="resultHeading">Test Submitted</h2>
+<div class="score" id="scoreText">0/30</div>
+<p id="percentageText"></p>
+<p id="resultMessage"></p>
+<button class="action" onclick="toggleReview()">View Answers and Explanations</button>
+<button class="action secondary" onclick="restartTest()">Try Again</button>
+</div>
+<div id="reviewPanel" class="hidden">
+<h2>Answer Review</h2>
+<div id="reviewList"></div>
+</div>
+</section>
 </div>
 
 <script>
 const questions = [
-{q:"Which statement best describes the historical use of cowrie shells in parts of West Africa?",o:["They were used only as currency and never for calculations.","They served as counting tools that could represent numbers and support arithmetic.","They were the first electronic memory devices.","They were invented by Charles Babbage."],a:1,e:"The Module 1 notes explain that cowrie shells represented numbers and were moved to perform calculations such as addition and subtraction.",c:"Computer history"},
-{q:"Which person is associated with the Pascaline calculating machine?",o:["John Napier","Alan Turing","Blaise Pascal","Herman Hollerith"],a:2,e:"Blaise Pascal developed the Pascaline, which was particularly useful for addition and subtraction.",c:"Computer history"},
-{q:"Ada Lovelace is recognised in the notes primarily for her contribution as:",o:["The inventor of the first supercomputer","The first computer programmer","The inventor of the vacuum tube","The founder of IBM"],a:1,e:"Ada Lovelace worked closely with Charles Babbage and recognised that the Analytical Engine could have uses beyond calculation.",c:"Computer history"},
-{q:"Herman Hollerith's tabulating machine was notably associated with which activity?",o:["Processing the United States census","Predicting earthquakes with GPUs","Creating the first smartphone","Designing the abacus"],a:0,e:"Hollerith developed an electromechanical tabulating machine used for the 1890 United States census.",c:"Computer history"},
-{q:"What was a defining technology of first-generation computers?",o:["Microprocessors","Integrated circuits","Vacuum tubes","Cloud computing"],a:2,e:"First-generation computers, mainly from the 1940s to the 1950s, used vacuum tubes.",c:"Computer generations"},
-{q:"A computer generation is mainly classified according to:",o:["The country where it was sold","The technology used in its construction","The colour of its monitor","The number of people who own it"],a:1,e:"The notes explain that computer generations are distinguished by the technology on which the computers were built.",c:"Computer generations"},
-{q:"Which development is most strongly associated with third-generation computers?",o:["Vacuum tubes","Integrated circuits","Cowrie-shell arithmetic","The disappearance of operating systems"],a:1,e:"Integrated circuits helped reduce computer size and improve reliability and performance in the third generation.",c:"Computer generations"},
-{q:"Which feature helped fourth-generation computers become smaller and more powerful?",o:["The return to mechanical gears","The use of microprocessors","The removal of memory","The use of only machine language"],a:1,e:"Microprocessors were a major development of the fourth generation and enabled smaller, more powerful computers.",c:"Computer generations"},
-{q:"Alan Turing's universal-machine concept contributed to the foundations of:",o:["Modern computer science","Computer recycling only","The Pascaline's mechanical gears","The first cowrie-shell system"],a:0,e:"The Module 1 notes link Turing's universal-machine concept to the foundations of modern computer science.",c:"Computer history"},
-{q:"Which field focuses especially on protecting systems, networks, and data from digital attacks?",o:["Cybersecurity","Data entry","Word processing","Computer graphics only"],a:0,e:"Cybersecurity concerns the protection of computer systems and digital information.",c:"Computing fields"},
-{q:"Which option best distinguishes data science from simply storing files?",o:["It studies and extracts useful insights from data.","It only manufactures keyboards.","It replaces every operating system.","It is limited to printing documents."],a:0,e:"Data science focuses on working with data to discover patterns, draw conclusions, and support decisions.",c:"Computing fields"},
-{q:"Which of these is NOT listed as a basic component of a computer system in Module 2?",o:["Hardware","Software","Peopleware","Weather"],a:3,e:"The listed components include hardware, software, data, peopleware/people, and procedures.",c:"Computer system"},
-{q:"A keyboard sends a user's typed information into a computer. It is acting as a(n):",o:["Input device","Output device","Arithmetic unit","Long-term storage device"],a:0,e:"Input devices allow data and instructions to enter a computer system.",c:"Computer system"},
-{q:"Which CPU component performs arithmetic operations and logical comparisons?",o:["Control Unit","Arithmetic Logic Unit","Monitor","Solid-state drive"],a:1,e:"The ALU performs arithmetic and logical operations.",c:"Computer system"},
-{q:"The Control Unit is mainly responsible for:",o:["Directing and coordinating computer operations","Displaying images on the screen directly","Storing every file permanently","Printing all processed data"],a:0,e:"The Control Unit coordinates and directs the activities of the computer's functional units.",c:"Computer system"},
-{q:"Which statement about RAM and ROM is most accurate?",o:["Both are output devices.","RAM is volatile memory, while ROM is generally non-volatile.","ROM loses its contents whenever power is removed, but RAM never does.","Both are types of printers."],a:1,e:"RAM normally loses its contents when power is removed; ROM retains its contents.",c:"Computer system"},
-{q:"A computer receives data, processes it according to instructions, and produces results. The results are called:",o:["Input","Output","Procedures","Hardware"],a:1,e:"Output is the information or result produced after processing.",c:"Computer system"},
-{q:"Which sequence best represents the basic information-processing cycle?",o:["Output → input → processing → input","Processing → output → input → storage only","Input → processing → output","Storage → output → keyboard → input"],a:2,e:"The basic cycle is input, processing, and output; storage may also be involved.",c:"Computer system"},
-{q:"A computer produces the same incorrect result repeatedly because the instructions are wrong. Which principle best explains this?",o:["Computers can make sound decisions without instructions.","Consistency does not guarantee correctness when the input or instructions are faulty.","Storage always corrects programming errors.","Speed automatically removes errors."],a:1,e:"The notes state that computers produce consistent results when the input is correct and the instructions work.",c:"Computer characteristics"},
-{q:"Which example best illustrates a computer's communication advantage?",o:["A computer exchanging information with another computer over a network","A computer overheating due to poor cooling","A user forgetting a password","A monitor displaying no picture"],a:0,e:"Communication allows computers and users to exchange information, often over networks.",c:"Advantages and disadvantages"},
-{q:"Which is an example of a potential disadvantage of computer use discussed in Module 3?",o:["Unlimited protection of every user's privacy","Health risks from prolonged or improper use","Guaranteed employment for every worker","Zero environmental impact"],a:1,e:"The notes identify health risks, privacy violations, labour-force impacts, public safety concerns, and environmental impacts.",c:"Advantages and disadvantages"},
-{q:"Which practice supports green computing?",o:["Discarding every computer as soon as it becomes old","Leaving unused computers running indefinitely","Recycling and properly disposing of replaced computers","Increasing electronic waste without control"],a:2,e:"Green computing includes reducing electricity use and waste, recycling, and extending computer life.",c:"Advantages and disadvantages"},
-{q:"A computer measures continuously changing temperature or pressure rather than representing values as discrete binary data. It is best classified as:",o:["Digital","Analog","General-purpose only","Mainframe only"],a:1,e:"Analog computers work with continuously variable physical quantities.",c:"Classification of computers"},
-{q:"A computer system combines analog measurement with digital control and display. This is a:",o:["Hybrid computer","Purely mechanical calculator","Computer without memory by definition","Special-purpose software package"],a:0,e:"Hybrid computers combine characteristics of analog and digital computers.",c:"Classification of computers"},
-{q:"A laptop runs a browser, spreadsheet, media player, and programming tools. This best illustrates a:",o:["Special-purpose computer","General-purpose computer","Computer that cannot store data","Purely analog computer"],a:1,e:"General-purpose computers can perform many different tasks by running different software.",c:"Classification of computers"},
-{q:"A device built specifically to control a traffic-light system is best described as:",o:["General-purpose in every context","Special-purpose","A supercomputer by definition","A mainframe in every case"],a:1,e:"A special-purpose computer is designed for one dedicated task or a narrow range of tasks.",c:"Classification of computers"},
-{q:"Which statement about supercomputer performance matches Module 5A?",o:["It is measured only by screen resolution.","It is measured using FLOPS, or floating-point operations per second.","It is measured by keyboard size.","It is measured only by the number of files stored."],a:1,e:"FLOPS measures floating-point calculation performance; the notes discuss PetaFLOPS and ExaFLOPS.",c:"Supercomputers"},
-{q:"Why do supercomputers use massive parallelism?",o:["To make all calculations happen one after another on a single core","To let many processing cores work on computations simultaneously","To eliminate the need for communication between nodes","To prevent scientific simulations"],a:1,e:"Massive parallelism enables many cores to work at the same time on computationally demanding problems.",c:"Supercomputers"},
-{q:"Why are high-speed interconnects important in supercomputers?",o:["They help interconnected nodes communicate rapidly with low delay.","They replace all cooling systems.","They convert every digital computer into an analog computer.","They are used only to improve screen brightness."],a:0,e:"Supercomputer nodes must exchange information quickly; interconnect performance can limit the overall system.",c:"Supercomputers"},
-{q:"Which task is a suitable supercomputer application from the lecture notes?",o:["Only typing a short letter","Climate modelling and complex scientific simulation","Only changing a desktop wallpaper","Only playing audio files"],a:1,e:"The notes identify climate and weather modelling, physics simulations, drug discovery, engineering, and AI/big-data tasks as applications.",c:"Supercomputers"}
+{
+q:"A student claims that a computer system consists only of hardware and software. Based on Module 2, what is the best response?",
+o:["The claim is correct because data is always hardware.","The claim is incomplete because data, people, and procedures are also components.","The claim is wrong because computers do not use software.","The claim is correct only for supercomputers."],
+a:1,c:"Module 2: Computer System",
+e:"The notes identify hardware, software, data, peopleware/people, and procedures as components of a computer system."
+},
+{
+q:"Which situation best demonstrates the difference between data and useful information?",
+o:["A monitor displays a blank screen.","Raw examination scores are processed to calculate each student's average.","A keyboard is connected to a computer.","A printer is switched off."],
+a:1,c:"Module 2: Computer System",
+e:"Information is produced when data is processed into a meaningful form, such as calculating averages from raw scores."
+},
+{
+q:"A user enters a wrong number, but the computer correctly performs the calculation requested. What is the most reasonable conclusion?",
+o:["The computer must be inaccurate.","Correct processing can still produce an incorrect result when the input is wrong.","The Control Unit has become an output device.","The computer has no processing unit."],
+a:1,c:"Module 2: Computer System",
+e:"A computer's result depends on the input and instructions. Correct processing does not automatically correct incorrect input."
+},
+{
+q:"Which pair is correctly matched?",
+o:["Keyboard — output","Monitor — input","ALU — arithmetic and logical operations","Control Unit — permanent file storage only"],
+a:2,c:"Module 2: Computer System",
+e:"The Arithmetic Logic Unit performs arithmetic operations and logical comparisons."
+},
+{
+q:"A computer is instructed to add two values. Which CPU component primarily performs the addition?",
+o:["Control Unit","Arithmetic Logic Unit","Input unit","Output unit"],
+a:1,c:"Module 2: Computer System",
+e:"The ALU performs arithmetic operations, while the Control Unit coordinates computer activities."
+},
+{
+q:"Which statement best describes the role of the Control Unit?",
+o:["It coordinates and directs the activities of the computer's functional units.","It is the only unit that permanently stores every file.","It is the same thing as a keyboard.","It converts every output into input automatically."],
+a:0,c:"Module 2: Computer System",
+e:"The Control Unit directs and coordinates computer operations."
+},
+{
+q:"A student saves a document on an SSD for use next week. The SSD is being used mainly for:",
+o:["Arithmetic processing","Long-term storage","Logical comparison","Input control"],
+a:1,c:"Module 2: Computer System",
+e:"An SSD is a storage device used to retain data and files for later use."
+},
+{
+q:"Which statement about RAM is correct?",
+o:["It is normally volatile memory.","It is an output device.","It is used only for printing.","It always retains all contents after power is removed."],
+a:0,c:"Module 2: Computer System",
+e:"RAM is volatile memory, meaning its contents are normally lost when power is removed."
+},
+{
+q:"Which of the following is the clearest example of an output device?",
+o:["Mouse","Scanner","Monitor","Keyboard"],
+a:2,c:"Module 2: Computer System",
+e:"A monitor presents processed information to the user, so it is an output device."
+},
+{
+q:"Which sequence best describes the basic information-processing cycle?",
+o:["Output, input, storage, keyboard","Input, processing, output","Processing, keyboard, input","Storage, output, processing, input"],
+a:1,c:"Module 2: Computer System",
+e:"The basic information-processing cycle is input, processing, and output. Storage may also be involved."
+},
+{
+q:"A scanner converts a paper image into data that a computer can work with. The scanner is functioning as:",
+o:["An input device","An output device","The ALU","A cooling unit"],
+a:0,c:"Module 2: Computer System",
+e:"A scanner captures information and sends it into the computer, making it an input device."
+},
+{
+q:"Which option correctly describes software?",
+o:["The physical components of a computer only","Programs and instructions used to operate a computer","The person operating the computer","The raw facts entered into a computer only"],
+a:1,c:"Module 2: Computer System",
+e:"Software consists of programs and instructions that tell a computer what to do."
+},
+{
+q:"A computer operator follows a defined set of steps for processing students' results. These steps are best described as:",
+o:["Hardware","Procedures","Output devices","Registers"],
+a:1,c:"Module 2: Computer System",
+e:"Procedures are the rules or steps followed when operating and using a computer system."
+},
+{
+q:"Which example best illustrates the computer characteristic of automation?",
+o:["A computer repeatedly performs a programmed task without needing a new instruction at every step.","A computer refuses to execute any program.","A user manually calculates every result.","A monitor displays the computer's brand name."],
+a:0,c:"Module 2: Computer System",
+e:"Automation means a computer can carry out tasks automatically once the appropriate instructions and conditions are provided."
+},
+{
+q:"A hospital uses computers to keep patient records and retrieve them when needed. Which computer characteristic is most directly illustrated?",
+o:["Storage","Diligence only","Physical size","Screen brightness"],
+a:0,c:"Module 2: Computer System",
+e:"Storage allows large amounts of data to be retained and retrieved when needed."
+},
+{
+q:"A computer performs millions of operations in a short period. Which characteristic does this demonstrate?",
+o:["Speed","Privacy violation","Environmental pollution","Public safety"],
+a:0,c:"Module 2: Computer System",
+e:"Speed refers to the ability of a computer to perform operations very quickly."
+},
+{
+q:"A computer repeats the same calculation many times without becoming tired. This best illustrates:",
+o:["Diligence","Privacy violation","Technology overload","Input failure"],
+a:0,c:"Module 2: Computer System",
+e:"Diligence means a computer can repeat tasks for long periods without human-like tiredness."
+},
+{
+q:"Which statement best captures the meaning of computer versatility?",
+o:["A computer can be used for different kinds of tasks.","A computer can perform only one fixed calculation.","A computer cannot process data.","A computer must always be connected to a printer."],
+a:0,c:"Module 2: Computer System",
+e:"Versatility is the ability to perform a variety of tasks."
+},
+{
+q:"A computer produces the same result whenever the same correct data and working instructions are used. This demonstrates:",
+o:["Consistency","Environmental impact","Privacy violation","Public safety risk"],
+a:0,c:"Module 2: Computer System",
+e:"Consistency means that the same input and processing instructions produce the same results."
+},
+{
+q:"Which statement about computer reliability is most appropriate?",
+o:["Modern electronic components can make computers dependable, although failure is still possible.","Computers can never fail under any circumstances.","Reliability means a computer has unlimited storage.","Reliability means a computer can think without instructions."],
+a:0,c:"Module 2: Computer System",
+e:"The notes describe modern computer components as dependable and reliable, not completely incapable of failure."
+},
+{
+q:"Which option is an advantage of computers specifically identified in Module 3?",
+o:["Violation of privacy","Health risks","Communication","Environmental pollution"],
+a:2,c:"Module 3: Advantages and Disadvantages",
+e:"The advantages listed in Module 3 include speed, reliability, consistency, storage, and communications."
+},
+{
+q:"A company uses a computer to process thousands of records quickly. Which advantage is most directly demonstrated?",
+o:["Speed","Public safety risk","Impact on the environment","Privacy violation"],
+a:0,c:"Module 3: Advantages and Disadvantages",
+e:"Speed is an advantage because computers can process large amounts of data rapidly."
+},
+{
+q:"Which condition best explains why a computer might produce an incorrect result despite its speed?",
+o:["The input data or instructions may be incorrect.","Every computer is always inaccurate.","Storage automatically prevents all errors.","Fast processing makes instructions unnecessary."],
+a:0,c:"Module 3: Advantages and Disadvantages",
+e:"The notes explain that results are dependable when the input is correct and the instructions work."
+},
+{
+q:"A person’s confidential records are accessed by someone without permission because they were not adequately protected. This is an example of:",
+o:["Consistency","Violation of privacy","Diligence","Versatility"],
+a:1,c:"Module 3: Advantages and Disadvantages",
+e:"The notes identify privacy violations and identity theft as risks when personal records are not properly protected."
+},
+{
+q:"Which situation best illustrates a computer-related public safety concern?",
+o:["A person shares personal details online and becomes vulnerable to a dangerous stranger.","A computer calculates a correct average.","A student backs up a document.","A computer stores a file securely."],
+a:0,c:"Module 3: Advantages and Disadvantages",
+e:"Public safety concerns can arise when people share personal information online and become vulnerable to harmful individuals."
+},
+{
+q:"A business introduces computer systems that perform tasks previously handled by some employees. Which disadvantage from Module 3 is most directly involved?",
+o:["Impact on the labour force","Increased consistency","Faster communication","Improved storage"],
+a:0,c:"Module 3: Advantages and Disadvantages",
+e:"The notes explain that computerisation can replace some workers' tasks, although it can also improve productivity and create new jobs."
+},
+{
+q:"Which action is recommended to help reduce health risks from computer use?",
+o:["Maintaining poor posture","Avoiding all breaks","Using good posture and taking appropriately spaced breaks","Increasing continuous use without rest"],
+a:2,c:"Module 3: Advantages and Disadvantages",
+e:"The notes recommend good posture, suitable workplace design, and appropriately spaced work breaks."
+},
+{
+q:"A person feels distressed when unable to use computers and mobile devices. Which concept in Module 3 is most relevant?",
+o:["Technology overload","Computer storage","Computer consistency","Information processing"],
+a:0,c:"Module 3: Advantages and Disadvantages",
+e:"The notes describe technology overload as feeling distressed when deprived of computers and mobile devices."
+},
+{
+q:"Which practice best supports the environmental aspect of green computing?",
+o:["Increasing electronic waste","Extending computer life and recycling equipment","Discarding usable computers carelessly","Ignoring electricity consumption"],
+a:1,c:"Module 3: Advantages and Disadvantages",
+e:"Green computing includes reducing electricity consumption and waste, recycling, and extending the useful life of computers."
+},
+{
+q:"Which statement gives the most balanced interpretation of computers' impact on work?",
+o:["Computers only destroy jobs and never create new ones.","Computers improve productivity and can create jobs, but some workers' skills may be replaced.","Computers have no effect on the labour force.","Computer use guarantees employment for everyone."],
+a:1,c:"Module 3: Advantages and Disadvantages",
+e:"Module 3 presents both sides: computers improve productivity and create industries, but some tasks and skills may be replaced."
+}
 ];
 
-let current = 0;
-let answers = {};
-let secondsLeft = 15 * 60;
-let timerInterval = null;
-let submitted = false;
+let current=0,answers={},seconds=900,submitted=false,timerInterval=null;
 
 function startTest(){
   document.getElementById("startPanel").classList.add("hidden");
   document.getElementById("quizPanel").classList.remove("hidden");
-  current=0;
-  answers={};
-  secondsLeft=15*60;
-  submitted=false;
-  renderQuestion();
-  updateTimer();
+  current=0;answers={};seconds=900;submitted=false;
+  renderQuestion();updateTimer();
   clearInterval(timerInterval);
   timerInterval=setInterval(()=>{
-    secondsLeft--;
-    updateTimer();
-    if(secondsLeft<=0){
-      clearInterval(timerInterval);
-      submitTest(true);
-    }
+    seconds--;updateTimer();
+    if(seconds<=0){clearInterval(timerInterval);submitTest(true);}
   },1000);
 }
 
 function updateTimer(){
-  const m=Math.floor(secondsLeft/60);
-  const s=secondsLeft%60;
-  const el=document.getElementById("timer");
-  el.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-  el.style.color=secondsLeft<=60?"#dc2626":"#dc2626";
+  let m=Math.floor(seconds/60),s=seconds%60;
+  document.getElementById("timer").textContent=
+    String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
 }
 
 function renderQuestion(){
-  const item=questions[current];
+  let q=questions[current];
   document.getElementById("questionCount").textContent=`Question ${current+1} of ${questions.length}`;
-  document.getElementById("questionCategory").textContent=item.c;
-  document.getElementById("questionText").textContent=item.q;
+  document.getElementById("category").textContent=q.c;
+  document.getElementById("questionText").textContent=q.q;
   document.getElementById("answeredCount").textContent=Object.keys(answers).length;
-  document.getElementById("progressBar").style.width=(Object.keys(answers).length/questions.length*100)+"%";
+  document.getElementById("progressBar").style.width=
+    (Object.keys(answers).length/questions.length*100)+"%";
   document.getElementById("prevBtn").disabled=current===0;
   document.getElementById("nextBtn").disabled=current===questions.length-1;
-  document.getElementById("feedback").classList.add("hidden");
-  const options=document.getElementById("options");
-  options.innerHTML="";
-  item.o.forEach((option,index)=>{
-    const btn=document.createElement("button");
-    btn.className="option"+(answers[current]===index?" selected":"");
-    btn.type="button";
-    btn.textContent=String.fromCharCode(65+index)+". "+option;
-    btn.onclick=()=>selectAnswer(index);
-    options.appendChild(btn);
+
+  let area=document.getElementById("options");
+  area.innerHTML="";
+  q.o.forEach((opt,i)=>{
+    let b=document.createElement("button");
+    b.type="button";
+    b.className="option"+(answers[current]===i?" selected":"");
+    b.textContent=String.fromCharCode(65+i)+". "+opt;
+    b.onclick=()=>{if(!submitted){answers[current]=i;renderQuestion();}};
+    area.appendChild(b);
   });
 }
 
-function selectAnswer(index){
-  if(submitted)return;
-  answers[current]=index;
-  renderQuestion();
-}
-
-function moveQuestion(direction){
-  const next=current+direction;
-  if(next>=0&&next<questions.length){
-    current=next;
-    renderQuestion();
-  }
+function moveQuestion(step){
+  let n=current+step;
+  if(n>=0&&n<questions.length){current=n;renderQuestion();}
 }
 
 function submitTest(timeUp=false){
   if(submitted)return;
   if(!timeUp){
-    const unanswered=questions.length-Object.keys(answers).length;
-    if(unanswered>0){
-      const ok=confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`);
-      if(!ok)return;
-    }else{
-      if(!confirm("Are you sure you want to submit your answers?"))return;
-    }
+    let unanswered=questions.length-Object.keys(answers).length;
+    if(unanswered>0&&!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`))return;
+    if(unanswered===0&&!confirm("Submit your answers now?"))return;
   }
-  submitted=true;
-  clearInterval(timerInterval);
-  let score=0;
-  questions.forEach((q,i)=>{if(answers[i]===q.a)score++;});
-  const pct=Math.round(score/questions.length*100);
+  submitted=true;clearInterval(timerInterval);
+  let score=questions.reduce((sum,q,i)=>sum+(answers[i]===q.a?1:0),0);
+  let pct=Math.round(score/questions.length*100);
   document.getElementById("quizPanel").classList.add("hidden");
   document.getElementById("resultPanel").classList.remove("hidden");
   document.getElementById("scoreText").textContent=`${score}/${questions.length}`;
   document.getElementById("percentageText").textContent=`Percentage: ${pct}%`;
-  document.getElementById("resultHeading").textContent=timeUp?"Time is up!":"Test Submitted";
+  document.getElementById("resultHeading").textContent=timeUp?"Time is Up!":"Test Submitted";
   document.getElementById("resultMessage").textContent=
-    pct>=80?"Excellent work! Keep revising the details and tricky concepts.":
-    pct>=60?"Good effort. Review the explanations to strengthen your understanding.":
-    pct>=40?"Keep practising. Study the explanations and try the CBT again.":
-    "Use this result as a guide. Review the lecture PDFs and attempt the CBT again.";
+    pct>=80?"Excellent work! Review the explanations to sharpen your understanding.":
+    pct>=60?"Good effort. Review the questions you missed.":
+    pct>=40?"Keep practising. Study Modules 2 and 3 again and retry.":
+    "Use this as a learning exercise. Revise the lecture notes and try again.";
   buildReview();
   document.getElementById("reviewPanel").classList.add("hidden");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function buildReview(){
-  const list=document.getElementById("reviewList");
-  list.innerHTML="";
+  const list=document.getElementById("reviewList");list.innerHTML="";
   questions.forEach((q,i)=>{
-    const correct=answers[i]===q.a;
-    const div=document.createElement("div");
-    div.className="review-item";
-    const h=document.createElement("h3");
-    h.textContent=`${i+1}. ${q.q}`;
-    const status=document.createElement("p");
-    status.className=correct?"good":"bad";
-    status.style.padding="9px";
-    status.style.borderRadius="8px";
-    status.textContent=answers[i]===undefined
-      ?"Not answered."
-      :(correct?"Correct!":"Incorrect.");
-    const chosen=document.createElement("p");
-    chosen.textContent="Your answer: "+(answers[i]===undefined?"No answer":String.fromCharCode(65+answers[i])+". "+q.o[answers[i]]);
-    const answer=document.createElement("p");
-    answer.innerHTML="<strong>Correct answer: </strong>";
-    answer.append(document.createTextNode(String.fromCharCode(65+q.a)+". "+q.o[q.a]));
-    const explanation=document.createElement("p");
-    explanation.innerHTML="<strong>Explanation: </strong>";
-    explanation.append(document.createTextNode(q.e));
-    div.append(h,status,chosen,answer,explanation);
-    list.appendChild(div);
+    let correct=answers[i]===q.a;
+    let div=document.createElement("div");div.className="review-item";
+    let h=document.createElement("h3");h.textContent=`${i+1}. ${q.q}`;
+    let status=document.createElement("p");
+    status.style.padding="9px";status.style.borderRadius="8px";
+    status.style.background=correct?"#dcfce7":"#fee2e2";
+    status.style.color=correct?"#166534":"#991b1b";
+    status.textContent=answers[i]===undefined?"Not answered":correct?"Correct!":"Incorrect";
+    let chosen=document.createElement("p");
+    chosen.textContent="Your answer: "+(answers[i]===undefined?"Not answered":String.fromCharCode(65+answers[i])+". "+q.o[answers[i]]);
+    let answer=document.createElement("p");
+    let strong=document.createElement("strong");strong.textContent="Correct answer: ";
+    answer.append(strong,document.createTextNode(String.fromCharCode(65+q.a)+". "+q.o[q.a]));
+    let exp=document.createElement("p");
+    let label=document.createElement("strong");label.textContent="Explanation: ";
+    exp.append(label,document.createTextNode(q.e));
+    div.append(h,status,chosen,answer,exp);list.appendChild(div);
   });
 }
 
@@ -269,10 +377,7 @@ function toggleReview(){
 
 function restartTest(){
   clearInterval(timerInterval);
-  current=0;
-  answers={};
-  secondsLeft=15*60;
-  submitted=false;
+  current=0;answers={};seconds=900;submitted=false;
   document.getElementById("resultPanel").classList.add("hidden");
   document.getElementById("startPanel").classList.remove("hidden");
   document.getElementById("reviewPanel").classList.add("hidden");
