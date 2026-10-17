@@ -1,334 +1,890 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COS 101 CBT - Fresh Set 2</title>
+<title>Measures of Location &amp; Variation | Set 2</title>
+
 <style>
-body{font-family:Arial,sans-serif;background:#f1f5f9;margin:0;padding:15px;color:#172033}
-.container{max-width:800px;margin:auto;background:white;padding:22px;border-radius:14px;box-shadow:0 4px 15px #0001}
-h1{text-align:center;color:#173b70;font-size:25px}
-.notice{text-align:center;color:#526176}
-.stats{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:#eaf2ff;padding:12px;border-radius:9px;font-weight:bold}
-#progress{height:8px;background:#ddd;border-radius:8px;margin:14px 0;overflow:hidden}
-#bar{height:100%;width:0;background:#2563eb}
-#question{font-size:19px;font-weight:bold;line-height:1.5;margin:20px 0}
-.option{display:block;width:100%;text-align:left;padding:13px;margin:9px 0;border:2px solid #dbe2ea;border-radius:8px;background:white;font-size:16px;cursor:pointer}
-.option:hover{background:#eff6ff}
-.option.selected{border-color:#2563eb;background:#dbeafe}
-.nav{display:flex;gap:10px;margin-top:20px}
-button.action{padding:12px 16px;border:0;border-radius:8px;background:#173b70;color:white;font-size:15px;cursor:pointer}
-button:disabled{opacity:.4;cursor:not-allowed}
-#next{margin-left:auto}
-#result{display:none}
-.review{padding:14px;margin:12px 0;background:#f8fafc;border-left:5px solid #2563eb;border-radius:7px}
-.correct{color:#087443;font-weight:bold}
-.wrong{color:#b91c1c;font-weight:bold}
-.small{color:#64748b;font-size:14px}
+:root {
+  --navy: #14213d;
+  --blue: #3157d5;
+  --teal: #0f9d8a;
+  --gold: #f4b942;
+  --ink: #1d2940;
+  --muted: #65718a;
+  --paper: #ffffff;
+  --bg: #f3f6fc;
+  --line: #dce4f1;
+  --good: #16794b;
+  --bad: #b42335;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(49,87,213,.12), transparent 28rem),
+    radial-gradient(circle at 100% 15%, rgba(15,157,138,.10), transparent 24rem),
+    var(--bg);
+  line-height: 1.6;
+}
+
+.hero {
+  color: white;
+  padding: 42px 20px 34px;
+  background: linear-gradient(
+    125deg, #14213d 0%, #2548ad 58%, #167f92 100%
+  );
+  border-bottom: 5px solid var(--gold);
+}
+
+.hero-inner,
+main {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.25);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 13px 0 4px;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -.04em;
+}
+
+.hero p {
+  max-width: 700px;
+  color: #e5edff;
+  margin: 12px 0 0;
+}
+
+main {
+  padding: 24px 0 50px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(28,45,83,.07);
+}
+
+.panel-title {
+  color: var(--muted);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 800;
+}
+
+.timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+#timer {
+  color: var(--blue);
+  font-size: clamp(2rem, 5vw, 2.65rem);
+  font-weight: 900;
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+}
+
+#timer.warning {
+  color: #d97706;
+}
+
+#timer.danger {
+  color: #c6283d;
+  animation: pulse 1s infinite;
+}
+
+.timer-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: #eaf0ff;
+  color: var(--blue);
+  font-size: 1.5rem;
+}
+
+@keyframes pulse {
+  50% { opacity: .55; }
+}
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 9px 0 8px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: #e8edf7;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  transition: width .2s;
+}
+
+.instructions {
+  margin: 0;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 28px 2px 14px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--navy);
+}
+
+.section-heading span {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+#questions {
+  display: grid;
+  gap: 14px;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0;
+  background: var(--paper);
+  box-shadow: 0 5px 18px rgba(28,45,83,.045);
+  overflow: hidden;
+  transition: border-color .18s, box-shadow .18s;
+}
+
+fieldset:focus-within {
+  border-color: #8ba4ff;
+  box-shadow: 0 0 0 3px rgba(49,87,213,.09);
+}
+
+legend {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 17px 20px;
+  background: #f9fbff;
+  border-bottom: 1px solid var(--line);
+  font-weight: 750;
+}
+
+legend::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.question-number {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 9px;
+  border-radius: 9px;
+  color: white;
+  background: var(--blue);
+  font-size: .84rem;
+  vertical-align: middle;
+}
+
+.options {
+  clear: both;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  padding: 16px 20px 20px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  min-height: 48px;
+  border: 1px solid #e1e7f2;
+  border-radius: 11px;
+  background: white;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+
+.option:hover {
+  border-color: #9db0f8;
+  background: #f6f8ff;
+  transform: translateY(-1px);
+}
+
+.option:has(input:checked) {
+  border-color: var(--blue);
+  background: #edf2ff;
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.option input {
+  accent-color: var(--blue);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.option-text {
+  display: block;
+  font-size: .96rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 20px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s, filter .15s, box-shadow .15s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+#submitBtn {
+  color: white;
+  background: linear-gradient(110deg, var(--blue), #167f92);
+  box-shadow: 0 7px 16px rgba(49,87,213,.22);
+}
+
+#resetBtn {
+  color: var(--navy);
+  background: #e7ecf7;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.result-card {
+  padding: 23px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(28,45,83,.07);
+}
+
+.score-line {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.score-circle {
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e9f8f2;
+  color: var(--good);
+  font-size: 1.2rem;
+  font-weight: 900;
+  border: 5px solid #b9ead5;
+}
+
+.result-card h2 {
+  margin: 0 0 4px;
+  color: var(--navy);
+}
+
+.result-card p {
+  margin: 4px 0;
+  color: var(--muted);
+}
+
+.feedback {
+  clear: both;
+  margin: 0 20px 16px;
+  padding: 13px 15px;
+  border-radius: 11px;
+  line-height: 1.55;
+}
+
+.feedback.correct {
+  background: #eaf8f0;
+  border: 1px solid #b7e6ca;
+  color: #145d3b;
+}
+
+.feedback.incorrect {
+  background: #fff0f0;
+  border: 1px solid #f1c2c6;
+  color: #8d1e2d;
+}
+
+.feedback strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+footer {
+  text-align: center;
+  padding: 0 16px 28px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+@media (max-width: 650px) {
+  .hero {
+    padding: 30px 0 27px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+    padding: 13px;
+  }
+
+  legend {
+    padding: 15px 13px;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .panel {
+    padding: 17px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="container">
-<h1>COS 101 CBT — Fresh Set 2</h1>
-<p class="notice">Modules 2 & 3 | 30 Questions | 15 Minutes</p>
 
-<div class="stats" id="stats">
-<span id="timer">Time: 15:00</span>
-<span id="counter">Question 1 of 30</span>
-<span id="answered">Answered: 0/30</span>
-</div>
-<div id="progress"><div id="bar"></div></div>
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Undergraduate practice · Set 02</span>
 
-<div id="quiz">
-<div id="question"></div>
-<div id="options"></div>
-<div class="nav">
-<button class="action" id="prev" onclick="move(-1)">Previous</button>
-<button class="action" id="next" onclick="move(1)">Next</button>
-</div>
-<p class="small">Choose one answer per question. Your score and explanations will appear only after you submit or the timer ends.</p>
-<button class="action" onclick="submitQuiz(false)" style="width:100%;background:#15803d;margin-top:12px">Submit All Answers</button>
-</div>
+    <h1>Measures of Location<br>&amp; Variation</h1>
 
-<div id="result">
-<h2 id="score"></h2>
-<p id="comment"></p>
-<h2>Answer Review and Explanations</h2>
-<div id="review"></div>
-<button class="action" onclick="restart()">Try Again</button>
-</div>
-</div>
+    <p>
+      Test your understanding with 20 theory and calculation questions.
+      Work independently, keep an eye on the timer, and submit to reveal
+      your score and explanations.
+    </p>
+  </div>
+</header>
+
+<main>
+
+  <section class="dashboard" aria-label="Test dashboard">
+
+    <div class="panel">
+      <div class="panel-title">Time remaining</div>
+
+      <div class="timer-row">
+        <div>
+          <div id="timer" aria-live="polite">20:00</div>
+          <p class="instructions" id="timerNote">
+            Your 20-minute test starts now.
+          </p>
+        </div>
+
+        <div class="timer-icon" aria-hidden="true">◷</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Your progress</div>
+
+      <div class="progress-top">
+        <span id="answeredCount">0 of 20 answered</span>
+        <span id="progressPercent">0%</span>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Questions answered"
+        aria-valuemin="0"
+        aria-valuemax="20"
+        aria-valuenow="0"
+        id="progressTrack"
+      >
+        <div id="progressBar"></div>
+      </div>
+
+      <p class="instructions" style="margin-top:12px">
+        Choose one option for every question.
+      </p>
+    </div>
+
+  </section>
+
+  <div class="section-heading">
+    <h2>Question paper</h2>
+    <span>20 questions · A, B, C or D</span>
+  </div>
+
+  <form id="quiz">
+    <div id="questions"></div>
+
+    <div class="actions">
+      <button type="submit" id="submitBtn">
+        Submit answers ↗
+      </button>
+
+      <button type="button" id="resetBtn">
+        Start again
+      </button>
+    </div>
+  </form>
+
+  <div id="results" aria-live="polite"></div>
+
+</main>
+
+<footer>
+  Take your time, show your working on paper, and learn from every explanation.
+</footer>
 
 <script>
 const questions = [
 {
-q:"A student enters 15 and 25 into a computer. The computer adds them and displays 40. Which option correctly identifies the result 40?",
-o:["Input","Raw data","Output","Procedure"],
-a:2,
-e:"The displayed answer is output because it is the result produced after processing."
+  q: "Which statement best describes a measure of central location?",
+  o: [
+    "It describes how spread out the data are.",
+    "It gives a typical or central value of a dataset.",
+    "It shows the largest value only.",
+    "It counts the number of classes."
+  ],
+  a: 1,
+  e: "Measures of central location, such as mean, median and mode, describe the centre or typical value of data."
 },
 {
-q:"Which situation best demonstrates the relationship between hardware and software?",
-o:["A keyboard operates without any instructions","A program gives instructions that the processor executes using physical components","Data replaces all physical components","Peopleware makes hardware unnecessary"],
-a:1,
-e:"Software provides instructions, while hardware provides the physical components that execute them."
+  q: "What is the arithmetic mean of 6, 8, 10 and 12?",
+  o: ["8", "9", "10", "36"],
+  a: 1,
+  e: "Mean = (6 + 8 + 10 + 12) / 4 = 36 / 4 = 9."
 },
 {
-q:"A computer produces the same result whenever it receives the same correct data and instructions. This demonstrates:",
-o:["Consistency","Versatility","Storage","Communication"],
-a:0,
-e:"Consistency means producing the same results when the same input and processes are used."
+  q: "The values 3, 5, 5, 7, 10 have which mode?",
+  o: ["3", "5", "6", "10"],
+  a: 1,
+  e: "The mode is the value that occurs most often. Five appears twice; every other value appears once."
 },
 {
-q:"Which CPU component is primarily responsible for arithmetic calculations and logical comparisons?",
-o:["Control Unit","ALU","Monitor","SSD"],
-a:1,
-e:"The Arithmetic and Logic Unit (ALU) performs arithmetic and logical operations."
+  q: "Find the median of 4, 9, 2, 7, 6.",
+  o: ["4", "6", "7", "9"],
+  a: 1,
+  e: "Arrange the data: 2, 4, 6, 7, 9. The middle value is 6."
 },
 {
-q:"A computer user wants to preserve files even after switching off the computer. Which is the most suitable option?",
-o:["Registers","RAM alone","SSD","Control Unit"],
-a:2,
-e:"An SSD is a storage device used to retain data for later use."
+  q: "What is the range of 14, 6, 19, 11 and 8?",
+  o: ["8", "11", "13", "19"],
+  a: 2,
+  e: "Range = maximum − minimum = 19 − 6 = 13."
 },
 {
-q:"Which statement about the Control Unit is most accurate?",
-o:["It coordinates and directs computer operations","It is the main device for printing documents","It permanently stores every file","It is responsible only for arithmetic"],
-a:0,
-e:"The Control Unit coordinates and directs the activities of the computer."
+  q: "For the class interval 21–30, what is its class midpoint?",
+  o: ["21", "25", "25.5", "30"],
+  a: 2,
+  e: "Midpoint = (lower class limit + upper class limit) / 2 = (21 + 30) / 2 = 25.5."
 },
 {
-q:"A worker follows an approved sequence for entering and saving records. In the five-component model, the sequence is best described as:",
-o:["Hardware","Data","Procedures","Peopleware"],
-a:2,
-e:"Procedures are the rules or steps followed when operating a computer system."
+  q: "Why is a cumulative frequency column useful when finding a grouped median?",
+  o: [
+    "It identifies the class containing the middle observation.",
+    "It gives the class midpoint directly.",
+    "It always equals the class width.",
+    "It identifies the largest individual observation."
+  ],
+  a: 0,
+  e: "Cumulative frequency helps locate the median class by showing how many observations have been counted up to each class."
 },
 {
-q:"Which option contains only examples of input devices?",
-o:["Monitor, printer, speakers","Keyboard, mouse, scanner","SSD, RAM, ROM","CPU, ALU, Control Unit"],
-a:1,
-e:"A keyboard, mouse, and scanner can all be used to enter data or instructions."
+  q: "Grouped data have intervals 1–10, 11–20, 21–30, 31–40 and 41–50, with frequencies 4, 7, 15, 13 and 8. Which is the median class?",
+  o: ["1–10", "11–20", "21–30", "31–40"],
+  a: 2,
+  e: "Total N = 47, so N/2 = 23.5. Cumulative frequencies are 4, 11, 26, 39, 47. The first cumulative frequency at least 23.5 is 26, so the median class is 21–30."
 },
 {
-q:"A computer is used to prepare documents, analyse figures, and play audio. Which characteristic does this best demonstrate?",
-o:["Diligence","Versatility","Privacy violation","Consistency"],
-a:1,
-e:"Versatility is the ability to perform different kinds of tasks."
+  q: "In the grouped median formula, what does F represent when it is defined as the cumulative frequency before the median class?",
+  o: [
+    "The frequency of the median class",
+    "The total number of classes",
+    "The cumulative frequency before the median class",
+    "The width of the median class"
+  ],
+  a: 2,
+  e: "F is the cumulative frequency of all classes before the median class."
 },
 {
-q:"Which statement about computer accuracy is the most reasonable?",
-o:["A computer always corrects incorrect data automatically","A computer can produce incorrect results when input or instructions are incorrect","Accuracy means a computer never needs instructions","Accuracy means the computer can store unlimited data"],
-a:1,
-e:"Correct results depend on correct input and working instructions."
+  q: "A grouped dataset has 80 observations. Which position is used to locate the median class?",
+  o: [
+    "The 20th observation",
+    "The 40th observation",
+    "The 80th observation",
+    "The 160th observation"
+  ],
+  a: 1,
+  e: "For a grouped median, locate N/2. Here 80/2 = 40, so use the class containing the 40th observation."
 },
 {
-q:"Which of the following is NOT one of the five components described in the basic computer-system model?",
-o:["Hardware","Software","Peopleware","Electricity bill"],
-a:3,
-e:"The five components are hardware, software, data, peopleware, and procedures."
+  q: "Which frequency identifies the modal class in a grouped frequency table?",
+  o: [
+    "The smallest frequency",
+    "The middle cumulative frequency",
+    "The largest class frequency",
+    "The total frequency divided by two"
+  ],
+  a: 2,
+  e: "The modal class is the class with the highest frequency."
 },
 {
-q:"Which sequence best represents the basic information processing cycle?",
-o:["Output → Input → Storage → Processing","Input → Processing → Output → Storage","Storage → Output → Input → Processing","Processing → Storage → Input → Output"],
-a:1,
-e:"The common sequence is input, processing, output, and storage."
+  q: "A modal class has frequency f₁ = 18, the preceding class has f₀ = 12, and the following class has f₂ = 10. What is f₁ − f₀?",
+  o: ["4", "6", "8", "30"],
+  a: 1,
+  e: "f₁ − f₀ = 18 − 12 = 6."
 },
 {
-q:"A computer stores data for use later. Which computer-system function is being demonstrated?",
-o:["Storage","Input only","Output only","Communication only"],
-a:0,
-e:"Storage keeps data or information for future use."
+  q: "Which statement about variance is correct?",
+  o: [
+    "It is the square root of the standard deviation.",
+    "It measures spread using squared deviations from the mean.",
+    "It is always negative.",
+    "It is the same as the range."
+  ],
+  a: 1,
+  e: "Variance is based on squared deviations from the mean and measures how spread out observations are."
 },
 {
-q:"Which option correctly matches a component with its function?",
-o:["ALU — coordinates all activities only","Control Unit — performs all arithmetic only","Input unit — accepts data and instructions","Output unit — enters raw data"],
-a:2,
-e:"The input unit accepts data and instructions from users or other devices."
+  q: "For a population with N observations, which denominator is used in the population variance formula?",
+  o: ["N", "N − 1", "N + 1", "The range"],
+  a: 0,
+  e: "Population variance divides the sum of squared deviations by N."
 },
 {
-q:"A person uses a computer to communicate with another person using a network. Which advantage is being demonstrated?",
-o:["Communication","Health risk","Privacy violation","Environmental waste"],
-a:0,
-e:"Computers enable users and devices to exchange information."
+  q: "When calculating sample variance from a sample of n observations, the usual denominator is:",
+  o: ["n", "n + 1", "n − 1", "2n"],
+  a: 2,
+  e: "The usual sample variance formula divides by n − 1."
 },
 {
-q:"Which of these is the clearest example of automation?",
-o:["A person manually calculates every sum","A computer performs an instructed task automatically","A user switches off a monitor","A worker writes instructions on paper"],
-a:1,
-e:"Automation means a computer can carry out instructed operations automatically."
+  q: "If the variance of a dataset is 49, what is its standard deviation?",
+  o: ["7", "14", "24.5", "49"],
+  a: 0,
+  e: "Standard deviation is the square root of variance: √49 = 7."
 },
 {
-q:"Which statement best distinguishes data from information?",
-o:["Data is always more meaningful than information","Data consists of raw facts; information is data processed into a meaningful form","Data and information can never be related","Information is always entered before data"],
-a:1,
-e:"Data refers to raw facts, while information is meaningful output obtained by processing data."
+  q: "A dataset has mean 20. What is the squared deviation for an observation x = 25?",
+  o: ["5", "10", "20", "25"],
+  a: 3,
+  e: "The deviation is 25 − 20 = 5. Its square is 5² = 25."
 },
 {
-q:"Which of these is most clearly an output device?",
-o:["Mouse","Keyboard","Monitor","Scanner"],
-a:2,
-e:"A monitor presents visual results from the computer."
+  q: "For grouped data, what value is usually used to represent each class when estimating the mean?",
+  o: [
+    "The lower class boundary only",
+    "The class midpoint",
+    "The cumulative frequency",
+    "The class frequency squared"
+  ],
+  a: 1,
+  e: "The grouped mean is estimated using each class midpoint multiplied by its frequency."
 },
 {
-q:"A computer keeps performing repetitive calculations without becoming tired like a human. This demonstrates:",
-o:["Diligence","Privacy","Public safety","Environmental impact"],
-a:0,
-e:"Diligence refers to the computer's ability to repeat tasks without tiring like a person."
+  q: "Which dataset has the greatest range?",
+  o: [
+    "2, 4, 6",
+    "1, 5, 8",
+    "10, 11, 12",
+    "20, 22, 23"
+  ],
+  a: 1,
+  e: "Ranges: A = 6−2 = 4; B = 8−1 = 7; C = 12−10 = 2; D = 23−20 = 3. Dataset B has the greatest range."
 },
 {
-q:"A school stores students' private records on a computer but fails to protect them properly. Which disadvantage is most directly illustrated?",
-o:["Speed","Violation of privacy","Versatility","Consistency"],
-a:1,
-e:"Poor protection of personal or confidential records can lead to privacy violations."
-},
-{
-q:"Which situation best illustrates a public-safety concern associated with computer use?",
-o:["A computer performs calculations quickly","A person shares personal information publicly and becomes vulnerable to dangerous strangers","A computer stores a school timetable","A user uses software to prepare notes"],
-a:1,
-e:"The lecture identifies publicly sharing personal information as a possible public-safety risk."
-},
-{
-q:"A company introduces computers and some employees' previous skills are no longer needed for their former tasks. Which disadvantage is most relevant?",
-o:["Impact on the labour force","Storage","Consistency","Communication"],
-a:0,
-e:"Computers can replace some workers' skills, although they can also improve productivity and create jobs."
-},
-{
-q:"Which action best supports the prevention of health problems associated with prolonged computer use?",
-o:["Maintaining poor posture","Avoiding all breaks","Using proper posture and taking appropriately spaced breaks","Increasing screen time continuously"],
-a:2,
-e:"The lecture recommends proper workplace design, good posture, and appropriately spaced breaks."
-},
-{
-q:"A person feels distressed when unable to use their computer or mobile device. Which term from the lecture is most relevant?",
-o:["Technology overload","Storage","Automation","Versatility"],
-a:0,
-e:"Technology overload involves distress when deprived of computers and mobile devices."
-},
-{
-q:"Which option best describes computer addiction in the lecture?",
-o:["Using a computer once for an assignment","Becoming obsessed with using a computer","Storing information on an SSD","Communicating through a network"],
-a:1,
-e:"The lecture describes computer addiction as becoming obsessed with using a computer."
-},
-{
-q:"Which action is the best example of green computing?",
-o:["Discarding every old computer carelessly","Leaving all computers running unnecessarily","Recycling equipment and properly disposing of replaced computers","Replacing working computers as often as possible"],
-a:2,
-e:"Green computing includes recycling, extending computer life, reducing electricity use, and proper disposal."
-},
-{
-q:"Why can computers be described as reliable?",
-o:["They always receive perfect input","Their electronic components are dependable and rarely break or fail","They never require electricity","They never use software"],
-a:1,
-e:"The lecture links reliability to the dependability of modern computer components."
-},
-{
-q:"Which statement best explains the relationship between computer use and environmental impact?",
-o:["Computer manufacturing and waste can consume natural resources and cause pollution","Computers have no environmental impact","Only software creates computer waste","Green computing requires replacing every device annually"],
-a:0,
-e:"Computer manufacturing and electronic waste can deplete resources and pollute the environment."
-},
-{
-q:"A computer is used by many people to access shared services and resources. Which type of computer is specifically designed to provide services or resources to other computers?",
-o:["Server","Scanner","Keyboard","Embedded system in every case"],
-a:0,
-e:"A server provides services or resources to other computers."
-},
-{
-q:"Which conclusion best reflects the lecture's discussion of the advantages and disadvantages of computers?",
-o:["Computers provide benefits but can also create social, health, privacy, and environmental concerns","Computers have only disadvantages","Computers have no influence on employment","Computers eliminate the need for responsible users"],
-a:0,
-e:"The lecture explains that computers offer benefits such as speed and communication while also creating potential risks that should be managed."
+  q: "A dataset contains one extremely large value compared with all the others. Which measure of central location is generally less affected by that outlier?",
+  o: ["Mean", "Median", "Sum", "Range"],
+  a: 1,
+  e: "The median depends on the middle position, so it is generally less affected by an extreme value than the mean."
 }
 ];
 
-let current=0;
-let answers=Array(questions.length).fill(null);
-let timeLeft=15*60;
-let finished=false;
-let interval;
+const holder = document.getElementById("questions");
 
-function render(){
- const q=questions[current];
- document.getElementById("question").textContent=(current+1)+". "+q.q;
- const options=document.getElementById("options");
- options.innerHTML="";
- q.o.forEach((option,i)=>{
-  const b=document.createElement("button");
-  b.className="option"+(answers[current]===i?" selected":"");
-  b.textContent=String.fromCharCode(65+i)+". "+option;
-  b.onclick=()=>{
-   if(finished)return;
-   answers[current]=i;
-   render();
-  };
-  options.appendChild(b);
- });
- document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
- document.getElementById("answered").textContent=`Answered: ${answers.filter(a=>a!==null).length}/${questions.length}`;
- document.getElementById("bar").style.width=((current+1)/questions.length*100)+"%";
- document.getElementById("prev").disabled=current===0;
- document.getElementById("next").disabled=current===questions.length-1;
+questions.forEach((item, i) => {
+  const fieldset = document.createElement("fieldset");
+  const legend = document.createElement("legend");
+
+  const number = document.createElement("span");
+  number.className = "question-number";
+  number.textContent = String(i + 1);
+
+  legend.appendChild(number);
+  legend.appendChild(document.createTextNode(item.q));
+  fieldset.appendChild(legend);
+
+  const options = document.createElement("div");
+  options.className = "options";
+
+  item.o.forEach((option, j) => {
+    const label = document.createElement("label");
+    label.className = "option";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = `q${i}`;
+    radio.value = j;
+    radio.setAttribute(
+      "aria-label",
+      `${String.fromCharCode(65 + j)}. ${option}`
+    );
+
+    radio.addEventListener("change", updateProgress);
+
+    const text = document.createElement("span");
+    text.className = "option-text";
+    text.textContent = `${String.fromCharCode(65 + j)}. ${option}`;
+
+    label.appendChild(radio);
+    label.appendChild(text);
+    options.appendChild(label);
+  });
+
+  fieldset.appendChild(options);
+  holder.appendChild(fieldset);
+});
+
+function updateProgress() {
+  const answered = questions.reduce((count, _, i) =>
+    count + (
+      document.querySelector(`input[name="q${i}"]:checked`) ? 1 : 0
+    ), 0);
+
+  const percent = Math.round(answered / questions.length * 100);
+
+  document.getElementById("answeredCount").textContent =
+    `${answered} of ${questions.length} answered`;
+
+  document.getElementById("progressPercent").textContent =
+    `${percent}%`;
+
+  document.getElementById("progressBar").style.width =
+    `${percent}%`;
+
+  document.getElementById("progressTrack")
+    .setAttribute("aria-valuenow", answered);
 }
-function move(n){
- current=Math.max(0,Math.min(questions.length-1,current+n));
- render();
+
+let seconds = 20 * 60;
+let finished = false;
+
+const timerEl = document.getElementById("timer");
+const timerNote = document.getElementById("timerNote");
+
+function showTime() {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  timerEl.textContent =
+    `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+
+  timerEl.classList.toggle(
+    "warning",
+    seconds <= 5 * 60 && seconds > 60
+  );
+
+  timerEl.classList.toggle("danger", seconds <= 60);
+
+  if (seconds <= 5 * 60 && seconds > 60) {
+    timerNote.textContent = "Five minutes or less — keep going!";
+  }
+
+  if (seconds <= 60) {
+    timerNote.textContent = "Final minute. Check your answers!";
+  }
 }
-function updateTimer(){
- if(finished)return;
- timeLeft--;
- const m=Math.floor(timeLeft/60);
- const s=timeLeft%60;
- document.getElementById("timer").textContent=`Time: ${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
- if(timeLeft<=0)submitQuiz(true);
+
+showTime();
+
+const timer = setInterval(() => {
+  if (finished) return;
+
+  seconds--;
+  showTime();
+
+  if (seconds <= 0) {
+    clearInterval(timer);
+    gradeQuiz(true);
+  }
+}, 1000);
+
+function gradeQuiz(timeUp = false) {
+  if (finished) return;
+
+  finished = true;
+  clearInterval(timer);
+
+  let score = 0;
+
+  questions.forEach((item, i) => {
+    const chosen = document.querySelector(
+      `input[name="q${i}"]:checked`
+    );
+
+    const correct = Boolean(
+      chosen && Number(chosen.value) === item.a
+    );
+
+    if (correct) score++;
+
+    document.querySelectorAll(`input[name="q${i}"]`)
+      .forEach(input => input.disabled = true);
+
+    const feedback = document.createElement("div");
+    feedback.className =
+      `feedback ${correct ? "correct" : "incorrect"}`;
+
+    const heading = document.createElement("strong");
+
+    heading.textContent =
+      `${correct ? "✓ Correct" : "✗ Incorrect"} — Answer ${
+        String.fromCharCode(65 + item.a)
+      }: ${item.o[item.a]}`;
+
+    const explanation = document.createElement("span");
+    explanation.textContent = item.e;
+
+    feedback.appendChild(heading);
+    feedback.appendChild(explanation);
+
+    document.querySelectorAll("fieldset")[i]
+      .appendChild(feedback);
+  });
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("resetBtn").disabled = true;
+
+  const percent = Math.round(score / questions.length * 100);
+
+  let message =
+    percent >= 80
+      ? "Excellent work!"
+      : percent >= 60
+      ? "Good effort — review the explanations to improve."
+      : "Keep practising — use the explanations to learn each method.";
+
+  document.getElementById("results").innerHTML = `
+    <div class="result-card">
+      <div class="score-line">
+        <div class="score-circle">${score}/${questions.length}</div>
+        <div>
+          <h2>${timeUp ? "Time is up!" : "Test submitted!"}</h2>
+          <p><strong>${percent}%</strong> · ${message}</p>
+          <p>Correct answers and explanations are shown under each question.</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("results")
+    .scrollIntoView({ behavior: "smooth", block: "start" });
 }
-function submitQuiz(auto){
- if(finished)return;
- if(!auto&&!confirm("Submit all answers now? You cannot change them after submission."))return;
- finished=true;
- clearInterval(interval);
- let score=0;
- questions.forEach((q,i)=>{if(answers[i]===q.a)score++;});
- document.getElementById("quiz").style.display="none";
- document.getElementById("stats").style.display="none";
- document.getElementById("progress").style.display="none";
- document.getElementById("result").style.display="block";
- document.getElementById("score").textContent=`Your Score: ${score}/${questions.length} (${Math.round(score/questions.length*100)}%)`;
- document.getElementById("comment").textContent=
- score>=27?"Excellent! You have a strong grasp of these topics.":
- score>=23?"Very good! Review the questions you missed.":
- score>=18?"Good effort. Revise the explanations below.":
- score>=15?"Fair attempt. Study Modules 2 and 3 again, then retry.":
- "Keep practising. Review the explanations carefully and try again.";
- if(auto)document.getElementById("comment").textContent+=" The timer ended, so your answers were submitted automatically.";
- const review=document.getElementById("review");
- review.innerHTML="";
- questions.forEach((q,i)=>{
-  const div=document.createElement("div");
-  div.className="review";
-  const chosen=answers[i]===null?"Not answered":String.fromCharCode(65+answers[i])+". "+q.o[answers[i]];
-  div.innerHTML=`<strong>${i+1}. ${q.q}</strong><p class="${answers[i]===q.a?"correct":"wrong"}">Your answer: ${chosen}</p><p class="correct">Correct answer: ${String.fromCharCode(65+q.a)}. ${q.o[q.a]}</p><p>Explanation: ${q.e}</p>`;
-  review.appendChild(div);
- });
- window.scrollTo(0,0);
-}
-function restart(){
- current=0;
- answers=Array(questions.length).fill(null);
- timeLeft=15*60;
- finished=false;
- document.getElementById("quiz").style.display="block";
- document.getElementById("stats").style.display="flex";
- document.getElementById("progress").style.display="block";
- document.getElementById("result").style.display="none";
- render();
- document.getElementById("timer").textContent="Time: 15:00";
- interval=setInterval(updateTimer,1000);
- window.scrollTo(0,0);
-}
-render();
-interval=setInterval(updateTimer,1000);
+
+document.getElementById("quiz").addEventListener("submit", event => {
+  event.preventDefault();
+  gradeQuiz(false);
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  window.location.reload();
+});
 </script>
+
 </body>
 </html>
