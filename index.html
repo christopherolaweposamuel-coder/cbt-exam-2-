@@ -4,886 +4,1117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Measures of Location &amp; Variation | Set 2</title>
+<title>PHY 101 | Mechanics Test</title>
 
 <style>
-:root {
-  --navy: #14213d;
-  --blue: #3157d5;
-  --teal: #0f9d8a;
-  --gold: #f4b942;
-  --ink: #1d2940;
-  --muted: #65718a;
-  --paper: #ffffff;
-  --bg: #f3f6fc;
-  --line: #dce4f1;
-  --good: #16794b;
-  --bad: #b42335;
-}
-
 * {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 10% 0%, rgba(49,87,213,.12), transparent 28rem),
-    radial-gradient(circle at 100% 15%, rgba(15,157,138,.10), transparent 24rem),
-    var(--bg);
-  line-height: 1.6;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef2f8;
+    color: #202b3c;
+    line-height: 1.6;
 }
 
-.hero {
-  color: white;
-  padding: 42px 20px 34px;
-  background: linear-gradient(
-    125deg, #14213d 0%, #2548ad 58%, #167f92 100%
-  );
-  border-bottom: 5px solid var(--gold);
+header {
+    background: linear-gradient(135deg, #101b3e, #294bb5);
+    color: white;
+    padding: 30px 18px;
+    text-align: center;
 }
 
-.hero-inner,
-main {
-  width: min(960px, calc(100% - 32px));
-  margin: 0 auto;
+header h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
 }
 
-.eyebrow {
-  display: inline-block;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.14);
-  border: 1px solid rgba(255,255,255,.25);
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+header p {
+    margin: 5px 0;
 }
 
-h1 {
-  margin: 13px 0 4px;
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  line-height: 1.1;
-  letter-spacing: -.04em;
-}
-
-.hero p {
-  max-width: 700px;
-  color: #e5edff;
-  margin: 12px 0 0;
-}
-
-main {
-  padding: 24px 0 50px;
-}
-
-.dashboard {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 16px;
-  margin-bottom: 18px;
+.container {
+    width: 94%;
+    max-width: 900px;
+    margin: 24px auto;
 }
 
 .panel {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 8px 24px rgba(28,45,83,.07);
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(25, 40, 80, 0.08);
 }
 
-.panel-title {
-  color: var(--muted);
-  font-size: .78rem;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  font-weight: 800;
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.info-box {
+    background: #f0f4ff;
+    border: 1px solid #dce5ff;
+    border-radius: 10px;
+    padding: 14px 8px;
+    text-align: center;
+}
+
+.info-box strong {
+    display: block;
+    color: #2549b8;
+    font-size: 21px;
+}
+
+.info-box span {
+    font-size: 12px;
+    color: #58657b;
 }
 
 .timer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
-#timer {
-  color: var(--blue);
-  font-size: clamp(2rem, 5vw, 2.65rem);
-  font-weight: 900;
-  letter-spacing: .04em;
-  font-variant-numeric: tabular-nums;
+.timer {
+    font-size: 22px;
+    font-weight: bold;
+    color: #176b45;
+    background: #e5f8ee;
+    border-radius: 9px;
+    padding: 8px 15px;
 }
 
-#timer.warning {
-  color: #d97706;
+.timer.warning {
+    color: #b42318;
+    background: #ffebe8;
 }
 
-#timer.danger {
-  color: #c6283d;
-  animation: pulse 1s infinite;
-}
-
-.timer-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: #eaf0ff;
-  color: var(--blue);
-  font-size: 1.5rem;
-}
-
-@keyframes pulse {
-  50% { opacity: .55; }
-}
-
-.progress-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: .9rem;
-  font-weight: 700;
-  margin: 9px 0 8px;
+.progress-text {
+    font-size: 14px;
+    color: #58657b;
 }
 
 .progress-track {
-  width: 100%;
-  height: 10px;
-  border-radius: 99px;
-  overflow: hidden;
-  background: #e8edf7;
+    height: 9px;
+    background: #e5e9f2;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 12px 0;
 }
 
-#progressBar {
-  width: 0%;
-  height: 100%;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--blue), var(--teal));
-  transition: width .2s;
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4169e1, #15a477);
+    transition: width 0.2s;
 }
 
-.instructions {
-  margin: 0;
-  color: var(--muted);
-  font-size: .92rem;
+.question {
+    background: white;
+    padding: 23px;
+    margin-bottom: 17px;
+    border-radius: 13px;
+    border: 1px solid #e0e5ee;
+    box-shadow: 0 3px 10px rgba(25, 40, 80, 0.04);
 }
 
-.section-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 28px 2px 14px;
+.question h3 {
+    font-size: 17px;
+    margin: 0 0 15px;
+    line-height: 1.6;
 }
 
-.section-heading h2 {
-  margin: 0;
-  font-size: 1.35rem;
-  color: var(--navy);
-}
-
-.section-heading span {
-  color: var(--muted);
-  font-size: .9rem;
-}
-
-#questions {
-  display: grid;
-  gap: 14px;
-}
-
-fieldset {
-  min-width: 0;
-  margin: 0;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 0;
-  background: var(--paper);
-  box-shadow: 0 5px 18px rgba(28,45,83,.045);
-  overflow: hidden;
-  transition: border-color .18s, box-shadow .18s;
-}
-
-fieldset:focus-within {
-  border-color: #8ba4ff;
-  box-shadow: 0 0 0 3px rgba(49,87,213,.09);
-}
-
-legend {
-  display: block;
-  float: left;
-  width: 100%;
-  padding: 17px 20px;
-  background: #f9fbff;
-  border-bottom: 1px solid var(--line);
-  font-weight: 750;
-}
-
-legend::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.question-number {
-  display: inline-grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  margin-right: 9px;
-  border-radius: 9px;
-  color: white;
-  background: var(--blue);
-  font-size: .84rem;
-  vertical-align: middle;
-}
-
-.options {
-  clear: both;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-  padding: 16px 20px 20px;
+.q-number {
+    color: #3156c5;
+    font-weight: bold;
 }
 
 .option {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 13px;
-  min-height: 48px;
-  border: 1px solid #e1e7f2;
-  border-radius: 11px;
-  background: white;
-  cursor: pointer;
-  transition: background .15s, border-color .15s, transform .15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    margin: 9px 0;
+    border: 1px solid #dfe5ef;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background 0.15s, border 0.15s;
 }
 
 .option:hover {
-  border-color: #9db0f8;
-  background: #f6f8ff;
-  transform: translateY(-1px);
+    background: #f0f4ff;
+    border-color: #7895ee;
 }
 
 .option:has(input:checked) {
-  border-color: var(--blue);
-  background: #edf2ff;
-  box-shadow: inset 0 0 0 1px var(--blue);
+    background: #e9efff;
+    border-color: #4169e1;
 }
 
 .option input {
-  accent-color: var(--blue);
-  margin-top: 5px;
-  flex-shrink: 0;
+    margin-top: 5px;
+    accent-color: #3156c5;
 }
 
-.option-text {
-  display: block;
-  font-size: .96rem;
+.option span {
+    flex: 1;
+}
+
+.question.correct {
+    border: 2px solid #1d9b61;
+}
+
+.question.incorrect {
+    border: 2px solid #d94b4b;
+}
+
+.explanation {
+    display: none;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 9px;
+    background: #f0f4ff;
+    border-left: 4px solid #4169e1;
+}
+
+.explanation.show {
+    display: block;
+}
+
+.explanation strong {
+    display: block;
+    margin-bottom: 5px;
 }
 
 .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 22px 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 22px 0;
 }
 
 button {
-  border: 0;
-  border-radius: 12px;
-  padding: 13px 20px;
-  font: inherit;
-  font-weight: 800;
-  cursor: pointer;
-  transition: transform .15s, filter .15s, box-shadow .15s;
+    border: none;
+    border-radius: 9px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.04);
-}
-
-button:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-}
-
-#submitBtn {
-  color: white;
-  background: linear-gradient(110deg, var(--blue), #167f92);
-  box-shadow: 0 7px 16px rgba(49,87,213,.22);
-}
-
-#resetBtn {
-  color: var(--navy);
-  background: #e7ecf7;
+    transform: translateY(-1px);
+    filter: brightness(0.96);
 }
 
 button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-  transform: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+.primary {
+    background: #3156c5;
+    color: white;
+    flex: 1;
+}
+
+.secondary {
+    background: #e5eaf4;
+    color: #24334e;
 }
 
 #results {
-  margin-top: 20px;
+    display: none;
 }
 
-.result-card {
-  padding: 23px;
-  border-radius: 18px;
-  background: #fff;
-  border: 1px solid var(--line);
-  box-shadow: 0 8px 24px rgba(28,45,83,.07);
+.score-card {
+    text-align: center;
+    background: linear-gradient(135deg, #101b3e, #294bb5);
+    color: white;
+    padding: 28px 15px;
+    border-radius: 13px;
+    margin-bottom: 20px;
 }
 
-.score-line {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
+.score {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 5px 0;
 }
 
-.score-circle {
-  width: 88px;
-  height: 88px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: #e9f8f2;
-  color: var(--good);
-  font-size: 1.2rem;
-  font-weight: 900;
-  border: 5px solid #b9ead5;
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.result-card h2 {
-  margin: 0 0 4px;
-  color: var(--navy);
+.stat {
+    padding: 14px 5px;
+    background: #f0f4ff;
+    border-radius: 9px;
+    text-align: center;
 }
 
-.result-card p {
-  margin: 4px 0;
-  color: var(--muted);
+.stat strong {
+    display: block;
+    font-size: 23px;
+    color: #3156c5;
 }
 
-.feedback {
-  clear: both;
-  margin: 0 20px 16px;
-  padding: 13px 15px;
-  border-radius: 11px;
-  line-height: 1.55;
-}
-
-.feedback.correct {
-  background: #eaf8f0;
-  border: 1px solid #b7e6ca;
-  color: #145d3b;
-}
-
-.feedback.incorrect {
-  background: #fff0f0;
-  border: 1px solid #f1c2c6;
-  color: #8d1e2d;
-}
-
-.feedback strong {
-  display: block;
-  margin-bottom: 3px;
+#review-heading {
+    margin-top: 28px;
 }
 
 footer {
-  text-align: center;
-  padding: 0 16px 28px;
-  color: var(--muted);
-  font-size: .85rem;
+    text-align: center;
+    color: #69758b;
+    font-size: 13px;
+    padding: 20px;
 }
 
-@media (max-width: 650px) {
-  .hero {
-    padding: 30px 0 27px;
-  }
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 23px;
+    }
 
-  .dashboard {
-    grid-template-columns: 1fr;
-  }
+    .panel, .question {
+        padding: 16px;
+    }
 
-  .options {
-    grid-template-columns: 1fr;
-    padding: 13px;
-  }
+    .info-grid {
+        gap: 6px;
+    }
 
-  legend {
-    padding: 15px 13px;
-  }
+    .info-box {
+        padding: 10px 4px;
+    }
 
-  .section-heading {
-    align-items: start;
-    flex-direction: column;
-    gap: 2px;
-  }
+    .info-box strong {
+        font-size: 17px;
+    }
 
-  .panel {
-    padding: 17px;
-  }
+    .info-box span {
+        font-size: 10px;
+    }
+
+    .score {
+        font-size: 39px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">Undergraduate practice · Set 02</span>
-
-    <h1>Measures of Location<br>&amp; Variation</h1>
-
-    <p>
-      Test your understanding with 20 theory and calculation questions.
-      Work independently, keep an eye on the timer, and submit to reveal
-      your score and explanations.
-    </p>
-  </div>
+<header>
+    <h1>PHY 101: GENERAL PHYSICS I</h1>
+    <p>MECHANICS — SPACE, TIME AND MOTION</p>
+    <p>University Standard Practice Test</p>
 </header>
 
-<main>
+<main class="container">
 
-  <section class="dashboard" aria-label="Test dashboard">
+    <section class="panel" id="instructions">
+        <h2>Welcome to your test!</h2>
+        <p>
+            This test covers your lecture notes and handwritten work
+            on mechanics, impulse, momentum and conservation of momentum.
+        </p>
 
-    <div class="panel">
-      <div class="panel-title">Time remaining</div>
-
-      <div class="timer-row">
-        <div>
-          <div id="timer" aria-live="polite">20:00</div>
-          <p class="instructions" id="timerNote">
-            Your 20-minute test starts now.
-          </p>
+        <div class="info-grid">
+            <div class="info-box">
+                <strong>30</strong>
+                <span>Questions</span>
+            </div>
+            <div class="info-box">
+                <strong>15:00</strong>
+                <span>Time allowed</span>
+            </div>
+            <div class="info-box">
+                <strong>30</strong>
+                <span>Total marks</span>
+            </div>
         </div>
 
-        <div class="timer-icon" aria-hidden="true">◷</div>
-      </div>
-    </div>
+        <h3>Instructions</h3>
+        <ul>
+            <li>Choose one answer (A, B, C or D) for every question.</li>
+            <li>Each correct answer earns one mark.</li>
+            <li>There is no negative marking.</li>
+            <li>Your answers and explanations will be revealed after submission.</li>
+            <li>The test submits automatically when the timer reaches zero.</li>
+            <li>Try to answer every question before the time expires.</li>
+        </ul>
 
-    <div class="panel">
-      <div class="panel-title">Your progress</div>
+        <button class="primary" id="startBtn" onclick="startTest()">
+            Start Test
+        </button>
+    </section>
 
-      <div class="progress-top">
-        <span id="answeredCount">0 of 20 answered</span>
-        <span id="progressPercent">0%</span>
-      </div>
+    <section id="testArea" style="display:none">
 
-      <div
-        class="progress-track"
-        role="progressbar"
-        aria-label="Questions answered"
-        aria-valuemin="0"
-        aria-valuemax="20"
-        aria-valuenow="0"
-        id="progressTrack"
-      >
-        <div id="progressBar"></div>
-      </div>
+        <div class="panel">
+            <div class="timer-row">
+                <div>
+                    <strong>PHY 101 Examination</strong>
+                    <div class="progress-text" id="progressText">
+                        Answered: 0 of 30
+                    </div>
+                </div>
 
-      <p class="instructions" style="margin-top:12px">
-        Choose one option for every question.
-      </p>
-    </div>
+                <div class="timer" id="timer">15:00</div>
+            </div>
 
-  </section>
+            <div class="progress-track">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
 
-  <div class="section-heading">
-    <h2>Question paper</h2>
-    <span>20 questions · A, B, C or D</span>
-  </div>
+            <small>Read each question carefully before selecting an answer.</small>
+        </div>
 
-  <form id="quiz">
-    <div id="questions"></div>
+        <div id="questions"></div>
 
-    <div class="actions">
-      <button type="submit" id="submitBtn">
-        Submit answers ↗
-      </button>
+        <div class="actions">
+            <button class="primary" id="submitBtn" onclick="submitTest(false)">
+                Submit Test
+            </button>
 
-      <button type="button" id="resetBtn">
-        Start again
-      </button>
-    </div>
-  </form>
+            <button class="secondary" onclick="clearAnswers()">
+                Clear Answers
+            </button>
+        </div>
+    </section>
 
-  <div id="results" aria-live="polite"></div>
+    <section class="panel" id="results">
+        <div class="score-card">
+            <h2 id="resultTitle">Test Completed!</h2>
+            <div class="score" id="scoreDisplay">0/30</div>
+            <p id="percentageDisplay">0%</p>
+            <p id="resultMessage"></p>
+        </div>
+
+        <div class="result-stats">
+            <div class="stat">
+                <strong id="correctCount">0</strong>
+                Correct
+            </div>
+            <div class="stat">
+                <strong id="wrongCount">0</strong>
+                Incorrect
+            </div>
+            <div class="stat">
+                <strong id="unansweredCount">0</strong>
+                Unanswered
+            </div>
+        </div>
+
+        <p id="timeUsed" style="text-align:center"></p>
+
+        <h2 id="review-heading">Review Your Answers</h2>
+        <p>
+            Green borders indicate correct answers.
+            Red borders indicate incorrect answers.
+            Read the explanation under each question to revise.
+        </p>
+
+        <button class="primary" onclick="restartTest()">
+            Try Again
+        </button>
+    </section>
 
 </main>
 
 <footer>
-  Take your time, show your working on paper, and learn from every explanation.
+    PHY 101 Practice Test | Mechanics, Impulse and Momentum
 </footer>
 
 <script>
 const questions = [
+
 {
-  q: "Which statement best describes a measure of central location?",
-  o: [
-    "It describes how spread out the data are.",
-    "It gives a typical or central value of a dataset.",
-    "It shows the largest value only.",
-    "It counts the number of classes."
-  ],
-  a: 1,
-  e: "Measures of central location, such as mean, median and mode, describe the centre or typical value of data."
+    topic: "Space and Time",
+    q: "Which statement best describes space in mechanics?",
+    options: [
+        "The duration between two events",
+        "The three-dimensional framework in which objects exist and move",
+        "The speed of an object",
+        "The force responsible for motion"
+    ],
+    answer: 1,
+    explanation: "Space is the three-dimensional framework in which objects exist and move. Position specifies the particular location of an object within that space."
 },
+
 {
-  q: "What is the arithmetic mean of 6, 8, 10 and 12?",
-  o: ["8", "9", "10", "36"],
-  a: 1,
-  e: "Mean = (6 + 8 + 10 + 12) / 4 = 36 / 4 = 9."
+    topic: "Reference Frames",
+    q: "A student sitting in a moving bus is at rest relative to another passenger but moving relative to a person standing by the road. This demonstrates that:",
+    options: [
+        "The student has no position",
+        "Motion is always absolute",
+        "Motion depends on the reference frame",
+        "Time stops inside a moving bus"
+    ],
+    answer: 2,
+    explanation: "Motion is relative to the chosen reference frame. The student is at rest relative to the bus but moves relative to the roadside observer."
 },
+
 {
-  q: "The values 3, 5, 5, 7, 10 have which mode?",
-  o: ["3", "5", "6", "10"],
-  a: 1,
-  e: "The mode is the value that occurs most often. Five appears twice; every other value appears once."
+    topic: "SI Units",
+    q: "Which of the following is the SI unit of mass?",
+    options: [
+        "Gram",
+        "Kilogram",
+        "Newton",
+        "Metre"
+    ],
+    answer: 1,
+    explanation: "The SI base unit of mass is the kilogram (kg). The metre is the unit of length, while the newton is the unit of force."
 },
+
 {
-  q: "Find the median of 4, 9, 2, 7, 6.",
-  o: ["4", "6", "7", "9"],
-  a: 1,
-  e: "Arrange the data: 2, 4, 6, 7, 9. The middle value is 6."
+    topic: "Dimensions",
+    q: "The dimensional formula for velocity is:",
+    options: [
+        "[LT]",
+        "[LT⁻¹]",
+        "[LT⁻²]",
+        "[MLT⁻²]"
+    ],
+    answer: 1,
+    explanation: "Velocity is displacement divided by time. Therefore, its dimensions are length divided by time, giving [LT⁻¹]."
 },
+
 {
-  q: "What is the range of 14, 6, 19, 11 and 8?",
-  o: ["8", "11", "13", "19"],
-  a: 2,
-  e: "Range = maximum − minimum = 19 − 6 = 13."
+    topic: "Dimensions",
+    q: "Using Newton's second law, F = ma, what is the dimensional formula for force?",
+    options: [
+        "[MLT⁻¹]",
+        "[ML²T⁻²]",
+        "[MLT⁻²]",
+        "[MT⁻²]"
+    ],
+    answer: 2,
+    explanation: "Mass has dimensions [M], while acceleration has dimensions [LT⁻²]. Multiplying them gives [F] = [MLT⁻²]."
 },
+
 {
-  q: "For the class interval 21–30, what is its class midpoint?",
-  o: ["21", "25", "25.5", "30"],
-  a: 2,
-  e: "Midpoint = (lower class limit + upper class limit) / 2 = (21 + 30) / 2 = 25.5."
+    topic: "Dimensional Homogeneity",
+    q: "Which equation is dimensionally consistent, using the usual meanings of the symbols?",
+    options: [
+        "v = u + at",
+        "v = u + at²",
+        "s = u + at",
+        "F = mv"
+    ],
+    answer: 0,
+    explanation: "In v = u + at, every term has dimensions [LT⁻¹]. In the other options, the terms or the two sides have different dimensions."
 },
+
 {
-  q: "Why is a cumulative frequency column useful when finding a grouped median?",
-  o: [
-    "It identifies the class containing the middle observation.",
-    "It gives the class midpoint directly.",
-    "It always equals the class width.",
-    "It identifies the largest individual observation."
-  ],
-  a: 0,
-  e: "Cumulative frequency helps locate the median class by showing how many observations have been counted up to each class."
+    topic: "Scalars and Vectors",
+    q: "Which of these is a scalar quantity?",
+    options: [
+        "Displacement",
+        "Momentum",
+        "Acceleration",
+        "Distance"
+    ],
+    answer: 3,
+    explanation: "Distance has magnitude only and is therefore a scalar. Displacement, momentum and acceleration have both magnitude and direction."
 },
+
 {
-  q: "Grouped data have intervals 1–10, 11–20, 21–30, 31–40 and 41–50, with frequencies 4, 7, 15, 13 and 8. Which is the median class?",
-  o: ["1–10", "11–20", "21–30", "31–40"],
-  a: 2,
-  e: "Total N = 47, so N/2 = 23.5. Cumulative frequencies are 4, 11, 26, 39, 47. The first cumulative frequency at least 23.5 is 26, so the median class is 21–30."
+    topic: "Vector Magnitude",
+    q: "A vector is A = 3i + 4j. What is its magnitude?",
+    options: [
+        "1",
+        "5",
+        "7",
+        "12"
+    ],
+    answer: 1,
+    explanation: "The magnitude is √(3² + 4²) = √(9 + 16) = √25 = 5."
 },
+
 {
-  q: "In the grouped median formula, what does F represent when it is defined as the cumulative frequency before the median class?",
-  o: [
-    "The frequency of the median class",
-    "The total number of classes",
-    "The cumulative frequency before the median class",
-    "The width of the median class"
-  ],
-  a: 2,
-  e: "F is the cumulative frequency of all classes before the median class."
+    topic: "Vector Product",
+    q: "Two vectors have magnitudes 4 and 5 and the angle between them is 30°. What is the magnitude of their cross product?",
+    options: [
+        "20",
+        "10",
+        "5",
+        "2.5"
+    ],
+    answer: 1,
+    explanation: "|A × B| = AB sin θ = 4 × 5 × sin 30° = 20 × 0.5 = 10."
 },
+
 {
-  q: "A grouped dataset has 80 observations. Which position is used to locate the median class?",
-  o: [
-    "The 20th observation",
-    "The 40th observation",
-    "The 80th observation",
-    "The 160th observation"
-  ],
-  a: 1,
-  e: "For a grouped median, locate N/2. Here 80/2 = 40, so use the class containing the 40th observation."
+    topic: "Cross Product Direction",
+    q: "If A × B points out of the page, what happens to the direction when the order is reversed to B × A?",
+    options: [
+        "It still points out of the page",
+        "It becomes zero",
+        "It points into the page",
+        "Its magnitude doubles"
+    ],
+    answer: 2,
+    explanation: "The cross product is anti-commutative: B × A = −(A × B). Reversing the order reverses the direction but preserves the magnitude."
 },
+
 {
-  q: "Which frequency identifies the modal class in a grouped frequency table?",
-  o: [
-    "The smallest frequency",
-    "The middle cumulative frequency",
-    "The largest class frequency",
-    "The total frequency divided by two"
-  ],
-  a: 2,
-  e: "The modal class is the class with the highest frequency."
+    topic: "Unit Vectors",
+    q: "Given i × j = k, what is j × i?",
+    options: [
+        "k",
+        "−k",
+        "i",
+        "0"
+    ],
+    answer: 1,
+    explanation: "Reversing the order changes the sign. Since i × j = k, then j × i = −k."
 },
+
 {
-  q: "A modal class has frequency f₁ = 18, the preceding class has f₀ = 12, and the following class has f₂ = 10. What is f₁ − f₀?",
-  o: ["4", "6", "8", "30"],
-  a: 1,
-  e: "f₁ − f₀ = 18 − 12 = 6."
+    topic: "Cross Product Calculation",
+    q: "If A = 2i + 3j and B = 4i + j, what is A × B?",
+    options: [
+        "10k",
+        "−10k",
+        "14k",
+        "−2k"
+    ],
+    answer: 1,
+    explanation: "For vectors in the xy-plane, the k-component is AxBy − AyBx = (2 × 1) − (3 × 4) = 2 − 12 = −10. Therefore, A × B = −10k."
 },
+
 {
-  q: "Which statement about variance is correct?",
-  o: [
-    "It is the square root of the standard deviation.",
-    "It measures spread using squared deviations from the mean.",
-    "It is always negative.",
-    "It is the same as the range."
-  ],
-  a: 1,
-  e: "Variance is based on squared deviations from the mean and measures how spread out observations are."
+    topic: "Displacement",
+    q: "A particle moves from position r₁ = 12i m to position r₂ = 35i m. Find its displacement.",
+    options: [
+        "47i m",
+        "23i m",
+        "−23i m",
+        "35i m"
+    ],
+    answer: 1,
+    explanation: "Displacement is final position minus initial position: Δr = r₂ − r₁ = 35i − 12i = 23i m."
 },
+
 {
-  q: "For a population with N observations, which denominator is used in the population variance formula?",
-  o: ["N", "N − 1", "N + 1", "The range"],
-  a: 0,
-  e: "Population variance divides the sum of squared deviations by N."
+    topic: "Distance and Displacement",
+    q: "A student walks 100 m to a shop and then returns to the starting point. What are the total distance and displacement?",
+    options: [
+        "100 m and 100 m",
+        "0 m and 200 m",
+        "200 m and 0 m",
+        "200 m and 200 m"
+    ],
+    answer: 2,
+    explanation: "The total distance is 100 + 100 = 200 m. Since the student returns to the starting point, the net displacement is zero."
 },
+
 {
-  q: "When calculating sample variance from a sample of n observations, the usual denominator is:",
-  o: ["n", "n + 1", "n − 1", "2n"],
-  a: 2,
-  e: "The usual sample variance formula divides by n − 1."
+    topic: "Average Velocity",
+    q: "A car moves from 20 m to 80 m along a straight road in 10 s. What is its average velocity?",
+    options: [
+        "10 m/s",
+        "8 m/s",
+        "6 m/s",
+        "60 m/s"
+    ],
+    answer: 2,
+    explanation: "Average velocity = displacement/time = (80 − 20)/10 = 60/10 = 6 m/s in the positive direction."
 },
+
 {
-  q: "If the variance of a dataset is 49, what is its standard deviation?",
-  o: ["7", "14", "24.5", "49"],
-  a: 0,
-  e: "Standard deviation is the square root of variance: √49 = 7."
+    topic: "Differentiation of Vectors",
+    q: "The position of a particle is r = (2t² + 3t)i m. Find its velocity at t = 2 s.",
+    options: [
+        "7 m/s",
+        "8 m/s",
+        "11 m/s",
+        "14 m/s"
+    ],
+    answer: 2,
+    explanation: "Velocity is dr/dt = (4t + 3)i. At t = 2 s, v = (4 × 2 + 3)i = 11i m/s."
 },
+
 {
-  q: "A dataset has mean 20. What is the squared deviation for an observation x = 25?",
-  o: ["5", "10", "20", "25"],
-  a: 3,
-  e: "The deviation is 25 − 20 = 5. Its square is 5² = 25."
+    topic: "Acceleration",
+    q: "A car's velocity changes from 5 m/s to 25 m/s in 4 s. Find its average acceleration.",
+    options: [
+        "4 m/s²",
+        "5 m/s²",
+        "6.25 m/s²",
+        "20 m/s²"
+    ],
+    answer: 1,
+    explanation: "Average acceleration = (v − u)/t = (25 − 5)/4 = 20/4 = 5 m/s²."
 },
+
 {
-  q: "For grouped data, what value is usually used to represent each class when estimating the mean?",
-  o: [
-    "The lower class boundary only",
-    "The class midpoint",
-    "The cumulative frequency",
-    "The class frequency squared"
-  ],
-  a: 1,
-  e: "The grouped mean is estimated using each class midpoint multiplied by its frequency."
+    topic: "Kinematics",
+    q: "A body starts with an initial velocity of 6 m/s and accelerates uniformly at 2 m/s² for 5 s. What is its final velocity?",
+    options: [
+        "10 m/s",
+        "12 m/s",
+        "16 m/s",
+        "20 m/s"
+    ],
+    answer: 2,
+    explanation: "Using v = u + at, v = 6 + (2 × 5) = 16 m/s."
 },
+
 {
-  q: "Which dataset has the greatest range?",
-  o: [
-    "2, 4, 6",
-    "1, 5, 8",
-    "10, 11, 12",
-    "20, 22, 23"
-  ],
-  a: 1,
-  e: "Ranges: A = 6−2 = 4; B = 8−1 = 7; C = 12−10 = 2; D = 23−20 = 3. Dataset B has the greatest range."
+    topic: "Kinematics",
+    q: "An object starts from rest and accelerates uniformly at 4 m/s² for 5 s. How far does it travel?",
+    options: [
+        "20 m",
+        "40 m",
+        "50 m",
+        "100 m"
+    ],
+    answer: 2,
+    explanation: "Since u = 0, s = ut + ½at² = ½ × 4 × 5² = 2 × 25 = 50 m."
 },
+
 {
-  q: "A dataset contains one extremely large value compared with all the others. Which measure of central location is generally less affected by that outlier?",
-  o: ["Mean", "Median", "Sum", "Range"],
-  a: 1,
-  e: "The median depends on the middle position, so it is generally less affected by an extreme value than the mean."
+    topic: "Newton's Second Law",
+    q: "A net force of 12 N acts on a 3 kg object. What is its acceleration?",
+    options: [
+        "4 m/s²",
+        "9 m/s²",
+        "15 m/s²",
+        "36 m/s²"
+    ],
+    answer: 0,
+    explanation: "Newton's second law gives F = ma. Therefore, a = F/m = 12/3 = 4 m/s²."
+},
+
+{
+    topic: "Inertial Frames",
+    q: "Which statement best describes an inertial frame of reference in introductory mechanics?",
+    options: [
+        "A frame that must always be accelerating",
+        "A frame in which Newton's first law holds for an isolated body",
+        "A frame in which all objects are stationary",
+        "A frame without a clock"
+    ],
+    answer: 1,
+    explanation: "An inertial frame is one in which a body experiencing zero net force remains at rest or moves with constant velocity."
+},
+
+{
+    topic: "Momentum",
+    q: "A 4 kg object moves with a velocity of 6 m/s to the right. What is its momentum?",
+    options: [
+        "10 kg m/s to the right",
+        "24 kg m/s to the right",
+        "24 kg m/s to the left",
+        "2/3 kg m/s to the right"
+    ],
+    answer: 1,
+    explanation: "Momentum p = mv = 4 × 6 = 24 kg m/s to the right. Momentum is a vector, so its direction follows the velocity."
+},
+
+{
+    topic: "Impulse",
+    q: "Impulse is defined as which of the following for a constant force?",
+    options: [
+        "Force divided by time",
+        "Mass multiplied by acceleration",
+        "Force multiplied by the time interval",
+        "Mass multiplied by distance"
+    ],
+    answer: 2,
+    explanation: "For a constant force, impulse J = FΔt. It describes the effect of a force acting over a time interval."
+},
+
+{
+    topic: "Impulse-Momentum Theorem",
+    q: "According to the impulse-momentum theorem, the impulse on an object equals its:",
+    options: [
+        "Initial momentum",
+        "Final momentum only",
+        "Change in momentum",
+        "Mass multiplied by its distance"
+    ],
+    answer: 2,
+    explanation: "The impulse-momentum theorem states that J = Δp. Impulse equals final momentum minus initial momentum."
+},
+
+{
+    topic: "Impulse Calculation",
+    q: "A constant force of 20 N acts on an object for 0.5 s. What impulse does the force produce?",
+    options: [
+        "10 N s",
+        "20 N s",
+        "40 N s",
+        "0.025 N s"
+    ],
+    answer: 0,
+    explanation: "Impulse = FΔt = 20 × 0.5 = 10 N s. The equivalent unit is kg m/s."
+},
+
+{
+    topic: "Deceleration",
+    q: "A car moving at 15 m/s comes to rest uniformly in 8 s. What is its acceleration?",
+    options: [
+        "1.875 m/s²",
+        "−1.875 m/s²",
+        "−15 m/s²",
+        "120 m/s²"
+    ],
+    answer: 1,
+    explanation: "Using a = (v − u)/t = (0 − 15)/8 = −1.875 m/s². The negative sign indicates acceleration opposite to the initial direction of motion."
+},
+
+{
+    topic: "Conservation of Momentum",
+    q: "A 2 kg object moves right at 3 m/s and collides with a stationary 3 kg object. After collision, the 2 kg object moves right at 1 m/s. If external forces are negligible, what is the final velocity of the 3 kg object?",
+    options: [
+        "1.00 m/s to the right",
+        "1.33 m/s to the right",
+        "2.00 m/s to the left",
+        "3.00 m/s to the right"
+    ],
+    answer: 1,
+    explanation: "Conservation of momentum gives 2(3) + 3(0) = 2(1) + 3v. Thus, 6 = 2 + 3v, so v = 4/3 ≈ 1.33 m/s to the right."
+},
+
+{
+    topic: "Perfectly Inelastic Collision",
+    q: "A 5 kg cart moves right at 4 m/s and collides with a stationary 3 kg cart. They stick together. What is their common final velocity?",
+    options: [
+        "1.5 m/s",
+        "2.0 m/s",
+        "2.5 m/s",
+        "4.0 m/s"
+    ],
+    answer: 2,
+    explanation: "Conservation of momentum gives 5(4) + 3(0) = (5 + 3)v. Therefore, v = 20/8 = 2.5 m/s to the right."
+},
+
+{
+    topic: "Momentum and Direction",
+    q: "A 2 kg ball moves to the left at 5 m/s. If right is defined as positive, what is its momentum?",
+    options: [
+        "+10 kg m/s",
+        "−10 kg m/s",
+        "+2.5 kg m/s",
+        "−2.5 kg m/s"
+    ],
+    answer: 1,
+    explanation: "With right positive, leftward velocity is −5 m/s. Therefore, p = mv = 2(−5) = −10 kg m/s. The negative sign indicates leftward momentum."
+},
+
+{
+    topic: "Force and Action at a Distance",
+    q: "Which example best illustrates a force acting at a distance without direct physical contact?",
+    options: [
+        "Pushing a box across a floor",
+        "A hand pulling a rope",
+        "Earth attracting a falling object gravitationally",
+        "A person lifting a chair by its seat"
+    ],
+    answer: 2,
+    explanation: "Gravity acts between masses without requiring direct physical contact. The other examples involve forces transmitted through physical contact."
 }
+
 ];
 
-const holder = document.getElementById("questions");
+let timeLeft = 15 * 60;
+let timerInterval = null;
+let started = false;
+let submitted = false;
+let startTime = null;
 
-questions.forEach((item, i) => {
-  const fieldset = document.createElement("fieldset");
-  const legend = document.createElement("legend");
+const questionsContainer = document.getElementById("questions");
 
-  const number = document.createElement("span");
-  number.className = "question-number";
-  number.textContent = String(i + 1);
+function renderQuestions() {
+    questionsContainer.innerHTML = "";
 
-  legend.appendChild(number);
-  legend.appendChild(document.createTextNode(item.q));
-  fieldset.appendChild(legend);
+    questions.forEach((question, index) => {
+        const card = document.createElement("div");
+        card.className = "question";
+        card.id = "question-" + index;
 
-  const options = document.createElement("div");
-  options.className = "options";
+        const heading = document.createElement("h3");
+        heading.innerHTML =
+            '<span class="q-number">Question ' +
+            (index + 1) + '.</span> ' + question.q;
 
-  item.o.forEach((option, j) => {
-    const label = document.createElement("label");
-    label.className = "option";
+        card.appendChild(heading);
 
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = `q${i}`;
-    radio.value = j;
-    radio.setAttribute(
-      "aria-label",
-      `${String.fromCharCode(65 + j)}. ${option}`
-    );
+        question.options.forEach((option, optionIndex) => {
+            const label = document.createElement("label");
+            label.className = "option";
 
-    radio.addEventListener("change", updateProgress);
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "question-" + index;
+            radio.value = optionIndex;
 
-    const text = document.createElement("span");
-    text.className = "option-text";
-    text.textContent = `${String.fromCharCode(65 + j)}. ${option}`;
+            radio.addEventListener("change", updateProgress);
 
-    label.appendChild(radio);
-    label.appendChild(text);
-    options.appendChild(label);
-  });
+            const text = document.createElement("span");
+            text.textContent =
+                String.fromCharCode(65 + optionIndex) + ". " + option;
 
-  fieldset.appendChild(options);
-  holder.appendChild(fieldset);
-});
+            label.appendChild(radio);
+            label.appendChild(text);
+            card.appendChild(label);
+        });
+
+        const explanation = document.createElement("div");
+        explanation.className = "explanation";
+        explanation.id = "explanation-" + index;
+
+        card.appendChild(explanation);
+        questionsContainer.appendChild(card);
+    });
+}
+
+function startTest() {
+    if (started) return;
+
+    started = true;
+    startTime = Date.now();
+
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("testArea").style.display = "block";
+
+    renderQuestions();
+    updateProgress();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+            updateTimer();
+            submitTest(true);
+        }
+    }, 1000);
+}
+
+function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+
+    const display =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+
+    const timer = document.getElementById("timer");
+    timer.textContent = display;
+
+    if (timeLeft <= 60) {
+        timer.classList.add("warning");
+    }
+}
 
 function updateProgress() {
-  const answered = questions.reduce((count, _, i) =>
-    count + (
-      document.querySelector(`input[name="q${i}"]:checked`) ? 1 : 0
-    ), 0);
+    let answered = 0;
 
-  const percent = Math.round(answered / questions.length * 100);
+    questions.forEach((question, index) => {
+        if (document.querySelector(
+            'input[name="question-' + index + '"]:checked'
+        )) {
+            answered++;
+        }
+    });
 
-  document.getElementById("answeredCount").textContent =
-    `${answered} of ${questions.length} answered`;
+    document.getElementById("progressText").textContent =
+        "Answered: " + answered + " of " + questions.length;
 
-  document.getElementById("progressPercent").textContent =
-    `${percent}%`;
-
-  document.getElementById("progressBar").style.width =
-    `${percent}%`;
-
-  document.getElementById("progressTrack")
-    .setAttribute("aria-valuenow", answered);
+    document.getElementById("progressBar").style.width =
+        (answered / questions.length * 100) + "%";
 }
 
-let seconds = 20 * 60;
-let finished = false;
+function clearAnswers() {
+    if (submitted || !started) return;
 
-const timerEl = document.getElementById("timer");
-const timerNote = document.getElementById("timerNote");
+    if (!confirm("Clear all selected answers?")) return;
 
-function showTime() {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
+    document.querySelectorAll(
+        '#questions input[type="radio"]'
+    ).forEach(input => {
+        input.checked = false;
+    });
 
-  timerEl.textContent =
-    `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-
-  timerEl.classList.toggle(
-    "warning",
-    seconds <= 5 * 60 && seconds > 60
-  );
-
-  timerEl.classList.toggle("danger", seconds <= 60);
-
-  if (seconds <= 5 * 60 && seconds > 60) {
-    timerNote.textContent = "Five minutes or less — keep going!";
-  }
-
-  if (seconds <= 60) {
-    timerNote.textContent = "Final minute. Check your answers!";
-  }
+    updateProgress();
 }
 
-showTime();
+function submitTest(isAutomatic) {
+    if (submitted || !started) return;
 
-const timer = setInterval(() => {
-  if (finished) return;
+    if (!isAutomatic) {
+        const confirmed = confirm(
+            "Are you sure you want to submit your test? " +
+            "You will not be able to change your answers afterward."
+        );
 
-  seconds--;
-  showTime();
+        if (!confirmed) return;
+    }
 
-  if (seconds <= 0) {
-    clearInterval(timer);
-    gradeQuiz(true);
-  }
-}, 1000);
+    submitted = true;
+    clearInterval(timerInterval);
 
-function gradeQuiz(timeUp = false) {
-  if (finished) return;
+    let correct = 0;
+    let wrong = 0;
+    let unanswered = 0;
 
-  finished = true;
-  clearInterval(timer);
+    questions.forEach((question, index) => {
+        const selected = document.querySelector(
+            'input[name="question-' + index + '"]:checked'
+        );
 
-  let score = 0;
+        const card = document.getElementById("question-" + index);
+        const explanation = document.getElementById(
+            "explanation-" + index
+        );
 
-  questions.forEach((item, i) => {
-    const chosen = document.querySelector(
-      `input[name="q${i}"]:checked`
+        const options = card.querySelectorAll('input[type="radio"]');
+
+        options.forEach(input => {
+            input.disabled = true;
+        });
+
+        if (!selected) {
+            unanswered++;
+            card.classList.add("incorrect");
+        } else if (Number(selected.value) === question.answer) {
+            correct++;
+            card.classList.add("correct");
+        } else {
+            wrong++;
+            card.classList.add("incorrect");
+        }
+
+        const correctLetter = String.fromCharCode(
+            65 + question.answer
+        );
+
+        const selectedLetter = selected
+            ? String.fromCharCode(65 + Number(selected.value))
+            : "No answer";
+
+        explanation.innerHTML =
+            "<strong>Correct answer: " + correctLetter + ". " +
+            escapeHTML(question.options[question.answer]) + "</strong>" +
+            "<p><b>Your answer:</b> " +
+            escapeHTML(selectedLetter) + "</p>" +
+            "<p><b>Explanation:</b> " +
+            escapeHTML(question.explanation) + "</p>";
+
+        explanation.classList.add("show");
+
+        // Highlight the correct option.
+        const labels = card.querySelectorAll(".option");
+        labels[question.answer].style.background = "#e5f8ee";
+        labels[question.answer].style.borderColor = "#1d9b61";
+
+        if (selected && Number(selected.value) !== question.answer) {
+            labels[Number(selected.value)].style.background = "#ffebe8";
+            labels[Number(selected.value)].style.borderColor = "#d94b4b";
+        }
+    });
+
+    const percentage = Math.round(
+        (correct / questions.length) * 100
     );
 
-    const correct = Boolean(
-      chosen && Number(chosen.value) === item.a
-    );
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const minutesUsed = Math.floor(elapsed / 60);
+    const secondsUsed = elapsed % 60;
 
-    if (correct) score++;
+    document.getElementById("scoreDisplay").textContent =
+        correct + "/" + questions.length;
 
-    document.querySelectorAll(`input[name="q${i}"]`)
-      .forEach(input => input.disabled = true);
+    document.getElementById("percentageDisplay").textContent =
+        percentage + "%";
 
-    const feedback = document.createElement("div");
-    feedback.className =
-      `feedback ${correct ? "correct" : "incorrect"}`;
+    document.getElementById("correctCount").textContent = correct;
+    document.getElementById("wrongCount").textContent = wrong;
+    document.getElementById("unansweredCount").textContent = unanswered;
 
-    const heading = document.createElement("strong");
+    document.getElementById("resultTitle").textContent =
+        isAutomatic ? "Time Is Up!" : "Test Submitted!";
 
-    heading.textContent =
-      `${correct ? "✓ Correct" : "✗ Incorrect"} — Answer ${
-        String.fromCharCode(65 + item.a)
-      }: ${item.o[item.a]}`;
+    document.getElementById("resultMessage").textContent =
+        percentage >= 80
+            ? "Excellent work! You have demonstrated a strong understanding of these topics."
+            : percentage >= 60
+            ? "Good effort! Review the explanations to strengthen your understanding."
+            : percentage >= 40
+            ? "You are making progress. Study the formulas and review your incorrect answers."
+            : "Keep practising. Review your notes and explanations, then try the test again.";
 
-    const explanation = document.createElement("span");
-    explanation.textContent = item.e;
+    document.getElementById("timeUsed").textContent =
+        "Time used: " + minutesUsed + " minute(s), " +
+        secondsUsed + " second(s).";
 
-    feedback.appendChild(heading);
-    feedback.appendChild(explanation);
+    document.getElementById("submitBtn").disabled = true;
 
-    document.querySelectorAll("fieldset")[i]
-      .appendChild(feedback);
-  });
+    document.getElementById("results").style.display = "block";
 
-  document.getElementById("submitBtn").disabled = true;
-  document.getElementById("resetBtn").disabled = true;
-
-  const percent = Math.round(score / questions.length * 100);
-
-  let message =
-    percent >= 80
-      ? "Excellent work!"
-      : percent >= 60
-      ? "Good effort — review the explanations to improve."
-      : "Keep practising — use the explanations to learn each method.";
-
-  document.getElementById("results").innerHTML = `
-    <div class="result-card">
-      <div class="score-line">
-        <div class="score-circle">${score}/${questions.length}</div>
-        <div>
-          <h2>${timeUp ? "Time is up!" : "Test submitted!"}</h2>
-          <p><strong>${percent}%</strong> · ${message}</p>
-          <p>Correct answers and explanations are shown under each question.</p>
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.getElementById("results")
-    .scrollIntoView({ behavior: "smooth", block: "start" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-document.getElementById("quiz").addEventListener("submit", event => {
-  event.preventDefault();
-  gradeQuiz(false);
-});
+function escapeHTML(text) {
+    return String(text).replace(/[&<>"']/g, character => {
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
 
-document.getElementById("resetBtn").addEventListener("click", () => {
-  window.location.reload();
-});
+        return entities[character];
+    });
+}
+
+function restartTest() {
+    clearInterval(timerInterval);
+
+    timeLeft = 15 * 60;
+    started = false;
+    submitted = false;
+    startTime = null;
+
+    document.getElementById("timer").textContent = "15:00";
+    document.getElementById("timer").classList.remove("warning");
+
+    document.getElementById("results").style.display = "none";
+    document.getElementById("testArea").style.display = "none";
+    document.getElementById("instructions").style.display = "block";
+
+    document.getElementById("submitBtn").disabled = false;
+    document.getElementById("progressBar").style.width = "0%";
+    document.getElementById("progressText").textContent =
+        "Answered: 0 of 30";
+
+    questionsContainer.innerHTML = "";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
 </script>
 
 </body>
