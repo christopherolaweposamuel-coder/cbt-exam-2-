@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PHY 101 | Mechanics Test</title>
+<title>COS 101 - Humanware Test</title>
 
 <style>
 * {
@@ -14,127 +14,106 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #eef2f8;
-    color: #202b3c;
+    background: #eef2f7;
+    color: #202938;
     line-height: 1.6;
 }
 
-header {
-    background: linear-gradient(135deg, #101b3e, #294bb5);
+.header {
+    background: linear-gradient(135deg, #101d3a, #174b82);
     color: white;
-    padding: 30px 18px;
     text-align: center;
+    padding: 30px 15px;
 }
 
-header h1 {
-    margin: 0 0 8px;
-    font-size: 30px;
+.header h1 {
+    margin: 0;
+    font-size: 28px;
 }
 
-header p {
-    margin: 5px 0;
+.header p {
+    margin: 8px 0 0;
+    color: #d9e8ff;
 }
 
 .container {
-    width: 94%;
     max-width: 900px;
-    margin: 24px auto;
+    margin: 22px auto;
+    padding: 0 15px;
 }
 
-.panel {
-    background: white;
-    border-radius: 14px;
-    padding: 22px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(25, 40, 80, 0.08);
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 18px;
-}
-
-.info-box {
-    background: #f0f4ff;
-    border: 1px solid #dce5ff;
-    border-radius: 10px;
-    padding: 14px 8px;
-    text-align: center;
-}
-
-.info-box strong {
-    display: block;
-    color: #2549b8;
-    font-size: 21px;
-}
-
-.info-box span {
-    font-size: 12px;
-    color: #58657b;
-}
-
-.timer-row {
+.info-panel {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    gap: 15px;
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #0000000d;
+    margin-bottom: 20px;
 }
 
-.timer {
-    font-size: 22px;
+.timer-box {
+    background: #e7f0ff;
+    color: #174b82;
+    padding: 10px 18px;
+    border-radius: 8px;
     font-weight: bold;
-    color: #176b45;
-    background: #e5f8ee;
-    border-radius: 9px;
-    padding: 8px 15px;
 }
 
-.timer.warning {
-    color: #b42318;
-    background: #ffebe8;
+#timer {
+    font-size: 24px;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-box.warning {
+    background: #ffebeb;
+    color: #c62828;
+}
+
+.progress-area {
+    margin-bottom: 20px;
 }
 
 .progress-text {
+    display: flex;
+    justify-content: space-between;
     font-size: 14px;
-    color: #58657b;
+    margin-bottom: 7px;
 }
 
 .progress-track {
+    background: #d8e0ec;
     height: 9px;
-    background: #e5e9f2;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
-    margin: 12px 0;
 }
 
-.progress-bar {
+#progress {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #4169e1, #15a477);
+    background: #2675d8;
     transition: width 0.2s;
 }
 
 .question {
     background: white;
-    padding: 23px;
-    margin-bottom: 17px;
-    border-radius: 13px;
-    border: 1px solid #e0e5ee;
-    box-shadow: 0 3px 10px rgba(25, 40, 80, 0.04);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 12px #0000000a;
+    border: 1px solid #e1e7f0;
 }
 
 .question h3 {
+    margin-top: 0;
     font-size: 17px;
-    margin: 0 0 15px;
-    line-height: 1.6;
 }
 
-.q-number {
-    color: #3156c5;
+.question-number {
+    color: #1e65b5;
     font-weight: bold;
 }
 
@@ -143,174 +122,139 @@ header p {
     align-items: flex-start;
     gap: 10px;
     padding: 12px;
-    margin: 9px 0;
-    border: 1px solid #dfe5ef;
-    border-radius: 9px;
+    margin: 8px 0;
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.15s, border 0.15s;
+    transition: 0.2s;
 }
 
 .option:hover {
-    background: #f0f4ff;
-    border-color: #7895ee;
-}
-
-.option:has(input:checked) {
-    background: #e9efff;
-    border-color: #4169e1;
+    background: #f0f6ff;
+    border-color: #4786d7;
 }
 
 .option input {
     margin-top: 5px;
-    accent-color: #3156c5;
+    accent-color: #1769c2;
+    flex-shrink: 0;
 }
 
-.option span {
-    flex: 1;
+.option.correct {
+    background: #e4f7e9;
+    border-color: #29994a;
 }
 
-.question.correct {
-    border: 2px solid #1d9b61;
-}
-
-.question.incorrect {
-    border: 2px solid #d94b4b;
+.option.incorrect {
+    background: #ffebeb;
+    border-color: #d94848;
 }
 
 .explanation {
     display: none;
     margin-top: 15px;
-    padding: 14px;
-    border-radius: 9px;
-    background: #f0f4ff;
-    border-left: 4px solid #4169e1;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f0f5fc;
+    border-left: 4px solid #2675d8;
 }
 
-.explanation.show {
+.question.answered .explanation {
     display: block;
 }
 
-.explanation strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.actions {
+.buttons {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin: 22px 0;
+    margin: 25px 0;
 }
 
 button {
     border: none;
-    border-radius: 9px;
-    padding: 14px 20px;
+    border-radius: 8px;
+    padding: 14px 22px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: translateY(-1px);
-    filter: brightness(0.96);
 }
 
 button:disabled {
     cursor: not-allowed;
     opacity: 0.6;
-    transform: none;
 }
 
-.primary {
-    background: #3156c5;
-    color: white;
+.submit-btn {
     flex: 1;
-}
-
-.secondary {
-    background: #e5eaf4;
-    color: #24334e;
-}
-
-#results {
-    display: none;
-}
-
-.score-card {
-    text-align: center;
-    background: linear-gradient(135deg, #101b3e, #294bb5);
+    background: #1769c2;
     color: white;
-    padding: 28px 15px;
-    border-radius: 13px;
-    margin-bottom: 20px;
 }
 
-.score {
-    font-size: 48px;
+.submit-btn:hover:not(:disabled) {
+    background: #104f96;
+}
+
+.reset-btn {
+    background: #e0e6ef;
+    color: #24344d;
+}
+
+#result {
+    display: none;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 18px #00000012;
+}
+
+#result h2 {
+    color: #174b82;
+}
+
+#score {
+    font-size: 38px;
     font-weight: bold;
-    margin: 5px 0;
+    color: #1769c2;
 }
 
-.result-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+.result-details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 20px 0;
 }
 
-.stat {
-    padding: 14px 5px;
-    background: #f0f4ff;
-    border-radius: 9px;
+.result-details div {
+    background: #f0f5fc;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.footer {
     text-align: center;
-}
-
-.stat strong {
-    display: block;
-    font-size: 23px;
-    color: #3156c5;
-}
-
-#review-heading {
-    margin-top: 28px;
-}
-
-footer {
-    text-align: center;
-    color: #69758b;
-    font-size: 13px;
     padding: 20px;
+    color: #64748b;
+    font-size: 13px;
 }
 
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 23px;
+    .header h1 {
+        font-size: 22px;
     }
 
-    .panel, .question {
+    .question {
         padding: 16px;
     }
 
-    .info-grid {
-        gap: 6px;
+    .info-panel {
+        align-items: flex-start;
     }
 
-    .info-box {
-        padding: 10px 4px;
-    }
-
-    .info-box strong {
-        font-size: 17px;
-    }
-
-    .info-box span {
-        font-size: 10px;
-    }
-
-    .score {
-        font-size: 39px;
+    button {
+        width: 100%;
     }
 }
 </style>
@@ -318,562 +262,354 @@ footer {
 
 <body>
 
-<header>
-    <h1>PHY 101: GENERAL PHYSICS I</h1>
-    <p>MECHANICS — SPACE, TIME AND MOTION</p>
-    <p>University Standard Practice Test</p>
+<header class="header">
+    <h1>COS 101: Introduction to Computing Sciences</h1>
+    <p>MODULE 7 — HUMANWARE</p>
+    <p>University-Level Computer-Based Test</p>
 </header>
 
 <main class="container">
 
-    <section class="panel" id="instructions">
-        <h2>Welcome to your test!</h2>
-        <p>
-            This test covers your lecture notes and handwritten work
-            on mechanics, impulse, momentum and conservation of momentum.
-        </p>
-
-        <div class="info-grid">
-            <div class="info-box">
-                <strong>30</strong>
-                <span>Questions</span>
-            </div>
-            <div class="info-box">
-                <strong>15:00</strong>
-                <span>Time allowed</span>
-            </div>
-            <div class="info-box">
-                <strong>30</strong>
-                <span>Total marks</span>
-            </div>
+    <section class="info-panel">
+        <div>
+            <strong>Total Questions:</strong> 20<br>
+            <strong>Duration:</strong> 15 Minutes<br>
+            <strong>Total Marks:</strong> 20
         </div>
 
-        <h3>Instructions</h3>
-        <ul>
-            <li>Choose one answer (A, B, C or D) for every question.</li>
-            <li>Each correct answer earns one mark.</li>
-            <li>There is no negative marking.</li>
-            <li>Your answers and explanations will be revealed after submission.</li>
-            <li>The test submits automatically when the timer reaches zero.</li>
-            <li>Try to answer every question before the time expires.</li>
-        </ul>
+        <div class="timer-box" id="timerBox">
+            TIME LEFT<br>
+            <span id="timer">15:00</span>
+        </div>
+    </section>
 
-        <button class="primary" id="startBtn" onclick="startTest()">
-            Start Test
+    <section class="progress-area">
+        <div class="progress-text">
+            <span>Test Progress</span>
+            <span id="answeredCount">0 / 20 answered</span>
+        </div>
+        <div class="progress-track">
+            <div id="progress"></div>
+        </div>
+    </section>
+
+    <div id="quiz"></div>
+
+    <div class="buttons">
+        <button class="submit-btn" id="submitBtn"
+                onclick="submitTest(false)">
+            SUBMIT TEST
         </button>
-    </section>
 
-    <section id="testArea" style="display:none">
+        <button class="reset-btn" onclick="resetTest()">
+            RESTART TEST
+        </button>
+    </div>
 
-        <div class="panel">
-            <div class="timer-row">
-                <div>
-                    <strong>PHY 101 Examination</strong>
-                    <div class="progress-text" id="progressText">
-                        Answered: 0 of 30
-                    </div>
-                </div>
+    <section id="result">
+        <h2>Test Completed!</h2>
+        <p id="resultMessage"></p>
+        <div id="score"></div>
 
-                <div class="timer" id="timer">15:00</div>
+        <div class="result-details">
+            <div>
+                <strong>Correct Answers</strong><br>
+                <span id="correctCount"></span>
             </div>
 
-            <div class="progress-track">
-                <div class="progress-bar" id="progressBar"></div>
+            <div>
+                <strong>Wrong Answers</strong><br>
+                <span id="wrongCount"></span>
             </div>
 
-            <small>Read each question carefully before selecting an answer.</small>
-        </div>
-
-        <div id="questions"></div>
-
-        <div class="actions">
-            <button class="primary" id="submitBtn" onclick="submitTest(false)">
-                Submit Test
-            </button>
-
-            <button class="secondary" onclick="clearAnswers()">
-                Clear Answers
-            </button>
-        </div>
-    </section>
-
-    <section class="panel" id="results">
-        <div class="score-card">
-            <h2 id="resultTitle">Test Completed!</h2>
-            <div class="score" id="scoreDisplay">0/30</div>
-            <p id="percentageDisplay">0%</p>
-            <p id="resultMessage"></p>
-        </div>
-
-        <div class="result-stats">
-            <div class="stat">
-                <strong id="correctCount">0</strong>
-                Correct
-            </div>
-            <div class="stat">
-                <strong id="wrongCount">0</strong>
-                Incorrect
-            </div>
-            <div class="stat">
-                <strong id="unansweredCount">0</strong>
-                Unanswered
+            <div>
+                <strong>Unanswered</strong><br>
+                <span id="unansweredCount"></span>
             </div>
         </div>
 
-        <p id="timeUsed" style="text-align:center"></p>
+        <p id="timeMessage"></p>
+        <p>Review the questions below to see the correct answers
+        and explanations.</p>
 
-        <h2 id="review-heading">Review Your Answers</h2>
-        <p>
-            Green borders indicate correct answers.
-            Red borders indicate incorrect answers.
-            Read the explanation under each question to revise.
-        </p>
-
-        <button class="primary" onclick="restartTest()">
-            Try Again
+        <button class="submit-btn" onclick="resetTest()">
+            TRY AGAIN
         </button>
     </section>
 
 </main>
 
-<footer>
-    PHY 101 Practice Test | Mechanics, Impulse and Momentum
+<footer class="footer">
+    COS 101 | Module 7: Humanware | Keep Learning!
 </footer>
 
 <script>
 const questions = [
-
 {
-    topic: "Space and Time",
-    q: "Which statement best describes space in mechanics?",
+    q: "Which of the following best defines humanware?",
     options: [
-        "The duration between two events",
-        "The three-dimensional framework in which objects exist and move",
-        "The speed of an object",
-        "The force responsible for motion"
-    ],
-    answer: 1,
-    explanation: "Space is the three-dimensional framework in which objects exist and move. Position specifies the particular location of an object within that space."
-},
-
-{
-    topic: "Reference Frames",
-    q: "A student sitting in a moving bus is at rest relative to another passenger but moving relative to a person standing by the road. This demonstrates that:",
-    options: [
-        "The student has no position",
-        "Motion is always absolute",
-        "Motion depends on the reference frame",
-        "Time stops inside a moving bus"
+        "The physical components of a computer",
+        "The programs installed on a computer",
+        "The people involved in developing, operating, maintaining and using computer systems",
+        "The raw facts stored in a database"
     ],
     answer: 2,
-    explanation: "Motion is relative to the chosen reference frame. The student is at rest relative to the bus but moves relative to the roadside observer."
+    explanation: "Humanware is the human component of a computer system. It includes the people who develop, manage, maintain and use computing technology."
 },
-
 {
-    topic: "SI Units",
-    q: "Which of the following is the SI unit of mass?",
+    q: "A university computer laboratory has computers, applications, student records, staff and operating rules. Which component refers to the staff and students?",
     options: [
-        "Gram",
-        "Kilogram",
-        "Newton",
-        "Metre"
+        "Hardware",
+        "Humanware",
+        "Software",
+        "Data"
     ],
     answer: 1,
-    explanation: "The SI base unit of mass is the kilogram (kg). The metre is the unit of length, while the newton is the unit of force."
+    explanation: "Staff and students are people who operate and use the computing facilities, so they belong to humanware."
 },
-
 {
-    topic: "Dimensions",
-    q: "The dimensional formula for velocity is:",
+    q: "Which component consists of the physical equipment that can be seen and touched?",
     options: [
-        "[LT]",
-        "[LT⁻¹]",
-        "[LT⁻²]",
-        "[MLT⁻²]"
-    ],
-    answer: 1,
-    explanation: "Velocity is displacement divided by time. Therefore, its dimensions are length divided by time, giving [LT⁻¹]."
-},
-
-{
-    topic: "Dimensions",
-    q: "Using Newton's second law, F = ma, what is the dimensional formula for force?",
-    options: [
-        "[MLT⁻¹]",
-        "[ML²T⁻²]",
-        "[MLT⁻²]",
-        "[MT⁻²]"
-    ],
-    answer: 2,
-    explanation: "Mass has dimensions [M], while acceleration has dimensions [LT⁻²]. Multiplying them gives [F] = [MLT⁻²]."
-},
-
-{
-    topic: "Dimensional Homogeneity",
-    q: "Which equation is dimensionally consistent, using the usual meanings of the symbols?",
-    options: [
-        "v = u + at",
-        "v = u + at²",
-        "s = u + at",
-        "F = mv"
-    ],
-    answer: 0,
-    explanation: "In v = u + at, every term has dimensions [LT⁻¹]. In the other options, the terms or the two sides have different dimensions."
-},
-
-{
-    topic: "Scalars and Vectors",
-    q: "Which of these is a scalar quantity?",
-    options: [
-        "Displacement",
-        "Momentum",
-        "Acceleration",
-        "Distance"
+        "Procedures",
+        "Software",
+        "Humanware",
+        "Hardware"
     ],
     answer: 3,
-    explanation: "Distance has magnitude only and is therefore a scalar. Displacement, momentum and acceleration have both magnitude and direction."
+    explanation: "Hardware includes physical devices such as the keyboard, monitor, CPU, RAM and storage devices."
 },
-
 {
-    topic: "Vector Magnitude",
-    q: "A vector is A = 3i + 4j. What is its magnitude?",
+    q: "Which of the following is an example of system software?",
     options: [
-        "1",
-        "5",
-        "7",
-        "12"
+        "A student examination score",
+        "An operating system",
+        "A computer technician",
+        "A university attendance record"
     ],
     answer: 1,
-    explanation: "The magnitude is √(3² + 4²) = √(9 + 16) = √25 = 5."
+    explanation: "An operating system is system software because it manages computer resources and provides services for applications."
 },
-
 {
-    topic: "Vector Product",
-    q: "Two vectors have magnitudes 4 and 5 and the angle between them is 30°. What is the magnitude of their cross product?",
+    q: "Which statement correctly distinguishes data from information?",
     options: [
-        "20",
-        "10",
-        "5",
-        "2.5"
-    ],
-    answer: 1,
-    explanation: "|A × B| = AB sin θ = 4 × 5 × sin 30° = 20 × 0.5 = 10."
-},
-
-{
-    topic: "Cross Product Direction",
-    q: "If A × B points out of the page, what happens to the direction when the order is reversed to B × A?",
-    options: [
-        "It still points out of the page",
-        "It becomes zero",
-        "It points into the page",
-        "Its magnitude doubles"
+        "Data is always meaningful, while information is always meaningless",
+        "Data refers only to pictures and videos",
+        "Data consists of raw facts, while information is data processed meaningfully",
+        "Data and information always mean exactly the same thing"
     ],
     answer: 2,
-    explanation: "The cross product is anti-commutative: B × A = −(A × B). Reversing the order reverses the direction but preserves the magnitude."
+    explanation: "Data consists of raw facts and figures. When processed and organised meaningfully, it can become useful information."
 },
-
 {
-    topic: "Unit Vectors",
-    q: "Given i × j = k, what is j × i?",
+    q: "Who is primarily responsible for writing and testing source code?",
     options: [
-        "k",
-        "−k",
-        "i",
-        "0"
-    ],
-    answer: 1,
-    explanation: "Reversing the order changes the sign. Since i × j = k, then j × i = −k."
-},
-
-{
-    topic: "Cross Product Calculation",
-    q: "If A = 2i + 3j and B = 4i + j, what is A × B?",
-    options: [
-        "10k",
-        "−10k",
-        "14k",
-        "−2k"
-    ],
-    answer: 1,
-    explanation: "For vectors in the xy-plane, the k-component is AxBy − AyBx = (2 × 1) − (3 × 4) = 2 − 12 = −10. Therefore, A × B = −10k."
-},
-
-{
-    topic: "Displacement",
-    q: "A particle moves from position r₁ = 12i m to position r₂ = 35i m. Find its displacement.",
-    options: [
-        "47i m",
-        "23i m",
-        "−23i m",
-        "35i m"
-    ],
-    answer: 1,
-    explanation: "Displacement is final position minus initial position: Δr = r₂ − r₁ = 35i − 12i = 23i m."
-},
-
-{
-    topic: "Distance and Displacement",
-    q: "A student walks 100 m to a shop and then returns to the starting point. What are the total distance and displacement?",
-    options: [
-        "100 m and 100 m",
-        "0 m and 200 m",
-        "200 m and 0 m",
-        "200 m and 200 m"
-    ],
-    answer: 2,
-    explanation: "The total distance is 100 + 100 = 200 m. Since the student returns to the starting point, the net displacement is zero."
-},
-
-{
-    topic: "Average Velocity",
-    q: "A car moves from 20 m to 80 m along a straight road in 10 s. What is its average velocity?",
-    options: [
-        "10 m/s",
-        "8 m/s",
-        "6 m/s",
-        "60 m/s"
-    ],
-    answer: 2,
-    explanation: "Average velocity = displacement/time = (80 − 20)/10 = 60/10 = 6 m/s in the positive direction."
-},
-
-{
-    topic: "Differentiation of Vectors",
-    q: "The position of a particle is r = (2t² + 3t)i m. Find its velocity at t = 2 s.",
-    options: [
-        "7 m/s",
-        "8 m/s",
-        "11 m/s",
-        "14 m/s"
-    ],
-    answer: 2,
-    explanation: "Velocity is dr/dt = (4t + 3)i. At t = 2 s, v = (4 × 2 + 3)i = 11i m/s."
-},
-
-{
-    topic: "Acceleration",
-    q: "A car's velocity changes from 5 m/s to 25 m/s in 4 s. Find its average acceleration.",
-    options: [
-        "4 m/s²",
-        "5 m/s²",
-        "6.25 m/s²",
-        "20 m/s²"
-    ],
-    answer: 1,
-    explanation: "Average acceleration = (v − u)/t = (25 − 5)/4 = 20/4 = 5 m/s²."
-},
-
-{
-    topic: "Kinematics",
-    q: "A body starts with an initial velocity of 6 m/s and accelerates uniformly at 2 m/s² for 5 s. What is its final velocity?",
-    options: [
-        "10 m/s",
-        "12 m/s",
-        "16 m/s",
-        "20 m/s"
-    ],
-    answer: 2,
-    explanation: "Using v = u + at, v = 6 + (2 × 5) = 16 m/s."
-},
-
-{
-    topic: "Kinematics",
-    q: "An object starts from rest and accelerates uniformly at 4 m/s² for 5 s. How far does it travel?",
-    options: [
-        "20 m",
-        "40 m",
-        "50 m",
-        "100 m"
-    ],
-    answer: 2,
-    explanation: "Since u = 0, s = ut + ½at² = ½ × 4 × 5² = 2 × 25 = 50 m."
-},
-
-{
-    topic: "Newton's Second Law",
-    q: "A net force of 12 N acts on a 3 kg object. What is its acceleration?",
-    options: [
-        "4 m/s²",
-        "9 m/s²",
-        "15 m/s²",
-        "36 m/s²"
+        "Computer programmer",
+        "Database administrator",
+        "Network administrator",
+        "End user"
     ],
     answer: 0,
-    explanation: "Newton's second law gives F = ma. Therefore, a = F/m = 12/3 = 4 m/s²."
+    explanation: "Programmers write, test, debug and update computer programs."
 },
-
 {
-    topic: "Inertial Frames",
-    q: "Which statement best describes an inertial frame of reference in introductory mechanics?",
+    q: "A university wants to replace its manual attendance register with an electronic system. Who would primarily analyse user needs and define system requirements?",
     options: [
-        "A frame that must always be accelerating",
-        "A frame in which Newton's first law holds for an isolated body",
-        "A frame in which all objects are stationary",
-        "A frame without a clock"
+        "Computer operator",
+        "End user only",
+        "Hardware technician",
+        "Systems analyst"
+    ],
+    answer: 3,
+    explanation: "Systems analysts investigate existing processes, identify problems and specify the requirements for improved information systems."
+},
+{
+    q: "Which professional is primarily responsible for organising, securing, backing up and recovering databases?",
+    options: [
+        "Computer programmer",
+        "Database administrator",
+        "Network engineer",
+        "Project manager"
     ],
     answer: 1,
-    explanation: "An inertial frame is one in which a body experiencing zero net force remains at rest or moves with constant velocity."
+    explanation: "Database administrators manage database security, permissions, backups, recovery and performance."
 },
-
 {
-    topic: "Momentum",
-    q: "A 4 kg object moves with a velocity of 6 m/s to the right. What is its momentum?",
+    q: "Students can use a university portal, but the campus Wi-Fi frequently fails. Which professional should primarily investigate the network connectivity problem?",
     options: [
-        "10 kg m/s to the right",
-        "24 kg m/s to the right",
-        "24 kg m/s to the left",
-        "2/3 kg m/s to the right"
-    ],
-    answer: 1,
-    explanation: "Momentum p = mv = 4 × 6 = 24 kg m/s to the right. Momentum is a vector, so its direction follows the velocity."
-},
-
-{
-    topic: "Impulse",
-    q: "Impulse is defined as which of the following for a constant force?",
-    options: [
-        "Force divided by time",
-        "Mass multiplied by acceleration",
-        "Force multiplied by the time interval",
-        "Mass multiplied by distance"
+        "Systems analyst",
+        "Database administrator",
+        "Network administrator",
+        "Lecturer"
     ],
     answer: 2,
-    explanation: "For a constant force, impulse J = FΔt. It describes the effect of a force acting over a time interval."
+    explanation: "Network administrators maintain network equipment, connectivity and network performance."
 },
-
 {
-    topic: "Impulse-Momentum Theorem",
-    q: "According to the impulse-momentum theorem, the impulse on an object equals its:",
+    q: "Which humanware category focuses primarily on protecting systems and information from digital threats?",
     options: [
-        "Initial momentum",
-        "Final momentum only",
-        "Change in momentum",
-        "Mass multiplied by its distance"
-    ],
-    answer: 2,
-    explanation: "The impulse-momentum theorem states that J = Δp. Impulse equals final momentum minus initial momentum."
-},
-
-{
-    topic: "Impulse Calculation",
-    q: "A constant force of 20 N acts on an object for 0.5 s. What impulse does the force produce?",
-    options: [
-        "10 N s",
-        "20 N s",
-        "40 N s",
-        "0.025 N s"
+        "Cybersecurity professional",
+        "Computer operator",
+        "End user",
+        "Word processor operator"
     ],
     answer: 0,
-    explanation: "Impulse = FΔt = 20 × 0.5 = 10 N s. The equivalent unit is kg m/s."
+    explanation: "Cybersecurity professionals identify vulnerabilities, monitor suspicious activity and implement security controls."
 },
-
 {
-    topic: "Deceleration",
-    q: "A car moving at 15 m/s comes to rest uniformly in 8 s. What is its acceleration?",
+    q: "What is the main difference between a programmer and a systems analyst?",
     options: [
-        "1.875 m/s²",
-        "−1.875 m/s²",
-        "−15 m/s²",
-        "120 m/s²"
+        "A programmer maintains databases, while an analyst repairs monitors",
+        "A programmer uses computers, while an analyst never uses computers",
+        "Both roles have exactly the same responsibilities",
+        "A programmer writes and tests code, while an analyst studies needs and defines requirements"
+    ],
+    answer: 3,
+    explanation: "Programming focuses on creating and testing code. Systems analysis focuses on understanding problems and determining system requirements."
+},
+{
+    q: "Which of the following is an example of a procedure?",
+    options: [
+        "The physical keyboard",
+        "The rule for backing up important files regularly",
+        "A database containing student records",
+        "A programmer who writes an application"
     ],
     answer: 1,
-    explanation: "Using a = (v − u)/t = (0 − 15)/8 = −1.875 m/s². The negative sign indicates acceleration opposite to the initial direction of motion."
+    explanation: "Procedures are established rules and steps for operating or managing a system, such as backup routines and login rules."
 },
-
 {
-    topic: "Conservation of Momentum",
-    q: "A 2 kg object moves right at 3 m/s and collides with a stationary 3 kg object. After collision, the 2 kg object moves right at 1 m/s. If external forces are negligible, what is the final velocity of the 3 kg object?",
+    q: "A computer calculates students' grades correctly, but a staff member enters the wrong scores. Which humanware responsibility is most directly relevant?",
     options: [
-        "1.00 m/s to the right",
-        "1.33 m/s to the right",
-        "2.00 m/s to the left",
-        "3.00 m/s to the right"
-    ],
-    answer: 1,
-    explanation: "Conservation of momentum gives 2(3) + 3(0) = 2(1) + 3v. Thus, 6 = 2 + 3v, so v = 4/3 ≈ 1.33 m/s to the right."
-},
-
-{
-    topic: "Perfectly Inelastic Collision",
-    q: "A 5 kg cart moves right at 4 m/s and collides with a stationary 3 kg cart. They stick together. What is their common final velocity?",
-    options: [
-        "1.5 m/s",
-        "2.0 m/s",
-        "2.5 m/s",
-        "4.0 m/s"
+        "Manufacturing the CPU",
+        "Replacing the operating system",
+        "Entering and validating data for accuracy",
+        "Designing the computer's physical casing"
     ],
     answer: 2,
-    explanation: "Conservation of momentum gives 5(4) + 3(0) = (5 + 3)v. Therefore, v = 20/8 = 2.5 m/s to the right."
+    explanation: "Humanware helps provide and validate accurate input. Incorrect data can produce incorrect results even when the system works properly."
 },
-
 {
-    topic: "Momentum and Direction",
-    q: "A 2 kg ball moves to the left at 5 m/s. If right is defined as positive, what is its momentum?",
+    q: "Which skill enables IT personnel to explain technical problems clearly to people with limited computing knowledge?",
     options: [
-        "+10 kg m/s",
-        "−10 kg m/s",
-        "+2.5 kg m/s",
-        "−2.5 kg m/s"
+        "Communication skills",
+        "Hardware capacity",
+        "Data storage",
+        "Network bandwidth"
+    ],
+    answer: 0,
+    explanation: "Communication skills help technical staff explain information clearly to users, colleagues and managers."
+},
+{
+    q: "Human-Computer Interaction (HCI) is mainly concerned with:",
+    options: [
+        "Increasing the physical weight of computers",
+        "Replacing all human users with machines",
+        "Storing every file in one location",
+        "Improving the way people interact with computer systems and interfaces"
+    ],
+    answer: 3,
+    explanation: "HCI studies interaction between people and computers. Its goal includes making interfaces understandable, usable and accessible."
+},
+{
+    q: "Which practice is most consistent with good computer ergonomics?",
+    options: [
+        "Using a monitor at an uncomfortable height",
+        "Maintaining suitable posture and taking regular breaks",
+        "Working continuously without breaks",
+        "Using poor lighting for long periods"
     ],
     answer: 1,
-    explanation: "With right positive, leftward velocity is −5 m/s. Therefore, p = mv = 2(−5) = −10 kg m/s. The negative sign indicates leftward momentum."
+    explanation: "Good ergonomics includes proper posture, suitable monitor placement, comfortable equipment positioning, adequate lighting and regular breaks."
 },
-
 {
-    topic: "Force and Action at a Distance",
-    q: "Which example best illustrates a force acting at a distance without direct physical contact?",
+    q: "A lecturer shares students' confidential examination records with an unauthorised person. Which ethical principle has been violated?",
     options: [
-        "Pushing a box across a floor",
-        "A hand pulling a rope",
-        "Earth attracting a falling object gravitationally",
-        "A person lifting a chair by its seat"
+        "Continuous learning",
+        "Teamwork",
+        "Privacy and confidentiality",
+        "Computer maintenance"
     ],
     answer: 2,
-    explanation: "Gravity acts between masses without requiring direct physical contact. The other examples involve forces transmitted through physical contact."
+    explanation: "Privacy and confidentiality require people to protect sensitive information from unauthorised disclosure."
+},
+{
+    q: "Which action best improves account security?",
+    options: [
+        "Using strong, unique passwords and multifactor authentication where available",
+        "Sharing passwords with classmates",
+        "Leaving computers unlocked",
+        "Using the same simple password for every account"
+    ],
+    answer: 0,
+    explanation: "Strong unique passwords, multifactor authentication and locking unattended computers help protect accounts and systems."
+},
+{
+    q: "A company introduces new software, but employees refuse to use it because they do not understand its benefits. Which challenge is illustrated?",
+    options: [
+        "Hardware manufacture",
+        "Database recovery",
+        "Data processing",
+        "Resistance to change"
+    ],
+    answer: 3,
+    explanation: "Resistance to change occurs when users are reluctant to adopt a new system. Consultation, demonstrations and training may help."
+},
+{
+    q: "A university has working computers and well-developed software, but students cannot use the system effectively because they have received no training. What is the best conclusion?",
+    options: [
+        "Hardware and software are never useful",
+        "Effective computing also depends on competent humanware and appropriate training",
+        "Data is not required in computer systems",
+        "Procedures should always be removed"
+    ],
+    answer: 1,
+    explanation: "A computer system is most effective when its components work together. User competence and training are essential even when hardware and software function correctly."
 }
-
 ];
 
 let timeLeft = 15 * 60;
 let timerInterval = null;
-let started = false;
 let submitted = false;
-let startTime = null;
+let started = false;
 
-const questionsContainer = document.getElementById("questions");
+const quiz = document.getElementById("quiz");
+const timer = document.getElementById("timer");
+const timerBox = document.getElementById("timerBox");
+const submitBtn = document.getElementById("submitBtn");
 
 function renderQuestions() {
-    questionsContainer.innerHTML = "";
+    quiz.innerHTML = "";
 
     questions.forEach((question, index) => {
-        const card = document.createElement("div");
+        const card = document.createElement("section");
         card.className = "question";
         card.id = "question-" + index;
 
         const heading = document.createElement("h3");
         heading.innerHTML =
-            '<span class="q-number">Question ' +
-            (index + 1) + '.</span> ' + question.q;
+            '<span class="question-number">Question ' +
+            (index + 1) + ' of ' + questions.length +
+            '.</span> ' + question.q;
 
         card.appendChild(heading);
 
         question.options.forEach((option, optionIndex) => {
             const label = document.createElement("label");
             label.className = "option";
+            label.htmlFor = "q" + index + "o" + optionIndex;
 
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = "question-" + index;
-            radio.value = optionIndex;
-
-            radio.addEventListener("change", updateProgress);
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = "question" + index;
+            input.id = "q" + index + "o" + optionIndex;
+            input.value = optionIndex;
+            input.addEventListener("change", updateProgress);
 
             const text = document.createElement("span");
             text.textContent =
                 String.fromCharCode(65 + optionIndex) + ". " + option;
 
-            label.appendChild(radio);
+            label.appendChild(input);
             label.appendChild(text);
             card.appendChild(label);
         });
@@ -881,33 +617,45 @@ function renderQuestions() {
         const explanation = document.createElement("div");
         explanation.className = "explanation";
         explanation.id = "explanation-" + index;
-
         card.appendChild(explanation);
-        questionsContainer.appendChild(card);
+
+        quiz.appendChild(card);
     });
+
+    updateProgress();
 }
 
-function startTest() {
-    if (started) return;
+function updateProgress() {
+    const answered = questions.filter((q, index) =>
+        document.querySelector(
+            'input[name="question' + index + '"]:checked'
+        )
+    ).length;
+
+    document.getElementById("answeredCount").textContent =
+        answered + " / " + questions.length + " answered";
+
+    document.getElementById("progress").style.width =
+        (answered / questions.length * 100) + "%";
+
+    if (!started && answered > 0) {
+        startTimer();
+    }
+}
+
+function startTimer() {
+    if (started || submitted) return;
 
     started = true;
-    startTime = Date.now();
-
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("testArea").style.display = "block";
-
-    renderQuestions();
-    updateProgress();
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
 
     timerInterval = setInterval(() => {
         timeLeft--;
+
+        if (timeLeft < 0) timeLeft = 0;
+
         updateTimer();
 
-        if (timeLeft <= 0) {
-            timeLeft = 0;
-            updateTimer();
+        if (timeLeft === 0) {
             submitTest(true);
         }
     }, 1000);
@@ -917,60 +665,39 @@ function updateTimer() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
 
-    const display =
+    timer.textContent =
         String(minutes).padStart(2, "0") + ":" +
         String(seconds).padStart(2, "0");
 
-    const timer = document.getElementById("timer");
-    timer.textContent = display;
-
     if (timeLeft <= 60) {
-        timer.classList.add("warning");
+        timerBox.classList.add("warning");
     }
 }
 
-function updateProgress() {
-    let answered = 0;
+function submitTest(autoSubmitted) {
+    if (submitted) return;
 
-    questions.forEach((question, index) => {
-        if (document.querySelector(
-            'input[name="question-' + index + '"]:checked'
-        )) {
-            answered++;
-        }
-    });
+    const answered = questions.filter((q, index) =>
+        document.querySelector(
+            'input[name="question' + index + '"]:checked'
+        )
+    ).length;
 
-    document.getElementById("progressText").textContent =
-        "Answered: " + answered + " of " + questions.length;
-
-    document.getElementById("progressBar").style.width =
-        (answered / questions.length * 100) + "%";
-}
-
-function clearAnswers() {
-    if (submitted || !started) return;
-
-    if (!confirm("Clear all selected answers?")) return;
-
-    document.querySelectorAll(
-        '#questions input[type="radio"]'
-    ).forEach(input => {
-        input.checked = false;
-    });
-
-    updateProgress();
-}
-
-function submitTest(isAutomatic) {
-    if (submitted || !started) return;
-
-    if (!isAutomatic) {
-        const confirmed = confirm(
-            "Are you sure you want to submit your test? " +
-            "You will not be able to change your answers afterward."
+    if (!autoSubmitted && answered < questions.length) {
+        const confirmSubmit = confirm(
+            "You have answered " + answered + " out of " +
+            questions.length + " questions.\n\n" +
+            "Do you want to submit now? Unanswered questions " +
+            "will be marked as incorrect."
         );
 
-        if (!confirmed) return;
+        if (!confirmSubmit) return;
+    } else if (!autoSubmitted) {
+        const confirmSubmit = confirm(
+            "Are you sure you want to submit your test?"
+        );
+
+        if (!confirmSubmit) return;
     }
 
     submitted = true;
@@ -981,140 +708,122 @@ function submitTest(isAutomatic) {
     let unanswered = 0;
 
     questions.forEach((question, index) => {
-        const selected = document.querySelector(
-            'input[name="question-' + index + '"]:checked'
-        );
-
         const card = document.getElementById("question-" + index);
-        const explanation = document.getElementById(
-            "explanation-" + index
+
+        const selected = document.querySelector(
+            'input[name="question' + index + '"]:checked'
         );
 
-        const options = card.querySelectorAll('input[type="radio"]');
+        const labels = card.querySelectorAll(".option");
 
-        options.forEach(input => {
+        labels.forEach((label, optionIndex) => {
+            const input = label.querySelector("input");
             input.disabled = true;
+
+            if (optionIndex === question.answer) {
+                label.classList.add("correct");
+            }
+
+            if (selected &&
+                Number(selected.value) === optionIndex &&
+                optionIndex !== question.answer) {
+                label.classList.add("incorrect");
+            }
         });
 
         if (!selected) {
             unanswered++;
-            card.classList.add("incorrect");
         } else if (Number(selected.value) === question.answer) {
             correct++;
-            card.classList.add("correct");
         } else {
             wrong++;
-            card.classList.add("incorrect");
         }
 
-        const correctLetter = String.fromCharCode(
-            65 + question.answer
+        const correctLetter =
+            String.fromCharCode(65 + question.answer);
+
+        const explanation = document.getElementById(
+            "explanation-" + index
         );
 
-        const selectedLetter = selected
-            ? String.fromCharCode(65 + Number(selected.value))
-            : "No answer";
-
         explanation.innerHTML =
-            "<strong>Correct answer: " + correctLetter + ". " +
-            escapeHTML(question.options[question.answer]) + "</strong>" +
-            "<p><b>Your answer:</b> " +
-            escapeHTML(selectedLetter) + "</p>" +
-            "<p><b>Explanation:</b> " +
-            escapeHTML(question.explanation) + "</p>";
+            "<strong>Correct answer: " + correctLetter +
+            ". " + question.options[question.answer] +
+            "</strong><br><br>" + question.explanation;
 
-        explanation.classList.add("show");
-
-        // Highlight the correct option.
-        const labels = card.querySelectorAll(".option");
-        labels[question.answer].style.background = "#e5f8ee";
-        labels[question.answer].style.borderColor = "#1d9b61";
-
-        if (selected && Number(selected.value) !== question.answer) {
-            labels[Number(selected.value)].style.background = "#ffebe8";
-            labels[Number(selected.value)].style.borderColor = "#d94b4b";
-        }
+        card.classList.add("answered");
     });
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "TEST SUBMITTED";
 
     const percentage = Math.round(
         (correct / questions.length) * 100
     );
 
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    const minutesUsed = Math.floor(elapsed / 60);
-    const secondsUsed = elapsed % 60;
-
-    document.getElementById("scoreDisplay").textContent =
-        correct + "/" + questions.length;
-
-    document.getElementById("percentageDisplay").textContent =
-        percentage + "%";
+    document.getElementById("score").textContent =
+        correct + " / " + questions.length +
+        " (" + percentage + "%)";
 
     document.getElementById("correctCount").textContent = correct;
     document.getElementById("wrongCount").textContent = wrong;
-    document.getElementById("unansweredCount").textContent = unanswered;
+    document.getElementById("unansweredCount").textContent =
+        unanswered;
 
-    document.getElementById("resultTitle").textContent =
-        isAutomatic ? "Time Is Up!" : "Test Submitted!";
+    let message;
 
-    document.getElementById("resultMessage").textContent =
-        percentage >= 80
-            ? "Excellent work! You have demonstrated a strong understanding of these topics."
-            : percentage >= 60
-            ? "Good effort! Review the explanations to strengthen your understanding."
-            : percentage >= 40
-            ? "You are making progress. Study the formulas and review your incorrect answers."
-            : "Keep practising. Review your notes and explanations, then try the test again.";
+    if (percentage >= 80) {
+        message = "Excellent work! You have a strong understanding of Humanware.";
+    } else if (percentage >= 60) {
+        message = "Good effort! Review the explanations to strengthen your understanding.";
+    } else if (percentage >= 40) {
+        message = "Fair attempt. Study the lecture notes and try the test again.";
+    } else {
+        message = "Keep practising. Review Module 7 carefully and attempt the test again.";
+    }
 
-    document.getElementById("timeUsed").textContent =
-        "Time used: " + minutesUsed + " minute(s), " +
-        secondsUsed + " second(s).";
+    document.getElementById("resultMessage").textContent = message;
 
-    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("timeMessage").textContent =
+        autoSubmitted
+        ? "Time expired. Your test was submitted automatically."
+        : "You submitted your test with " +
+          Math.floor(timeLeft / 60) + " minute(s) and " +
+          (timeLeft % 60) + " second(s) remaining.";
 
-    document.getElementById("results").style.display = "block";
+    const result = document.getElementById("result");
+    result.style.display = "block";
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function escapeHTML(text) {
-    return String(text).replace(/[&<>"']/g, character => {
-        const entities = {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        };
-
-        return entities[character];
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
 }
 
-function restartTest() {
+function resetTest() {
     clearInterval(timerInterval);
 
     timeLeft = 15 * 60;
-    started = false;
     submitted = false;
-    startTime = null;
+    started = false;
 
-    document.getElementById("timer").textContent = "15:00";
-    document.getElementById("timer").classList.remove("warning");
+    timerBox.classList.remove("warning");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "SUBMIT TEST";
 
-    document.getElementById("results").style.display = "none";
-    document.getElementById("testArea").style.display = "none";
-    document.getElementById("instructions").style.display = "block";
+    document.getElementById("result").style.display = "none";
 
-    document.getElementById("submitBtn").disabled = false;
-    document.getElementById("progressBar").style.width = "0%";
-    document.getElementById("progressText").textContent =
-        "Answered: 0 of 30";
+    updateTimer();
+    renderQuestions();
 
-    questionsContainer.innerHTML = "";
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
+
+renderQuestions();
+updateTimer();
 </script>
 
 </body>
