@@ -1,203 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COS 101 Humanware - Set 4</title>
+<title>COS 101 Humanware - Set 5</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    color:#172033
 }
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef2ff;
-    color: #172033;
+.container{max-width:900px;margin:25px auto;padding:18px}
+.header{
+    background:linear-gradient(135deg,#111827,#7c3aed);
+    color:white;text-align:center;padding:27px 18px;
+    border-radius:16px
 }
-
-.container {
-    max-width: 900px;
-    margin: 25px auto;
-    padding: 20px;
+.header h1{font-size:25px}
+.header p{line-height:1.5}
+.stats{
+    display:flex;gap:12px;flex-wrap:wrap;margin:18px 0
 }
-
-.header {
-    background: linear-gradient(135deg, #172554, #4f46e5);
-    color: white;
-    padding: 25px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 5px 15px #0002;
+.stat{
+    flex:1;min-width:130px;background:white;
+    text-align:center;padding:15px;border-radius:12px;
+    box-shadow:0 2px 8px #0001
 }
-
-.header h1 {
-    margin: 5px 0 10px;
+.stat strong{font-size:14px}
+#timer{font-size:24px;font-weight:bold;color:#dc2626}
+.progress-bg{
+    height:9px;background:#ddd6fe;border-radius:10px;
+    overflow:hidden;margin-bottom:20px
 }
-
-.header p {
-    margin: 6px;
+#progress{
+    width:0;height:100%;background:#7c3aed;transition:.2s
 }
-
-.info {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 18px 0;
+.question{
+    background:white;margin-bottom:17px;padding:21px;
+    border-radius:13px;border-left:5px solid #8b5cf6;
+    box-shadow:0 2px 8px #0001
 }
-
-.info div {
-    flex: 1;
-    min-width: 130px;
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 3px 10px #0001;
+.question h3{line-height:1.5;margin-top:0}
+.option{
+    display:block;padding:12px;margin:8px 0;
+    border:1px solid #d1d5db;border-radius:8px;
+    cursor:pointer;line-height:1.4
 }
-
-.timer {
-    color: #dc2626;
-    font-size: 23px;
-    font-weight: bold;
+.option:hover{background:#f5f3ff;border-color:#8b5cf6}
+.option input{margin-right:8px}
+.correct{background:#dcfce7!important;border-color:#16a34a!important}
+.wrong{background:#fee2e2!important;border-color:#dc2626!important}
+.explanation{
+    display:none;margin-top:12px;padding:12px;
+    background:#f3f4f6;border-radius:8px;line-height:1.5
 }
-
-.progress-box {
-    background: #dbeafe;
-    height: 9px;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 20px;
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+button{
+    padding:14px 20px;border:0;border-radius:9px;
+    cursor:pointer;font-weight:bold;font-size:15px
 }
-
-.progress {
-    height: 100%;
-    width: 0%;
-    background: #4f46e5;
-    transition: width .3s;
+#submitBtn{background:#7c3aed;color:white;flex:1}
+.restart{background:#e2e8f0;color:#172033}
+button:disabled{opacity:.6;cursor:not-allowed}
+#result{
+    display:none;background:white;text-align:center;
+    padding:25px;border-radius:15px;margin-top:20px
 }
-
-.question {
-    background: white;
-    padding: 22px;
-    margin-bottom: 17px;
-    border-radius: 13px;
-    box-shadow: 0 3px 10px #0001;
-    border-left: 5px solid #6366f1;
-}
-
-.question h3 {
-    margin-top: 0;
-    line-height: 1.5;
-}
-
-.option {
-    display: block;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #d1d5db;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: .2s;
-}
-
-.option:hover {
-    background: #eef2ff;
-    border-color: #6366f1;
-}
-
-.option input {
-    margin-right: 9px;
-}
-
-.option.correct {
-    background: #dcfce7;
-    border-color: #16a34a;
-}
-
-.option.wrong {
-    background: #fee2e2;
-    border-color: #dc2626;
-}
-
-.explanation {
-    display: none;
-    margin-top: 12px;
-    padding: 12px;
-    border-radius: 8px;
-    background: #f1f5f9;
-    line-height: 1.5;
-}
-
-.buttons {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 25px 0;
-}
-
-button {
-    border: none;
-    padding: 14px 22px;
-    border-radius: 9px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.submit {
-    background: #4f46e5;
-    color: white;
-    flex: 1;
-}
-
-.restart {
-    background: #e2e8f0;
-    color: #172033;
-}
-
-button:hover {
-    opacity: .88;
-}
-
-#result {
-    display: none;
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 4px 15px #0002;
-    margin-top: 20px;
-}
-
-.score {
-    font-size: 38px;
-    font-weight: bold;
-    color: #4f46e5;
-}
-
-.footer {
-    text-align: center;
-    color: #64748b;
-    padding: 15px;
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 12px;
-        margin: 10px auto;
-    }
-
-    .header {
-        padding: 20px 12px;
-    }
-
-    .question {
-        padding: 16px;
-    }
+#score{font-size:40px;color:#7c3aed;font-weight:bold}
+.footer{text-align:center;color:#64748b;padding:15px}
+@media(max-width:600px){
+    .container{padding:10px;margin:10px auto}
+    .question{padding:15px}
+    .header h1{font-size:21px}
 }
 </style>
 </head>
@@ -205,290 +82,283 @@ button:hover {
 <body>
 <div class="container">
 
-    <div class="header">
-        <h1>COS 101: INTRODUCTION TO COMPUTING</h1>
-        <h2>HUMANWARE — SET 4</h2>
-        <p>University-Level Practice Test</p>
-        <p>20 Questions | 15 Minutes | Multiple Choice</p>
+<header class="header">
+    <h1>COS 101: INTRODUCTION TO COMPUTING</h1>
+    <h2>HUMANWARE — SET 5</h2>
+    <p>Advanced Application and Theory Practice</p>
+    <p>20 Questions | 15 Minutes | A–D Options</p>
+</header>
+
+<div class="stats">
+    <div class="stat">
+        <strong>TIME REMAINING</strong>
+        <div id="timer">15:00</div>
     </div>
-
-    <div class="info">
-        <div>
-            <strong>Time Remaining</strong>
-            <p class="timer" id="timer">15:00</p>
-        </div>
-        <div>
-            <strong>Questions</strong>
-            <p id="answered">0 / 20 answered</p>
-        </div>
-        <div>
-            <strong>Progress</strong>
-            <p id="percent">0%</p>
-        </div>
+    <div class="stat">
+        <strong>ANSWERED</strong>
+        <p id="answered">0 / 20</p>
     </div>
-
-    <div class="progress-box">
-        <div class="progress" id="progress"></div>
+    <div class="stat">
+        <strong>COMPLETION</strong>
+        <p id="percentage">0%</p>
     </div>
+</div>
 
-    <form id="quiz">
+<div class="progress-bg">
+    <div id="progress"></div>
+</div>
 
-        <div class="question" data-answer="B"
-             data-explanation="Humanware refers to the people who use, operate, manage, develop or maintain computer systems.">
-            <h3>1. A university purchases computers but has no trained personnel to operate them. Which component is most clearly missing?</h3>
-            <label class="option"><input type="radio" name="q1" value="A"> Hardware</label>
-            <label class="option"><input type="radio" name="q1" value="B"> Humanware</label>
-            <label class="option"><input type="radio" name="q1" value="C"> Data</label>
-            <label class="option"><input type="radio" name="q1" value="D"> Software</label>
-            <div class="explanation"></div>
-        </div>
+<form id="quiz">
 
-        <div class="question" data-answer="C"
-             data-explanation="A systems analyst studies existing systems, identifies problems and determines user and organisational requirements.">
-            <h3>2. A company asks a professional to investigate why its information system is inefficient and recommend improvements. Which role best fits this task?</h3>
-            <label class="option"><input type="radio" name="q2" value="A"> Computer operator</label>
-            <label class="option"><input type="radio" name="q2" value="B"> End user</label>
-            <label class="option"><input type="radio" name="q2" value="C"> Systems analyst</label>
-            <label class="option"><input type="radio" name="q2" value="D"> Database administrator</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="C"
+data-explanation="Humanware includes the people who develop, operate, manage, maintain and use computer systems. The system's usefulness depends partly on their skills and decisions.">
+<h3>1. A business has modern computers and reliable software, but its workers cannot interpret the results produced. Which statement best explains the problem?</h3>
+<label class="option"><input type="radio" name="q1" value="A"> The hardware must always be replaced first.</label>
+<label class="option"><input type="radio" name="q1" value="B"> Data automatically becomes useful without people.</label>
+<label class="option"><input type="radio" name="q1" value="C"> Effective humanware is needed to use and interpret system outputs.</label>
+<label class="option"><input type="radio" name="q1" value="D"> Procedures are unnecessary when computers are modern.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="A"
-             data-explanation="Procedures are the established instructions or steps that guide how computer-related tasks should be performed.">
-            <h3>3. Two staff members use the same software but follow different methods, causing inconsistent results. What would most directly help?</h3>
-            <label class="option"><input type="radio" name="q3" value="A"> Clear operating procedures</label>
-            <label class="option"><input type="radio" name="q3" value="B"> More computer monitors</label>
-            <label class="option"><input type="radio" name="q3" value="C"> A different keyboard</label>
-            <label class="option"><input type="radio" name="q3" value="D"> More stored data</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="A"
+data-explanation="A systems analyst investigates user needs, evaluates existing systems and helps specify requirements for a suitable solution.">
+<h3>2. Before a hospital develops a patient-record system, a specialist interviews staff and documents what the new system must do. Which role is being performed?</h3>
+<label class="option"><input type="radio" name="q2" value="A"> Systems analyst</label>
+<label class="option"><input type="radio" name="q2" value="B"> Computer operator</label>
+<label class="option"><input type="radio" name="q2" value="C"> Network administrator</label>
+<label class="option"><input type="radio" name="q2" value="D"> End user</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="D"
-             data-explanation="A database administrator manages databases, including their organisation, maintenance, access and security.">
-            <h3>4. Which professional is most appropriate for organising a company's database and controlling access to stored records?</h3>
-            <label class="option"><input type="radio" name="q4" value="A"> Computer operator</label>
-            <label class="option"><input type="radio" name="q4" value="B"> IT project manager</label>
-            <label class="option"><input type="radio" name="q4" value="C"> End user</label>
-            <label class="option"><input type="radio" name="q4" value="D"> Database administrator</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="D"
+data-explanation="Software engineers develop, test and maintain software systems. Their work may include translating requirements into functioning programs.">
+<h3>3. A team is responsible for building, testing and maintaining the application that processes examination results. Which professional role is most directly relevant?</h3>
+<label class="option"><input type="radio" name="q3" value="A"> Database end user only</label>
+<label class="option"><input type="radio" name="q3" value="B"> Computer operator only</label>
+<label class="option"><input type="radio" name="q3" value="C"> Network administrator only</label>
+<label class="option"><input type="radio" name="q3" value="D"> Software engineer</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="B"
-             data-explanation="Ergonomics concerns designing the work environment and equipment to support people's comfort, safety and efficiency.">
-            <h3>5. A computer laboratory adjusts chair heights, desk positions and monitor placement to improve users' comfort. This is an example of:</h3>
-            <label class="option"><input type="radio" name="q5" value="A"> Data processing</label>
-            <label class="option"><input type="radio" name="q5" value="B"> Ergonomics</label>
-            <label class="option"><input type="radio" name="q5" value="C"> Software engineering</label>
-            <label class="option"><input type="radio" name="q5" value="D"> Database administration</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="B"
+data-explanation="Humanware and procedures complement one another: people carry out tasks, while procedures provide consistent instructions for performing them.">
+<h3>4. An organisation has competent staff, but each employee handles backups differently. What is the most appropriate improvement?</h3>
+<label class="option"><input type="radio" name="q4" value="A"> Remove all staff responsibilities.</label>
+<label class="option"><input type="radio" name="q4" value="B"> Establish clear backup procedures.</label>
+<label class="option"><input type="radio" name="q4" value="C"> Stop storing organisational data.</label>
+<label class="option"><input type="radio" name="q4" value="D"> Replace the users with more software.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="C"
-             data-explanation="End users interact with computer systems to carry out their own tasks, such as entering records or preparing reports.">
-            <h3>6. A lecturer uses a spreadsheet to calculate students' scores but does not develop the software. The lecturer is acting as a:</h3>
-            <label class="option"><input type="radio" name="q6" value="A"> Software engineer</label>
-            <label class="option"><input type="radio" name="q6" value="B"> Network engineer</label>
-            <label class="option"><input type="radio" name="q6" value="C"> End user</label>
-            <label class="option"><input type="radio" name="q6" value="D"> Hardware technician</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="C"
+data-explanation="A computer operator performs routine computer operations according to established procedures. The exact duties depend on the organisation.">
+<h3>5. A worker runs scheduled computer jobs, checks their completion and follows established operating instructions. Which role best describes this work?</h3>
+<label class="option"><input type="radio" name="q5" value="A"> Systems analyst</label>
+<label class="option"><input type="radio" name="q5" value="B"> IT project manager</label>
+<label class="option"><input type="radio" name="q5" value="C"> Computer operator</label>
+<label class="option"><input type="radio" name="q5" value="D"> Software designer only</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="A"
-             data-explanation="Human-computer interaction (HCI) studies how people interact with computers and how interfaces can be made usable and effective.">
-            <h3>7. A developer redesigns a registration page so students can find functions easily and complete tasks with fewer mistakes. Which area is most relevant?</h3>
-            <label class="option"><input type="radio" name="q7" value="A"> Human-computer interaction</label>
-            <label class="option"><input type="radio" name="q7" value="B"> Computer hardware manufacturing</label>
-            <label class="option"><input type="radio" name="q7" value="C"> Data storage capacity</label>
-            <label class="option"><input type="radio" name="q7" value="D"> Intellectual property registration</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="A"
+data-explanation="A technician or hardware engineer diagnoses physical equipment faults and carries out appropriate repair and maintenance.">
+<h3>6. A computer repeatedly shuts down because a cooling component is faulty. Who is the most suitable person to investigate the physical fault?</h3>
+<label class="option"><input type="radio" name="q6" value="A"> Hardware technician or engineer</label>
+<label class="option"><input type="radio" name="q6" value="B"> Database administrator</label>
+<label class="option"><input type="radio" name="q6" value="C"> End user only</label>
+<label class="option"><input type="radio" name="q6" value="D"> Project manager only</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="D"
-             data-explanation="A network administrator or network engineer works with computer networks, including their setup, maintenance and troubleshooting.">
-            <h3>8. Employees can use their computers, but none can access shared network resources. Which specialist should investigate the network?</h3>
-            <label class="option"><input type="radio" name="q8" value="A"> Database administrator only</label>
-            <label class="option"><input type="radio" name="q8" value="B"> End user only</label>
-            <label class="option"><input type="radio" name="q8" value="C"> Software tester only</label>
-            <label class="option"><input type="radio" name="q8" value="D"> Network administrator or engineer</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="D"
+data-explanation="A database administrator helps manage database organisation, maintenance, availability, access and protection.">
+<h3>7. A company wants only authorised employees to view particular database records. Which specialist can help manage database permissions?</h3>
+<label class="option"><input type="radio" name="q7" value="A"> Computer operator only</label>
+<label class="option"><input type="radio" name="q7" value="B"> End user only</label>
+<label class="option"><input type="radio" name="q7" value="C"> Hardware technician only</label>
+<label class="option"><input type="radio" name="q7" value="D"> Database administrator</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="B"
-             data-explanation="Training helps users develop the knowledge and skills needed to operate systems correctly, efficiently and safely.">
-            <h3>9. After new accounting software is introduced, employees repeatedly make mistakes because they do not understand its functions. What is the best response?</h3>
-            <label class="option"><input type="radio" name="q9" value="A"> Remove all operating procedures</label>
-            <label class="option"><input type="radio" name="q9" value="B"> Provide appropriate user training</label>
-            <label class="option"><input type="radio" name="q9" value="C"> Prevent employees from asking questions</label>
-            <label class="option"><input type="radio" name="q9" value="D"> Stop collecting all business data</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="B"
+data-explanation="Human-computer interaction concerns the design and use of interfaces that allow people to interact with computer systems effectively.">
+<h3>8. Students regularly select the wrong button on a school portal because the labels are confusing. Which improvement most directly addresses the issue?</h3>
+<label class="option"><input type="radio" name="q8" value="A"> Increase the number of database tables.</label>
+<label class="option"><input type="radio" name="q8" value="B"> Improve the interface using HCI principles.</label>
+<label class="option"><input type="radio" name="q8" value="C"> Add more passwords to every button.</label>
+<label class="option"><input type="radio" name="q8" value="D"> Replace every computer keyboard.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="C"
-             data-explanation="Cybersecurity professionals help protect systems, networks and information from unauthorised access, attacks and other security threats.">
-            <h3>10. An organisation wants to assess security weaknesses and strengthen its protection against cyberattacks. Which role is most relevant?</h3>
-            <label class="option"><input type="radio" name="q10" value="A"> End user</label>
-            <label class="option"><input type="radio" name="q10" value="B"> Data-entry clerk</label>
-            <label class="option"><input type="radio" name="q10" value="C"> Cybersecurity professional</label>
-            <label class="option"><input type="radio" name="q10" value="D"> Computer operator only</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="C"
+data-explanation="Training and continuous learning help people adapt to new technology, improve their skills and reduce errors.">
+<h3>9. An organisation adopts new software every few years. Which humanware practice best helps employees remain capable of using it?</h3>
+<label class="option"><input type="radio" name="q9" value="A"> Avoid all professional development.</label>
+<label class="option"><input type="radio" name="q9" value="B"> Depend only on what employees already know.</label>
+<label class="option"><input type="radio" name="q9" value="C"> Provide appropriate training and continuous learning.</label>
+<label class="option"><input type="radio" name="q9" value="D"> Prevent employees from reading instructions.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="A"
-             data-explanation="Privacy means respecting personal information and ensuring it is handled and accessed appropriately.">
-            <h3>11. A staff member opens another student's private records without a legitimate reason. Which ethical concern is most directly involved?</h3>
-            <label class="option"><input type="radio" name="q11" value="A"> Privacy</label>
-            <label class="option"><input type="radio" name="q11" value="B"> Ergonomics</label>
-            <label class="option"><input type="radio" name="q11" value="C"> Hardware maintenance</label>
-            <label class="option"><input type="radio" name="q11" value="D"> User interface design</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="A"
+data-explanation="Cybersecurity professionals help identify and address security risks, protect information and support safer system use.">
+<h3>10. Several employees receive suspicious emails asking for their passwords. Which action is most appropriate?</h3>
+<label class="option"><input type="radio" name="q10" value="A"> Avoid sharing passwords and report the suspicious messages through the proper channel.</label>
+<label class="option"><input type="radio" name="q10" value="B"> Reply with the requested passwords.</label>
+<label class="option"><input type="radio" name="q10" value="C"> Forward the messages to every contact without warning.</label>
+<label class="option"><input type="radio" name="q10" value="D"> Disable every security procedure.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="D"
-             data-explanation="Intellectual property concerns creations such as software and other original works. Using them requires respecting applicable ownership rights and permissions.">
-            <h3>12. A student copies commercial software and distributes it without permission. Which issue does this raise?</h3>
-            <label class="option"><input type="radio" name="q12" value="A"> Network configuration</label>
-            <label class="option"><input type="radio" name="q12" value="B"> Ergonomic design</label>
-            <label class="option"><input type="radio" name="q12" value="C"> Data validation</label>
-            <label class="option"><input type="radio" name="q12" value="D"> Intellectual property</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="D"
+data-explanation="Responsible computer use includes protecting confidential information and respecting privacy and access permissions.">
+<h3>11. A worker needs to prepare a report but finds confidential information unrelated to the task. What should the worker do?</h3>
+<label class="option"><input type="radio" name="q11" value="A"> Publish the information publicly.</label>
+<label class="option"><input type="radio" name="q11" value="B"> Send it to friends for discussion.</label>
+<label class="option"><input type="radio" name="q11" value="C"> Copy it to a personal account without permission.</label>
+<label class="option"><input type="radio" name="q11" value="D"> Respect access restrictions and use only authorised information.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="B"
-             data-explanation="An IT or project manager coordinates people, resources, schedules and tasks to help a technology project meet its objectives.">
-            <h3>13. A new information system requires a schedule, task assignments, resource coordination and progress monitoring. Who should normally coordinate these activities?</h3>
-            <label class="option"><input type="radio" name="q13" value="A"> End user</label>
-            <label class="option"><input type="radio" name="q13" value="B"> IT or project manager</label>
-            <label class="option"><input type="radio" name="q13" value="C"> Database user only</label>
-            <label class="option"><input type="radio" name="q13" value="D"> Computer operator only</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="B"
+data-explanation="Accessibility makes systems easier to use for people with different abilities and needs. It is an important consideration in interface design.">
+<h3>12. Which design choice best supports accessibility in a university computer system?</h3>
+<label class="option"><input type="radio" name="q12" value="A"> Use colour alone to communicate every instruction.</label>
+<label class="option"><input type="radio" name="q12" value="B"> Support keyboard navigation and screen-reader-friendly content.</label>
+<label class="option"><input type="radio" name="q12" value="C"> Make all text extremely small.</label>
+<label class="option"><input type="radio" name="q12" value="D"> Remove all instructions from the interface.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="C"
-             data-explanation="Human error can cause incorrect data, security incidents and system problems. Training, clear procedures and appropriate safeguards can help reduce these errors.">
-            <h3>14. A worker repeatedly enters incorrect figures into a system. Which combination is most likely to reduce this problem?</h3>
-            <label class="option"><input type="radio" name="q14" value="A"> More decorative computer equipment</label>
-            <label class="option"><input type="radio" name="q14" value="B"> Removing all data checks</label>
-            <label class="option"><input type="radio" name="q14" value="C"> Training, clear procedures and suitable validation</label>
-            <label class="option"><input type="radio" name="q14" value="D"> Giving every employee unrestricted access</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="C"
+data-explanation="Ergonomics improves the fit between people, their equipment and their working environment to support comfort, safety and effective work.">
+<h3>13. Students spend long periods using computers in a laboratory. Which measure best reflects ergonomic awareness?</h3>
+<label class="option"><input type="radio" name="q13" value="A"> Require students to ignore discomfort.</label>
+<label class="option"><input type="radio" name="q13" value="B"> Place every monitor at an unsuitable angle.</label>
+<label class="option"><input type="radio" name="q13" value="C"> Provide suitable seating, monitor positioning and sensible breaks.</label>
+<label class="option"><input type="radio" name="q13" value="D"> Remove adjustable furniture.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="A"
-             data-explanation="Responsible AI use includes checking outputs, considering errors and bias, protecting information and maintaining human judgement.">
-            <h3>15. An employee uses an AI tool to prepare a report. What is the most responsible next step?</h3>
-            <label class="option"><input type="radio" name="q15" value="A"> Check the output for accuracy and suitability</label>
-            <label class="option"><input type="radio" name="q15" value="B"> Assume every AI response is correct</label>
-            <label class="option"><input type="radio" name="q15" value="C"> Share confidential information without checking permissions</label>
-            <label class="option"><input type="radio" name="q15" value="D"> Remove all human review</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="A"
+data-explanation="An IT or project manager coordinates project activities, people, resources, schedules and progress toward agreed objectives.">
+<h3>14. A software project is delayed because team members do not know their responsibilities or deadlines. Which action best addresses the coordination problem?</h3>
+<label class="option"><input type="radio" name="q14" value="A"> Clarify roles, schedules and project responsibilities.</label>
+<label class="option"><input type="radio" name="q14" value="B"> Remove communication between team members.</label>
+<label class="option"><input type="radio" name="q14" value="C"> Allow every worker to set conflicting deadlines.</label>
+<label class="option"><input type="radio" name="q14" value="D"> Stop monitoring project progress.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="D"
-             data-explanation="Documentation records how a system works and how tasks are performed, helping people maintain the system and share knowledge.">
-            <h3>16. The only technician who understands a system leaves the organisation. What would have best helped the remaining staff continue maintaining it?</h3>
-            <label class="option"><input type="radio" name="q16" value="A"> More computer wallpaper choices</label>
-            <label class="option"><input type="radio" name="q16" value="B"> Fewer written instructions</label>
-            <label class="option"><input type="radio" name="q16" value="C"> Unrecorded maintenance practices</label>
-            <label class="option"><input type="radio" name="q16" value="D"> Proper documentation and knowledge sharing</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="D"
+data-explanation="Human error is a potential source of system problems. Clear procedures, appropriate training and checks can reduce the likelihood and impact of mistakes.">
+<h3>15. A staff member accidentally deletes important records. Which general lesson about humanware is most appropriate?</h3>
+<label class="option"><input type="radio" name="q15" value="A"> People never affect system reliability.</label>
+<label class="option"><input type="radio" name="q15" value="B"> All staff should have unrestricted permissions.</label>
+<label class="option"><input type="radio" name="q15" value="C"> Written procedures always prevent every possible error.</label>
+<label class="option"><input type="radio" name="q15" value="D"> Training, suitable access controls and safeguards can help reduce risk.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="B"
-             data-explanation="Accessibility aims to make systems usable by people with different abilities and needs.">
-            <h3>17. A university portal is redesigned to support students who use screen readers. What principle does this demonstrate?</h3>
-            <label class="option"><input type="radio" name="q17" value="A"> Restricting access to technology</label>
-            <label class="option"><input type="radio" name="q17" value="B"> Accessibility</label>
-            <label class="option"><input type="radio" name="q17" value="C"> Intellectual property theft</label>
-            <label class="option"><input type="radio" name="q17" value="D"> Hardware replacement</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="B"
+data-explanation="Documentation records important information about system operation, maintenance and procedures, helping others understand and support the system.">
+<h3>16. A technician fixes a recurring system fault but does not record the cause or solution. What important practice has been neglected?</h3>
+<label class="option"><input type="radio" name="q16" value="A"> Interface decoration</label>
+<label class="option"><input type="radio" name="q16" value="B"> Documentation and knowledge sharing</label>
+<label class="option"><input type="radio" name="q16" value="C"> Data duplication for no reason</label>
+<label class="option"><input type="radio" name="q16" value="D"> Software copyright registration only</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="C"
-             data-explanation="A hardware technician or hardware engineer deals with computer equipment, including diagnosing faults, repairs and maintenance.">
-            <h3>18. A desktop computer fails to start because of a suspected physical component fault. Which professional is best suited to examine the hardware?</h3>
-            <label class="option"><input type="radio" name="q18" value="A"> IT project manager</label>
-            <label class="option"><input type="radio" name="q18" value="B"> End user only</label>
-            <label class="option"><input type="radio" name="q18" value="C"> Hardware technician or engineer</label>
-            <label class="option"><input type="radio" name="q18" value="D"> Database administrator only</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="C"
+data-explanation="Humanware roles may overlap, particularly in small organisations. However, the responsibilities and skills needed for different tasks remain distinct.">
+<h3>17. In a small business, one employee maintains computers and also helps users solve basic software problems. Which statement is most accurate?</h3>
+<label class="option"><input type="radio" name="q17" value="A"> One person can never perform more than one computing role.</label>
+<label class="option"><input type="radio" name="q17" value="B"> The business no longer needs procedures.</label>
+<label class="option"><input type="radio" name="q17" value="C"> Humanware responsibilities can overlap depending on the organisation.</label>
+<label class="option"><input type="radio" name="q17" value="D"> Every computing task becomes a database task.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="A"
-             data-explanation="Humanware is important because people develop, operate, manage and maintain computer systems, and make decisions about their use.">
-            <h3>19. Why can an organisation not rely on hardware and software alone to achieve its computing objectives?</h3>
-            <label class="option"><input type="radio" name="q19" value="A"> People are needed to operate, manage and use the system effectively</label>
-            <label class="option"><input type="radio" name="q19" value="B"> Hardware automatically understands every business goal</label>
-            <label class="option"><input type="radio" name="q19" value="C"> Software always eliminates every possible error</label>
-            <label class="option"><input type="radio" name="q19" value="D"> Data does not require interpretation or use</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="A"
+data-explanation="Responsible AI use requires human judgement, verification of outputs and care with confidential information. AI-generated content should not automatically be treated as accurate.">
+<h3>18. An AI tool produces figures for a financial report. Which approach is most responsible?</h3>
+<label class="option"><input type="radio" name="q18" value="A"> Verify the figures and protect confidential data before using the output.</label>
+<label class="option"><input type="radio" name="q18" value="B"> Assume the figures must be correct because AI generated them.</label>
+<label class="option"><input type="radio" name="q18" value="C"> Publish the output without reviewing it.</label>
+<label class="option"><input type="radio" name="q18" value="D"> Share passwords with the AI tool.</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="question" data-answer="D"
-             data-explanation="An effective computer system depends on the interaction of hardware, software, data, humanware and procedures. These components support one another.">
-            <h3>20. A school has computers, appropriate programs and student records, but staff do not know the correct steps for processing results. Which component needs particular attention?</h3>
-            <label class="option"><input type="radio" name="q20" value="A"> Hardware alone</label>
-            <label class="option"><input type="radio" name="q20" value="B"> Data alone</label>
-            <label class="option"><input type="radio" name="q20" value="C"> Software alone</label>
-            <label class="option"><input type="radio" name="q20" value="D"> Procedures</label>
-            <div class="explanation"></div>
-        </div>
+<div class="question" data-answer="D"
+data-explanation="A network administrator or engineer helps maintain network connectivity and investigates network-related faults.">
+<h3>19. A computer can run local programs but cannot communicate with other computers on the office network. Which role is especially relevant to diagnosing the problem?</h3>
+<label class="option"><input type="radio" name="q19" value="A"> Database administrator only</label>
+<label class="option"><input type="radio" name="q19" value="B"> End user only</label>
+<label class="option"><input type="radio" name="q19" value="C"> IT project manager only</label>
+<label class="option"><input type="radio" name="q19" value="D"> Network administrator or engineer</label>
+<div class="explanation"></div>
+</div>
 
-        <div class="buttons">
-            <button type="button" class="submit" id="submitBtn"
-                onclick="submitQuiz(false)">Submit Answers</button>
-            <button type="button" class="restart"
-                onclick="restartQuiz()">Restart Test</button>
-        </div>
-    </form>
+<div class="question" data-answer="B"
+data-explanation="Computer systems depend on hardware, software, data, humanware and procedures working together. A weakness in one component can affect the overall system.">
+<h3>20. Which statement best describes the relationship between the five components of a computer system discussed in the lecture?</h3>
+<label class="option"><input type="radio" name="q20" value="A"> Humanware makes all the other components unnecessary.</label>
+<label class="option"><input type="radio" name="q20" value="B"> The components complement one another to support effective system operation.</label>
+<label class="option"><input type="radio" name="q20" value="C"> Procedures are only needed when hardware is broken.</label>
+<label class="option"><input type="radio" name="q20" value="D"> Data and software are the same component.</label>
+<div class="explanation"></div>
+</div>
 
-    <div id="result">
-        <h2>Test Results</h2>
-        <div class="score" id="score"></div>
-        <p id="message"></p>
-        <p id="details"></p>
-        <p>Correct answers and explanations are shown under each question.</p>
-        <button class="restart" onclick="restartQuiz()">Try Again</button>
-    </div>
+<div class="buttons">
+<button type="button" id="submitBtn" onclick="submitQuiz(false)">Submit Answers</button>
+<button type="button" class="restart" onclick="restartQuiz()">Restart Test</button>
+</div>
 
-    <div class="footer">
-        COS 101 | Humanware Practice Test | Set 4
-    </div>
+</form>
 
+<div id="result">
+<h2>YOUR RESULTS</h2>
+<div id="score"></div>
+<p id="details"></p>
+<p id="message"></p>
+<p>Review the green answers and explanations below each question.</p>
+<button class="restart" onclick="restartQuiz()">Try Again</button>
+</div>
+
+<div class="footer">COS 101 • Humanware • Set 5</div>
 </div>
 
 <script>
-const TOTAL_QUESTIONS = 20;
-const TEST_SECONDS = 15 * 60;
-
-let timeLeft = TEST_SECONDS;
-let timerInterval = null;
+const TOTAL = 20;
+let remaining = 15 * 60;
 let started = false;
 let submitted = false;
+let interval = null;
 
 const quiz = document.getElementById("quiz");
-const timerDisplay = document.getElementById("timer");
+const timer = document.getElementById("timer");
 
 function startTimer() {
     if (started || submitted) return;
-
     started = true;
 
-    timerInterval = setInterval(function() {
-        timeLeft--;
+    interval = setInterval(function() {
+        remaining--;
 
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
+        let m = Math.floor(remaining / 60);
+        let s = remaining % 60;
 
-        timerDisplay.textContent =
-            String(minutes).padStart(2, "0") + ":" +
-            String(seconds).padStart(2, "0");
+        timer.textContent =
+            String(m).padStart(2, "0") + ":" +
+            String(s).padStart(2, "0");
 
-        if (timeLeft <= 60) {
-            timerDisplay.style.color = "#dc2626";
+        if (remaining <= 60) {
+            timer.style.color = "#dc2626";
         }
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
+        if (remaining <= 0) {
+            clearInterval(interval);
             submitQuiz(true);
         }
     }, 1000);
@@ -496,53 +366,42 @@ function startTimer() {
 
 function updateProgress() {
     const questions = document.querySelectorAll(".question");
-    let count = 0;
+    let answered = 0;
 
-    questions.forEach(function(question) {
-        if (question.querySelector("input:checked")) {
-            count++;
-        }
+    questions.forEach(function(q) {
+        if (q.querySelector("input:checked")) answered++;
     });
 
+    const pct = Math.round(answered / TOTAL * 100);
+
     document.getElementById("answered").textContent =
-        count + " / " + TOTAL_QUESTIONS + " answered";
+        answered + " / " + TOTAL;
 
-    const percentage = Math.round(
-        count / TOTAL_QUESTIONS * 100
-    );
-
-    document.getElementById("percent").textContent =
-        percentage + "%";
-
-    document.getElementById("progress").style.width =
-        percentage + "%";
+    document.getElementById("percentage").textContent = pct + "%";
+    document.getElementById("progress").style.width = pct + "%";
 }
 
-quiz.addEventListener("change", function(event) {
-    if (submitted) return;
-
-    if (event.target.matches('input[type="radio"]')) {
+quiz.addEventListener("change", function(e) {
+    if (!submitted && e.target.matches('input[type="radio"]')) {
         startTimer();
         updateProgress();
     }
 });
 
-function submitQuiz(timeExpired) {
+function submitQuiz(timeUp) {
     if (submitted) return;
 
     submitted = true;
-    clearInterval(timerInterval);
+    clearInterval(interval);
 
-    const questions = document.querySelectorAll(".question");
     let correct = 0;
     let wrong = 0;
     let unanswered = 0;
 
-    questions.forEach(function(question) {
-        const answer = question.dataset.answer;
-        const explanation = question.dataset.explanation;
-        const selected = question.querySelector("input:checked");
-        const labels = question.querySelectorAll(".option");
+    document.querySelectorAll(".question").forEach(function(q) {
+        const answer = q.dataset.answer;
+        const chosen = q.querySelector("input:checked");
+        const labels = q.querySelectorAll(".option");
 
         labels.forEach(function(label) {
             const input = label.querySelector("input");
@@ -552,59 +411,51 @@ function submitQuiz(timeExpired) {
                 label.classList.add("correct");
             }
 
-            if (selected &&
-                input.value === selected.value &&
-                selected.value !== answer) {
+            if (chosen && input.value === chosen.value &&
+                chosen.value !== answer) {
                 label.classList.add("wrong");
             }
         });
 
-        if (!selected) {
+        if (!chosen) {
             unanswered++;
-        } else if (selected.value === answer) {
+        } else if (chosen.value === answer) {
             correct++;
         } else {
             wrong++;
         }
 
-        const explanationBox = question.querySelector(".explanation");
-
-        explanationBox.style.display = "block";
-        explanationBox.textContent =
-            "Correct answer: " + answer + ". " + explanation;
+        const box = q.querySelector(".explanation");
+        box.textContent = "Correct answer: " + answer + ". " +
+            q.dataset.explanation;
+        box.style.display = "block";
     });
 
-    const percentage = Math.round(
-        correct / TOTAL_QUESTIONS * 100
-    );
+    const pct = Math.round(correct / TOTAL * 100);
 
     document.getElementById("score").textContent =
-        correct + " / " + TOTAL_QUESTIONS;
+        correct + " / " + TOTAL + " (" + pct + "%)";
 
     document.getElementById("details").textContent =
-        "Percentage: " + percentage + "% | Correct: " +
-        correct + " | Incorrect: " + wrong +
+        "Correct: " + correct + " | Incorrect: " + wrong +
         " | Unanswered: " + unanswered;
 
-    let message = "";
+    let msg;
 
-    if (percentage >= 80) {
-        message = "Excellent work! You have a strong understanding of Humanware.";
-    } else if (percentage >= 60) {
-        message = "Good effort! Review the explanations to improve further.";
-    } else if (percentage >= 40) {
-        message = "Keep practising. Review the lecture notes and try again.";
+    if (pct >= 80) {
+        msg = "Excellent! You have a strong grasp of the topic.";
+    } else if (pct >= 60) {
+        msg = "Good effort! Review the explanations to strengthen your understanding.";
+    } else if (pct >= 40) {
+        msg = "Keep practising. Revise the lecture notes and try again.";
     } else {
-        message = "Use this result as a guide. Study the notes and attempt the test again.";
+        msg = "Use this attempt to identify topics you need to revise.";
     }
 
-    if (timeExpired) {
-        message = "Time is up! " + message;
-    }
+    if (timeUp) msg = "Time is up! " + msg;
 
-    document.getElementById("message").textContent = message;
+    document.getElementById("message").textContent = msg;
     document.getElementById("result").style.display = "block";
-
     document.getElementById("submitBtn").disabled = true;
     document.getElementById("submitBtn").textContent = "Submitted";
 
@@ -620,6 +471,5 @@ function restartQuiz() {
 
 updateProgress();
 </script>
-
 </body>
 </html>
