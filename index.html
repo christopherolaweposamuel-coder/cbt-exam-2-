@@ -2,474 +2,107 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COS 101 Humanware - Set 5</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHM 101 Week 1 CBT — 50 Questions</title>
 <style>
-*{box-sizing:border-box}
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f1f5f9;
-    color:#172033
-}
-.container{max-width:900px;margin:25px auto;padding:18px}
-.header{
-    background:linear-gradient(135deg,#111827,#7c3aed);
-    color:white;text-align:center;padding:27px 18px;
-    border-radius:16px
-}
-.header h1{font-size:25px}
-.header p{line-height:1.5}
-.stats{
-    display:flex;gap:12px;flex-wrap:wrap;margin:18px 0
-}
-.stat{
-    flex:1;min-width:130px;background:white;
-    text-align:center;padding:15px;border-radius:12px;
-    box-shadow:0 2px 8px #0001
-}
-.stat strong{font-size:14px}
-#timer{font-size:24px;font-weight:bold;color:#dc2626}
-.progress-bg{
-    height:9px;background:#ddd6fe;border-radius:10px;
-    overflow:hidden;margin-bottom:20px
-}
-#progress{
-    width:0;height:100%;background:#7c3aed;transition:.2s
-}
-.question{
-    background:white;margin-bottom:17px;padding:21px;
-    border-radius:13px;border-left:5px solid #8b5cf6;
-    box-shadow:0 2px 8px #0001
-}
-.question h3{line-height:1.5;margin-top:0}
-.option{
-    display:block;padding:12px;margin:8px 0;
-    border:1px solid #d1d5db;border-radius:8px;
-    cursor:pointer;line-height:1.4
-}
-.option:hover{background:#f5f3ff;border-color:#8b5cf6}
-.option input{margin-right:8px}
-.correct{background:#dcfce7!important;border-color:#16a34a!important}
-.wrong{background:#fee2e2!important;border-color:#dc2626!important}
-.explanation{
-    display:none;margin-top:12px;padding:12px;
-    background:#f3f4f6;border-radius:8px;line-height:1.5
-}
-.buttons{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
-button{
-    padding:14px 20px;border:0;border-radius:9px;
-    cursor:pointer;font-weight:bold;font-size:15px
-}
-#submitBtn{background:#7c3aed;color:white;flex:1}
-.restart{background:#e2e8f0;color:#172033}
-button:disabled{opacity:.6;cursor:not-allowed}
-#result{
-    display:none;background:white;text-align:center;
-    padding:25px;border-radius:15px;margin-top:20px
-}
-#score{font-size:40px;color:#7c3aed;font-weight:bold}
-.footer{text-align:center;color:#64748b;padding:15px}
-@media(max-width:600px){
-    .container{padding:10px;margin:10px auto}
-    .question{padding:15px}
-    .header h1{font-size:21px}
-}
+:root{--bg:#f4f6fb;--card:#fff;--text:#172033;--muted:#637087;--line:#dfe5ef;--accent:#2447a8;--good:#18794e;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Arial,Helvetica,sans-serif}
+header{background:#182b59;color:white;padding:24px 16px}header .wrap,main{max-width:900px;margin:auto}
+h1{font-size:clamp(1.45rem,4vw,2.1rem);margin:0 0 6px}header p{margin:0;color:#dbe5ff}
+main{padding:18px 12px 40px}.sticky{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0}
+.status{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 2px 8px #1020400c}
+.timer{font-size:1.25rem;font-weight:700;color:var(--accent)}.timer.warning{color:var(--bad)}
+.progress{height:7px;background:#e4e9f2;border-radius:10px;margin-top:10px;overflow:hidden}.bar{height:100%;width:0;background:var(--accent);transition:width .15s}
+.note{color:var(--muted);font-size:.9rem;margin:12px 2px}
+.question{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;margin:12px 0;box-shadow:0 2px 7px #10204008}
+.qtitle{font-weight:700;margin:0 0 10px}.num{display:inline-flex;align-items:center;justify-content:center;background:#eaf0ff;color:var(--accent);border-radius:8px;width:30px;height:30px;margin-right:7px;font-size:.9rem}
+label.option{display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid var(--line);border-radius:9px;margin:7px 0;cursor:pointer}
+label.option:hover{border-color:#8ca3e7;background:#f8faff}input[type=radio]{margin-top:5px;accent-color:var(--accent)}label.option.selected{border-color:var(--accent);background:#f1f4ff}
+.explanation{display:none;margin-top:10px;padding:10px 12px;background:#f0f3f8;border-radius:8px;font-size:.93rem}.correct{color:var(--good);font-weight:700}.incorrect{color:var(--bad);font-weight:700}
+button{border:0;border-radius:10px;padding:13px 18px;font-size:1rem;font-weight:700;cursor:pointer}
+.primary{background:var(--accent);color:#fff}.secondary{background:#e7ebf3;color:#18233b}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.result{display:none;background:var(--card);border:2px solid var(--accent);border-radius:14px;padding:18px;margin:16px 0}.score{font-size:2rem;font-weight:800;color:var(--accent)}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:16px}
+@media(max-width:560px){.question{padding:13px}.status{align-items:center}.timer{font-size:1.1rem}}
 </style>
 </head>
-
 <body>
-<div class="container">
-
-<header class="header">
-    <h1>COS 101: INTRODUCTION TO COMPUTING</h1>
-    <h2>HUMANWARE — SET 5</h2>
-    <p>Advanced Application and Theory Practice</p>
-    <p>20 Questions | 15 Minutes | A–D Options</p>
-</header>
-
-<div class="stats">
-    <div class="stat">
-        <strong>TIME REMAINING</strong>
-        <div id="timer">15:00</div>
-    </div>
-    <div class="stat">
-        <strong>ANSWERED</strong>
-        <p id="answered">0 / 20</p>
-    </div>
-    <div class="stat">
-        <strong>COMPLETION</strong>
-        <p id="percentage">0%</p>
-    </div>
-</div>
-
-<div class="progress-bg">
-    <div id="progress"></div>
-</div>
-
-<form id="quiz">
-
-<div class="question" data-answer="C"
-data-explanation="Humanware includes the people who develop, operate, manage, maintain and use computer systems. The system's usefulness depends partly on their skills and decisions.">
-<h3>1. A business has modern computers and reliable software, but its workers cannot interpret the results produced. Which statement best explains the problem?</h3>
-<label class="option"><input type="radio" name="q1" value="A"> The hardware must always be replaced first.</label>
-<label class="option"><input type="radio" name="q1" value="B"> Data automatically becomes useful without people.</label>
-<label class="option"><input type="radio" name="q1" value="C"> Effective humanware is needed to use and interpret system outputs.</label>
-<label class="option"><input type="radio" name="q1" value="D"> Procedures are unnecessary when computers are modern.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="A"
-data-explanation="A systems analyst investigates user needs, evaluates existing systems and helps specify requirements for a suitable solution.">
-<h3>2. Before a hospital develops a patient-record system, a specialist interviews staff and documents what the new system must do. Which role is being performed?</h3>
-<label class="option"><input type="radio" name="q2" value="A"> Systems analyst</label>
-<label class="option"><input type="radio" name="q2" value="B"> Computer operator</label>
-<label class="option"><input type="radio" name="q2" value="C"> Network administrator</label>
-<label class="option"><input type="radio" name="q2" value="D"> End user</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="D"
-data-explanation="Software engineers develop, test and maintain software systems. Their work may include translating requirements into functioning programs.">
-<h3>3. A team is responsible for building, testing and maintaining the application that processes examination results. Which professional role is most directly relevant?</h3>
-<label class="option"><input type="radio" name="q3" value="A"> Database end user only</label>
-<label class="option"><input type="radio" name="q3" value="B"> Computer operator only</label>
-<label class="option"><input type="radio" name="q3" value="C"> Network administrator only</label>
-<label class="option"><input type="radio" name="q3" value="D"> Software engineer</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="B"
-data-explanation="Humanware and procedures complement one another: people carry out tasks, while procedures provide consistent instructions for performing them.">
-<h3>4. An organisation has competent staff, but each employee handles backups differently. What is the most appropriate improvement?</h3>
-<label class="option"><input type="radio" name="q4" value="A"> Remove all staff responsibilities.</label>
-<label class="option"><input type="radio" name="q4" value="B"> Establish clear backup procedures.</label>
-<label class="option"><input type="radio" name="q4" value="C"> Stop storing organisational data.</label>
-<label class="option"><input type="radio" name="q4" value="D"> Replace the users with more software.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="C"
-data-explanation="A computer operator performs routine computer operations according to established procedures. The exact duties depend on the organisation.">
-<h3>5. A worker runs scheduled computer jobs, checks their completion and follows established operating instructions. Which role best describes this work?</h3>
-<label class="option"><input type="radio" name="q5" value="A"> Systems analyst</label>
-<label class="option"><input type="radio" name="q5" value="B"> IT project manager</label>
-<label class="option"><input type="radio" name="q5" value="C"> Computer operator</label>
-<label class="option"><input type="radio" name="q5" value="D"> Software designer only</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="A"
-data-explanation="A technician or hardware engineer diagnoses physical equipment faults and carries out appropriate repair and maintenance.">
-<h3>6. A computer repeatedly shuts down because a cooling component is faulty. Who is the most suitable person to investigate the physical fault?</h3>
-<label class="option"><input type="radio" name="q6" value="A"> Hardware technician or engineer</label>
-<label class="option"><input type="radio" name="q6" value="B"> Database administrator</label>
-<label class="option"><input type="radio" name="q6" value="C"> End user only</label>
-<label class="option"><input type="radio" name="q6" value="D"> Project manager only</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="D"
-data-explanation="A database administrator helps manage database organisation, maintenance, availability, access and protection.">
-<h3>7. A company wants only authorised employees to view particular database records. Which specialist can help manage database permissions?</h3>
-<label class="option"><input type="radio" name="q7" value="A"> Computer operator only</label>
-<label class="option"><input type="radio" name="q7" value="B"> End user only</label>
-<label class="option"><input type="radio" name="q7" value="C"> Hardware technician only</label>
-<label class="option"><input type="radio" name="q7" value="D"> Database administrator</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="B"
-data-explanation="Human-computer interaction concerns the design and use of interfaces that allow people to interact with computer systems effectively.">
-<h3>8. Students regularly select the wrong button on a school portal because the labels are confusing. Which improvement most directly addresses the issue?</h3>
-<label class="option"><input type="radio" name="q8" value="A"> Increase the number of database tables.</label>
-<label class="option"><input type="radio" name="q8" value="B"> Improve the interface using HCI principles.</label>
-<label class="option"><input type="radio" name="q8" value="C"> Add more passwords to every button.</label>
-<label class="option"><input type="radio" name="q8" value="D"> Replace every computer keyboard.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="C"
-data-explanation="Training and continuous learning help people adapt to new technology, improve their skills and reduce errors.">
-<h3>9. An organisation adopts new software every few years. Which humanware practice best helps employees remain capable of using it?</h3>
-<label class="option"><input type="radio" name="q9" value="A"> Avoid all professional development.</label>
-<label class="option"><input type="radio" name="q9" value="B"> Depend only on what employees already know.</label>
-<label class="option"><input type="radio" name="q9" value="C"> Provide appropriate training and continuous learning.</label>
-<label class="option"><input type="radio" name="q9" value="D"> Prevent employees from reading instructions.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="A"
-data-explanation="Cybersecurity professionals help identify and address security risks, protect information and support safer system use.">
-<h3>10. Several employees receive suspicious emails asking for their passwords. Which action is most appropriate?</h3>
-<label class="option"><input type="radio" name="q10" value="A"> Avoid sharing passwords and report the suspicious messages through the proper channel.</label>
-<label class="option"><input type="radio" name="q10" value="B"> Reply with the requested passwords.</label>
-<label class="option"><input type="radio" name="q10" value="C"> Forward the messages to every contact without warning.</label>
-<label class="option"><input type="radio" name="q10" value="D"> Disable every security procedure.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="D"
-data-explanation="Responsible computer use includes protecting confidential information and respecting privacy and access permissions.">
-<h3>11. A worker needs to prepare a report but finds confidential information unrelated to the task. What should the worker do?</h3>
-<label class="option"><input type="radio" name="q11" value="A"> Publish the information publicly.</label>
-<label class="option"><input type="radio" name="q11" value="B"> Send it to friends for discussion.</label>
-<label class="option"><input type="radio" name="q11" value="C"> Copy it to a personal account without permission.</label>
-<label class="option"><input type="radio" name="q11" value="D"> Respect access restrictions and use only authorised information.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="B"
-data-explanation="Accessibility makes systems easier to use for people with different abilities and needs. It is an important consideration in interface design.">
-<h3>12. Which design choice best supports accessibility in a university computer system?</h3>
-<label class="option"><input type="radio" name="q12" value="A"> Use colour alone to communicate every instruction.</label>
-<label class="option"><input type="radio" name="q12" value="B"> Support keyboard navigation and screen-reader-friendly content.</label>
-<label class="option"><input type="radio" name="q12" value="C"> Make all text extremely small.</label>
-<label class="option"><input type="radio" name="q12" value="D"> Remove all instructions from the interface.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="C"
-data-explanation="Ergonomics improves the fit between people, their equipment and their working environment to support comfort, safety and effective work.">
-<h3>13. Students spend long periods using computers in a laboratory. Which measure best reflects ergonomic awareness?</h3>
-<label class="option"><input type="radio" name="q13" value="A"> Require students to ignore discomfort.</label>
-<label class="option"><input type="radio" name="q13" value="B"> Place every monitor at an unsuitable angle.</label>
-<label class="option"><input type="radio" name="q13" value="C"> Provide suitable seating, monitor positioning and sensible breaks.</label>
-<label class="option"><input type="radio" name="q13" value="D"> Remove adjustable furniture.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="A"
-data-explanation="An IT or project manager coordinates project activities, people, resources, schedules and progress toward agreed objectives.">
-<h3>14. A software project is delayed because team members do not know their responsibilities or deadlines. Which action best addresses the coordination problem?</h3>
-<label class="option"><input type="radio" name="q14" value="A"> Clarify roles, schedules and project responsibilities.</label>
-<label class="option"><input type="radio" name="q14" value="B"> Remove communication between team members.</label>
-<label class="option"><input type="radio" name="q14" value="C"> Allow every worker to set conflicting deadlines.</label>
-<label class="option"><input type="radio" name="q14" value="D"> Stop monitoring project progress.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="D"
-data-explanation="Human error is a potential source of system problems. Clear procedures, appropriate training and checks can reduce the likelihood and impact of mistakes.">
-<h3>15. A staff member accidentally deletes important records. Which general lesson about humanware is most appropriate?</h3>
-<label class="option"><input type="radio" name="q15" value="A"> People never affect system reliability.</label>
-<label class="option"><input type="radio" name="q15" value="B"> All staff should have unrestricted permissions.</label>
-<label class="option"><input type="radio" name="q15" value="C"> Written procedures always prevent every possible error.</label>
-<label class="option"><input type="radio" name="q15" value="D"> Training, suitable access controls and safeguards can help reduce risk.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="B"
-data-explanation="Documentation records important information about system operation, maintenance and procedures, helping others understand and support the system.">
-<h3>16. A technician fixes a recurring system fault but does not record the cause or solution. What important practice has been neglected?</h3>
-<label class="option"><input type="radio" name="q16" value="A"> Interface decoration</label>
-<label class="option"><input type="radio" name="q16" value="B"> Documentation and knowledge sharing</label>
-<label class="option"><input type="radio" name="q16" value="C"> Data duplication for no reason</label>
-<label class="option"><input type="radio" name="q16" value="D"> Software copyright registration only</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="C"
-data-explanation="Humanware roles may overlap, particularly in small organisations. However, the responsibilities and skills needed for different tasks remain distinct.">
-<h3>17. In a small business, one employee maintains computers and also helps users solve basic software problems. Which statement is most accurate?</h3>
-<label class="option"><input type="radio" name="q17" value="A"> One person can never perform more than one computing role.</label>
-<label class="option"><input type="radio" name="q17" value="B"> The business no longer needs procedures.</label>
-<label class="option"><input type="radio" name="q17" value="C"> Humanware responsibilities can overlap depending on the organisation.</label>
-<label class="option"><input type="radio" name="q17" value="D"> Every computing task becomes a database task.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="A"
-data-explanation="Responsible AI use requires human judgement, verification of outputs and care with confidential information. AI-generated content should not automatically be treated as accurate.">
-<h3>18. An AI tool produces figures for a financial report. Which approach is most responsible?</h3>
-<label class="option"><input type="radio" name="q18" value="A"> Verify the figures and protect confidential data before using the output.</label>
-<label class="option"><input type="radio" name="q18" value="B"> Assume the figures must be correct because AI generated them.</label>
-<label class="option"><input type="radio" name="q18" value="C"> Publish the output without reviewing it.</label>
-<label class="option"><input type="radio" name="q18" value="D"> Share passwords with the AI tool.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="D"
-data-explanation="A network administrator or engineer helps maintain network connectivity and investigates network-related faults.">
-<h3>19. A computer can run local programs but cannot communicate with other computers on the office network. Which role is especially relevant to diagnosing the problem?</h3>
-<label class="option"><input type="radio" name="q19" value="A"> Database administrator only</label>
-<label class="option"><input type="radio" name="q19" value="B"> End user only</label>
-<label class="option"><input type="radio" name="q19" value="C"> IT project manager only</label>
-<label class="option"><input type="radio" name="q19" value="D"> Network administrator or engineer</label>
-<div class="explanation"></div>
-</div>
-
-<div class="question" data-answer="B"
-data-explanation="Computer systems depend on hardware, software, data, humanware and procedures working together. A weakness in one component can affect the overall system.">
-<h3>20. Which statement best describes the relationship between the five components of a computer system discussed in the lecture?</h3>
-<label class="option"><input type="radio" name="q20" value="A"> Humanware makes all the other components unnecessary.</label>
-<label class="option"><input type="radio" name="q20" value="B"> The components complement one another to support effective system operation.</label>
-<label class="option"><input type="radio" name="q20" value="C"> Procedures are only needed when hardware is broken.</label>
-<label class="option"><input type="radio" name="q20" value="D"> Data and software are the same component.</label>
-<div class="explanation"></div>
-</div>
-
-<div class="buttons">
-<button type="button" id="submitBtn" onclick="submitQuiz(false)">Submit Answers</button>
-<button type="button" class="restart" onclick="restartQuiz()">Restart Test</button>
-</div>
-
-</form>
-
-<div id="result">
-<h2>YOUR RESULTS</h2>
-<div id="score"></div>
-<p id="details"></p>
-<p id="message"></p>
-<p>Review the green answers and explanations below each question.</p>
-<button class="restart" onclick="restartQuiz()">Try Again</button>
-</div>
-
-<div class="footer">COS 101 • Humanware • Set 5</div>
-</div>
-
+<header><div class="wrap"><h1>CHM 101 — Week 1 CBT</h1><p>50 multiple-choice questions · 20 minutes · 50 marks</p></div></header>
+<main>
+<div class="sticky"><div class="status"><div><strong>Progress:</strong> <span id="answered">0</span>/50 answered</div><div class="timer" id="timer">20:00</div></div><div class="progress"><div class="bar" id="bar"></div></div></div>
+<p class="note">Instructions: Choose one answer for each question. The timer starts when you press “Start examination”. Submit before time runs out to see your score, correct answers and explanations. Each question carries 1 mark.</p>
+<div class="actions"><button class="primary" id="start">Start examination</button><button class="secondary" id="submitTop" disabled>Submit examination</button></div>
+<div id="questions"></div>
+<div class="result" id="result"><div class="score" id="score"></div><p id="message"></p><p id="details"></p></div>
+<div class="actions"><button class="primary" id="submitBottom" disabled>Submit examination</button><button class="secondary" id="restart" style="display:none">Restart examination</button></div>
+</main><footer>Prepared from the uploaded CHM 101 Week 1 lecture slides.</footer>
 <script>
-const TOTAL = 20;
-let remaining = 15 * 60;
-let started = false;
-let submitted = false;
-let interval = null;
-
-const quiz = document.getElementById("quiz");
-const timer = document.getElementById("timer");
-
-function startTimer() {
-    if (started || submitted) return;
-    started = true;
-
-    interval = setInterval(function() {
-        remaining--;
-
-        let m = Math.floor(remaining / 60);
-        let s = remaining % 60;
-
-        timer.textContent =
-            String(m).padStart(2, "0") + ":" +
-            String(s).padStart(2, "0");
-
-        if (remaining <= 60) {
-            timer.style.color = "#dc2626";
-        }
-
-        if (remaining <= 0) {
-            clearInterval(interval);
-            submitQuiz(true);
-        }
-    }, 1000);
-}
-
-function updateProgress() {
-    const questions = document.querySelectorAll(".question");
-    let answered = 0;
-
-    questions.forEach(function(q) {
-        if (q.querySelector("input:checked")) answered++;
-    });
-
-    const pct = Math.round(answered / TOTAL * 100);
-
-    document.getElementById("answered").textContent =
-        answered + " / " + TOTAL;
-
-    document.getElementById("percentage").textContent = pct + "%";
-    document.getElementById("progress").style.width = pct + "%";
-}
-
-quiz.addEventListener("change", function(e) {
-    if (!submitted && e.target.matches('input[type="radio"]')) {
-        startTimer();
-        updateProgress();
-    }
-});
-
-function submitQuiz(timeUp) {
-    if (submitted) return;
-
-    submitted = true;
-    clearInterval(interval);
-
-    let correct = 0;
-    let wrong = 0;
-    let unanswered = 0;
-
-    document.querySelectorAll(".question").forEach(function(q) {
-        const answer = q.dataset.answer;
-        const chosen = q.querySelector("input:checked");
-        const labels = q.querySelectorAll(".option");
-
-        labels.forEach(function(label) {
-            const input = label.querySelector("input");
-            input.disabled = true;
-
-            if (input.value === answer) {
-                label.classList.add("correct");
-            }
-
-            if (chosen && input.value === chosen.value &&
-                chosen.value !== answer) {
-                label.classList.add("wrong");
-            }
-        });
-
-        if (!chosen) {
-            unanswered++;
-        } else if (chosen.value === answer) {
-            correct++;
-        } else {
-            wrong++;
-        }
-
-        const box = q.querySelector(".explanation");
-        box.textContent = "Correct answer: " + answer + ". " +
-            q.dataset.explanation;
-        box.style.display = "block";
-    });
-
-    const pct = Math.round(correct / TOTAL * 100);
-
-    document.getElementById("score").textContent =
-        correct + " / " + TOTAL + " (" + pct + "%)";
-
-    document.getElementById("details").textContent =
-        "Correct: " + correct + " | Incorrect: " + wrong +
-        " | Unanswered: " + unanswered;
-
-    let msg;
-
-    if (pct >= 80) {
-        msg = "Excellent! You have a strong grasp of the topic.";
-    } else if (pct >= 60) {
-        msg = "Good effort! Review the explanations to strengthen your understanding.";
-    } else if (pct >= 40) {
-        msg = "Keep practising. Revise the lecture notes and try again.";
-    } else {
-        msg = "Use this attempt to identify topics you need to revise.";
-    }
-
-    if (timeUp) msg = "Time is up! " + msg;
-
-    document.getElementById("message").textContent = msg;
-    document.getElementById("result").style.display = "block";
-    document.getElementById("submitBtn").disabled = true;
-    document.getElementById("submitBtn").textContent = "Submitted";
-
-    document.getElementById("result").scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-}
-
-function restartQuiz() {
-    window.location.reload();
-}
-
-updateProgress();
-</script>
-</body>
-</html>
+const data = [
+["What is matter?",["Anything that has mass and occupies space","Anything that produces light","Anything that dissolves in water","Anything that contains oxygen"],0,"Matter has mass and occupies space."],
+["Which of the following is a homogeneous mixture?",["Sand and water","Granite","Salt dissolved in water","Iron filings and sulphur"],2,"A homogeneous mixture has a uniform composition throughout."],
+["Which statement correctly defines an element?",["A substance made from different compounds","A pure substance that cannot be broken down by chemical means","Any substance containing two atoms","A mixture of two metals"],1,"An element cannot be decomposed into simpler substances by ordinary chemical means."],
+["Which of these is a compound?",["Gold (Au)","Oxygen (O₂)","Sulphur (S₈)","Water (H₂O)"],3,"Water contains hydrogen and oxygen chemically combined in a fixed ratio."],
+["Which statement about molecules is correct?",["Every molecule must contain different elements","A molecule can contain atoms of the same element","All molecules carry electrical charges","Every compound is a molecule"],1,"O₂ is a molecule of an element, while H₂O is a molecule of a compound."],
+["Which particle has a positive charge?",["Anion","Neutron","Cation","Electron"],2,"A cation forms when an atom or group of atoms loses electrons."],
+["An anion is formed when an atom or group of atoms:",["Loses protons","Gains electrons","Loses neutrons","Gains protons"],1,"Gaining electrons produces a negative charge."],
+["Why is solid NaCl described as an ionic lattice rather than a molecule?",["It contains no atoms","It contains only neutral molecules","Its ions form a giant repeating ionic structure","It is a gas at room temperature"],2,"Solid sodium chloride consists of a repeating ionic lattice; NaCl represents its formula unit."],
+["Which law states that total mass remains constant during a chemical reaction?",["Law of constant composition","Law of conservation of mass","Avogadro's hypothesis","Dalton's law of isotopes"],1,"In a chemical reaction, atoms are rearranged and total mass is conserved."],
+["A reaction mixture has a total mass of 104.50 g before reaction in a closed system. What is its total mass after reaction?",["52.25 g","104.50 g","105.50 g","It must be zero"],1,"Total mass before reaction equals total mass after reaction."],
+["The law of constant composition is also known as the law of:",["Definite proportions","Multiple temperatures","Variable mass","Conservation of energy"],0,"A pure compound always contains its elements in the same proportion by mass."],
+["A 10.000 g water sample contains 1.119 g hydrogen. What percentage by mass is hydrogen?",["1.119%","8.881%","11.19%","88.81%"],2,"Percentage = (1.119 ÷ 10.000) × 100 = 11.19%."],
+["According to Dalton's original theory, atoms of the same element have:",["Different proton numbers","Identical masses and chemical properties","Different chemical properties in every sample","No relationship to the element"],1,"This was Dalton's second postulate, although isotopes later showed atomic masses can differ."],
+["Which discovery disproved Dalton's claim that all atoms of the same element have identical masses?",["The discovery of mixtures","The discovery of isotopes","The discovery of solutions","The discovery of catalysts"],1,"Isotopes have the same atomic number but different mass numbers."],
+["Which statement about Dalton's claim that atoms cannot be created or destroyed is most accurate today?",["It is true in every nuclear reaction","It fails in nuclear reactions, where atoms can transform","It means chemical equations need not balance","It proves that electrons cannot exist"],1,"Nuclear reactions can transform one element into another; ordinary chemical reactions conserve atoms."],
+["In the particulate theory of matter, particles in a solid generally:",["Move freely over long distances","Are far apart and move randomly","Vibrate about fixed positions","Have no forces between them"],2,"Solid particles are closely packed and vibrate around mean positions."],
+["Which statement best describes a liquid?",["It has a fixed shape and fixed volume","It has no fixed shape but has a fixed volume","It has neither fixed shape nor fixed volume","Its particles cannot move"],1,"Liquid particles remain close together but can slide past one another."],
+["Which property is characteristic of a gas?",["Fixed shape and fixed volume","Particles fixed in a regular structure","No fixed shape and no fixed volume","Particles only vibrate in place"],2,"Gas particles are far apart and move rapidly and randomly."],
+["A chemical reaction involves:",["Only a change in size","Breaking and forming chemical bonds to produce different substances","Only a change of state","No change in chemical identity"],1,"Reactants are converted into products through bond breaking and bond formation."],
+["Which observation can provide evidence of a chemical reaction?",["A precipitate forms","Ice melts","Water boils","Sugar is separated unchanged from water by evaporation"],0,"Formation of a precipitate is one sign that a chemical reaction may have occurred."],
+["Why is dissolving table salt in water described as a physical change in the lecture?",["Salt atoms are destroyed","A new compound must form","The salt can be recovered unchanged by evaporating the water","The process always releases light"],2,"The salt can be recovered unchanged by removing the water."],
+["What does the symbol (aq) mean in a chemical equation?",["A gas","A solid","A liquid","Dissolved in water"],3,"The state symbol (aq) means aqueous."],
+["In a chemical equation, what does (g) indicate?",["A gas","A liquid","A solid","A catalyst"],0,"The symbol (g) indicates the gaseous state."],
+["Which is a rule for balancing chemical equations?",["Change subscripts until both sides match","Change the identity of reactants","Place coefficients in front of formulas","Delete oxygen whenever it is inconvenient"],2,"Balancing uses coefficients; subscripts must not be changed because that changes the substance."],
+["Why must subscripts not be changed when balancing an equation?",["Subscripts are always optional","Changing a subscript changes the chemical formula and substance","Subscripts only apply to gases","Changing subscripts violates the law of constant temperature"],1,"For example, H₂O and H₂O₂ are different substances."],
+["Balance H₂ + O₂ → H₂O. What is the correct set of coefficients?",["1, 1, 1","2, 1, 2","1, 2, 1","2, 2, 1"],1,"The balanced equation is 2H₂ + O₂ → 2H₂O."],
+["For octane combustion, C₈H₁₈, what coefficient appears before O₂ after balancing carbon and hydrogen but before clearing the fraction?",["8","9","12.5","25"],2,"Eight CO₂ and nine H₂O require 25 oxygen atoms, equivalent to 12.5 O₂ molecules."],
+["What is the fully balanced octane combustion equation using the smallest whole-number coefficients?",["C₈H₁₈ + 8O₂ → 8CO₂ + 9H₂O","2C₈H₁₈ + 25O₂ → 16CO₂ + 18H₂O","C₈H₁₈ + 25O₂ → 8CO₂ + 18H₂O","2C₈H₁₈ + 12O₂ → 16CO₂ + 18H₂O"],1,"The smallest whole-number coefficients are 2, 25, 16 and 18."],
+["Which is NOT necessarily revealed by a balanced stoichiometric equation?",["Relative numbers of reactant and product particles","Balanced atom ratios","Reaction mechanism","Chemical formulas written in the equation"],2,"A balanced equation does not specify the mechanism by which a reaction proceeds."],
+["How can an equation indicate a catalyst or particular temperature?",["By changing all subscripts","By writing conditions above or below the reaction arrow","By removing all coefficients","By replacing element symbols"],1,"Reaction conditions may be written above or below the arrow."],
+["Stoichiometry is the study of:",["Colours of all elements","Quantitative relationships among substances in reactions and compounds","Only shapes of molecules","Speed of sound in gases"],1,"Stoichiometry deals with quantitative relationships between substances."],
+["For N₂ + 3H₂ → 2NH₃, what is the mole ratio N₂:H₂:NH₃?",["1:3:2","3:1:2","2:3:1","1:2:3"],0,"The coefficients give the ratio 1:3:2."],
+["In one mole of NH₃, what is the mass ratio of nitrogen to hydrogen using N = 14 and H = 1?",["1:3","3:14","14:3","14:17"],2,"One mole of NH₃ has a nitrogen-to-hydrogen mass ratio of 14:3."],
+["The atomic number Z equals the number of:",["Neutrons only","Protons in the nucleus","Protons plus neutrons","Electrons plus neutrons"],1,"Atomic number is defined by the number of protons in the nucleus."],
+["The mass number A represents:",["Number of electrons only","Number of neutrons only","Number of protons plus neutrons","Number of protons minus neutrons"],2,"Mass number is the total number of nucleons: protons and neutrons."],
+["How many neutrons are present in ²³₁₁Na?",["11","12","23","34"],1,"Neutrons = A − Z = 23 − 11 = 12."],
+["What defines isotopes of the same element?",["Same mass number, different atomic number","Same neutrons, different protons","Same atomic number, different mass number","Different atomic numbers and identical masses"],2,"Isotopes have the same number of protons but different numbers of neutrons."],
+["How many electrons are in a neutral atom of ¹⁸₈O?",["8","10","18","26"],0,"A neutral atom has equal numbers of protons and electrons; oxygen has atomic number 8."],
+["Why do isotopes of the same element have similar chemical properties?",["They always have identical masses","They have the same electron arrangement when neutral","They contain the same number of neutrons","They have different atomic numbers"],1,"Chemical properties are largely determined by electron arrangements."],
+["Why are many relative atomic masses not whole numbers?",["Atomic numbers are always fractional","Elements can contain mixtures of isotopes with different masses","All atoms lose half their protons","Mass spectrometers round every value randomly"],1,"The periodic-table value is generally a weighted average of naturally occurring isotopes."],
+["What is the main purpose of ionisation in a mass spectrometer?",["To turn ions into neutral atoms before detection","To give particles a charge so fields can manipulate them","To make every isotope have the same mass","To convert all atoms into liquids"],1,"Charged particles can be accelerated and deflected by electric and magnetic fields."],
+["Why is a mass spectrometer operated under high vacuum?",["To increase collisions with air","To prevent ions colliding with gas molecules and interfering with their path","To turn positive ions negative","To remove the need for a detector"],1,"A high vacuum reduces collisions with gas molecules, helping ions travel through the instrument."],
+["What does m/z represent in mass spectrometry?",["Mass divided by charge","Mass multiplied by temperature","Moles divided by volume","Molecular mass plus zero"],0,"m/z is the mass-to-charge ratio of an ion."],
+["What does the intensity of a peak in a mass spectrum generally indicate?",["The colour of the isotope","The relative abundance of detected ions","The temperature of the sample only","The number of neutrons in every atom"],1,"Peak intensity indicates relative abundance."],
+["Relative molecular mass, Mᵣ, is calculated by:",["Subtracting all atomic masses","Adding the relative atomic masses of all atoms in the molecule","Dividing atomic number by mass number","Multiplying molecules by Avogadro's constant"],1,"For example, H₂O has Mᵣ = (2 × 1) + 16 = 18."],
+["What is the approximate mass of one atomic mass unit in kilograms?",["1.66 × 10⁻²⁷ kg","1.66 × 10²⁷ kg","6.02 × 10⁻²³ kg","12 kg"],0,"One a.m.u. is approximately 1.66 × 10⁻²⁷ kg."],
+["Neon has isotope masses 20, 21 and 22 with relative abundances 114, 0.2 and 11.2. Which method gives its relative atomic mass?",["Add masses and multiply by 100","Divide total abundance by total weighted mass","Divide the sum of mass × abundance by total abundance","Use only the most abundant isotope's mass"],2,"Aᵣ = Σ(mass × abundance) ÷ Σ(abundance), giving approximately 20.18."],
+["What is the approximate value of Avogadro's constant used in the lecture?",["6.02 × 10²³ mol⁻¹","6.02 × 10⁻²³ mol⁻¹","3.00 × 10⁸ mol⁻¹","1.66 × 10⁻²⁷ mol⁻¹"],0,"The lecture uses Nₐ = 6.02 × 10²³ mol⁻¹."],
+["Calculate the number of moles in 90 g of glucose, C₆H₁₂O₆, with molar mass 180 g mol⁻¹.",["2 mol","0.5 mol","5 mol","180 mol"],1,"n = m/M = 90/180 = 0.5 mol."],
+["How many molecules are present in 0.5 mol? Use Nₐ = 6.02 × 10²³ mol⁻¹.",["3.01 × 10²³","6.02 × 10²³","1.204 × 10²⁴","0.5 × 10⁻²³"],0,"N = nNₐ = 0.5 × 6.02 × 10²³ = 3.01 × 10²³ molecules."],
+["What is the mass of 0.25 mol of sucrose, C₁₂H₂₂O₁₁, if its molar mass is 342 g mol⁻¹?",["1368 g","342 g","85.5 g","22 g"],2,"m = nM = 0.25 × 342 = 85.5 g."]
+];
+let started=false, finished=false, remaining=1200, interval=null;
+const container=document.getElementById('questions');
+data.forEach((q,i)=>{const card=document.createElement('section');card.className='question';card.id='q'+i;
+let inner=`<p class="qtitle"><span class="num">${i+1}</span>${q[0]}</p>`;
+q[1].forEach((opt,j)=>{inner+=`<label class="option"><input type="radio" name="q${i}" value="${j}" disabled><span>${String.fromCharCode(65+j)}. ${opt}</span></label>`});
+inner+=`<div class="explanation" id="exp${i}"></div>`;card.innerHTML=inner;container.appendChild(card)});
+function updateProgress(){let n=0;data.forEach((q,i)=>{if(document.querySelector(`input[name="q${i}"]:checked`))n++});document.getElementById('answered').textContent=n;document.getElementById('bar').style.width=(n/50*100)+'%';}
+document.querySelectorAll('input[type=radio]').forEach(r=>r.addEventListener('change',()=>{document.querySelectorAll(`input[name="${r.name}"]`).forEach(x=>x.parentElement.classList.toggle('selected',x.checked));updateProgress()}));
+function showTime(){const m=Math.floor(remaining/60),s=remaining%60;const el=document.getElementById('timer');el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');el.classList.toggle('warning',remaining<=60)}
+function startExam(){if(started||finished)return;started=true;document.getElementById('start').disabled=true;document.querySelectorAll('input[type=radio]').forEach(r=>r.disabled=false);document.getElementById('submitTop').disabled=false;document.getElementById('submitBottom').disabled=false;interval=setInterval(()=>{remaining--;showTime();if(remaining<=0){clearInterval(interval);submitExam(true)}},1000)}
+function submitExam(auto=false){if(finished)return;if(!started){alert('Press “Start examination” first.');return}finished=true;clearInterval(interval);let score=0,answered=0;
+data.forEach((q,i)=>{const selected=document.querySelector(`input[name="q${i}"]:checked`);if(selected)answered++;const ok=selected&&Number(selected.value)===q[2];if(ok)score++;const exp=document.getElementById('exp'+i);exp.style.display='block';exp.innerHTML=`<span class="${ok?'correct':'incorrect'}">${ok?'Correct':'Incorrect'} — Answer: ${String.fromCharCode(65+q[2])}. ${q[1][q[2]]}</span><br>${q[3]}`;document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>{r.disabled=true;if(Number(r.value)===q[2])r.parentElement.style.borderColor='#18794e';if(r.checked&&!ok)r.parentElement.style.borderColor='#b42318'})});
+document.getElementById('score').textContent=`Your score: ${score}/50 (${Math.round(score/50*100)}%)`;document.getElementById('message').textContent=auto?'Time is up. Your answers have been submitted automatically.':(score>=40?'Excellent work!':score>=30?'Good effort. Review the questions you missed.':score>=25?'Keep practising and revisit the lecture slides.':'Review the slides carefully, then try the test again.');document.getElementById('details').textContent=`You answered ${answered} of 50 questions. Unanswered questions received zero marks.`;document.getElementById('result').style.display='block';document.getElementById('submitTop').disabled=true;document.getElementById('submitBottom').disabled=true;document.getElementById('restart').style.display='inline-block';document.getElementById('result').scrollIntoView({behavior:'smooth'})}
+function restart(){location.reload()}
+document.getElementById('start').addEventListener('click',startExam);document.getElementById('submitTop').addEventListener('click',()=>submitExam(false));document.getElementById('submitBottom').addEventListener('click',()=>submitExam(false));document.getElementById('restart').addEventListener('click',restart);showTime();
+</script></body></html>
